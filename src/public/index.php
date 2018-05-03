@@ -82,6 +82,7 @@ $app->group('/api', function () use ($app) {
          * in 'App/container.php'. This makes it easier for us to call the database
          * inside our routes.
          */
+        //$this === $app
         $allTodos = $this->get('Todos')->getAll();
         /**
          * Wrapping the data when returning as a safety thing
@@ -115,6 +116,6 @@ $app->group('/api', function () use ($app) {
         $newTodo = $this->get('Todos')->add($body);
         return $response->withJson(['data' => $newTodo]);
     });
-})->add($auth);
+});
 
 $app->run();
