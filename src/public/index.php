@@ -84,12 +84,8 @@ $app->group('/api', function () use ($app) {
          * in 'App/container.php'. This makes it easier for us to call the database
          * inside our routes.
          */
-<<<<<<< HEAD
         //$this === $app
         $allTodos = $this->get('Todos')->getAll();
-=======
-        $allTodos = $this->todos->getAll();
->>>>>>> 26c2d1c5b4c4cb399747c458488b0650184af967
         /**
          * Wrapping the data when returning as a safety thing
          * https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet#Server_Side
