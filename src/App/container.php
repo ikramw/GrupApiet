@@ -1,6 +1,7 @@
 <?php
 
 require_once 'ConfigHandler.php';
+use \App\Controllers\UserController as UserController;
 
 /**
  * Return a new config with all the database credentials. If you need to change
@@ -56,6 +57,9 @@ $container['view'] = function ($container) {
     return new \Slim\Views\PhpRenderer('../public/views/');
 };
 
-
+$container['users'] = function ($c) {
+    $userControllers = new \App\Controllers\UserController($c->get('db'));
+    return $userControllers;
+};
 
 return $container;
