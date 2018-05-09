@@ -1,10 +1,5 @@
 <?php
 
-/**
- * We rename or make a shortcut to the TodoController
- */
-use \App\Controllers\TodoController as TodoController;
-
 require_once 'ConfigHandler.php';
 
 /**
@@ -61,17 +56,6 @@ $container['view'] = function ($container) {
     return new \Slim\Views\PhpRenderer('../public/views/');
 };
 
-/**
- * This is how you would inject your own class. You defined what it will be called
- * as $container['your_name']. Inside here we are creating a new TodoController
- * that will handle adding and removing todos. The TodoController itself
- * needs a database so we inject the database when we create the controller.
- * $c always refers to the whole container. So calling $c->get('db') is the same
- * as calling $this->get('db') in our routes in index.php
- */
-$container['Todos'] = function ($c) {
-    $todosController = new TodoController($c->get('db'));
-    return $todosController;
-};
+
 
 return $container;
