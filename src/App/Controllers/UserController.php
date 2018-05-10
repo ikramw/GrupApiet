@@ -21,7 +21,7 @@ class UserController
 
     public function getOne($id)
     {
-        $getOneUser = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $getOneUser = $this->db->prepare("SELECT * FROM users WHERE userID = :id");
         $getOneUser->execute([
           ":id" => $id
         ]);
@@ -29,13 +29,34 @@ class UserController
         $oneUser = $getOneUser->fetch();
         return $oneUser;
     }
-   /* public function add()
+    public function add($user)
     {
-        $addOneUser = $this->db->prepare("INSERT INTO users (username, password, createdAt)
-        VALUES (value1, value2, value3, ...);");
-        $addOneUser->execute();
-        // Fetch -> single resource
-       // $oneUser = $getOneUser->fetch();
-       // return $oneUser;
-    }*/
+        /**
+         * Default 'completed' is false so we only need to insert the 'content'
+         */
+        $addOne = $this->db->prepare(
+            'INSERT INTO users (username, password, createdAt) 
+            VALUES (:username, :password, :createdAt)'
+        );
+
+        /**
+         * Insert the value from the parameter into the database
+         */
+        $addOne->execute([':username'  => $user['username'],
+        ':password'  => $user['password'],
+        ':createdAt'  => $user['createdAt']]);
+
+        /**
+         * A INSERT INTO does not return the created object. If we want to return it to the user
+         * that has posted the todo we must build it ourself or fetch it after we have inserted it
+         * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
+         */
+        return [
+          'userID'      => (int)$this->db->lastInsertId(),
+          'username'    => $user['username'],
+          'createdAt'   => $user['createdAt']
+        ];
+    }
+    
+    
 }
