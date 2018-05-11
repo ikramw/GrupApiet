@@ -2,6 +2,7 @@
 
 require_once 'ConfigHandler.php';
 use \App\Controllers\UserController as UserController;
+use \App\Controllers\EntryController as EntryController;
 
 /**
  * Return a new config with all the database credentials. If you need to change
@@ -60,6 +61,10 @@ $container['view'] = function ($container) {
 $container['users'] = function ($c) {
     $userControllers = new \App\Controllers\UserController($c->get('db'));
     return $userControllers;
+};
+$container['entries'] = function ($c) {
+    $EntryControllers = new \App\Controllers\EntryController($c->get('db'));
+    return $EntryControllers;
 };
 
 return $container;

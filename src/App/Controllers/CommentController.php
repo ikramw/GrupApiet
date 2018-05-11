@@ -41,10 +41,10 @@ class CommentController
          * Insert the value from the parameter into the database
          */
         $addOne->execute(
-       [':entryID'  => $user['entryID'],
-        ':content'  => $user['content'],
-        ':createdBy'  => $user['createdBy'],
-        ':createdAt'  => $user['createdAt']]);
+       [':entryID'  => $comment['entryID'],
+        ':content'  => $comment['content'],
+        ':createdBy'  => $comment['createdBy'],
+        ':createdAt'  => $comment['createdAt']]);
 
         /**
          * A INSERT INTO does not return the created object. If we want to return it to the user
@@ -53,10 +53,10 @@ class CommentController
          */
         return [
         'commentID'      => (int)$this->db->lastInsertId(),
-        'entryID'  => $user['entryID'],
-        'content'  => $user['content'],
-        'createdBy'  => $user['createdBy'],
-        'createdAt'  => $user['createdAt']
+        'entryID'  => $comment['entryID'],
+        'content'  => $comment['content'],
+        'createdBy'  => $comment['createdBy'],
+        'createdAt'  => $comment['createdAt']
         ];
     }
     
