@@ -19,9 +19,9 @@
       </div>
       <nav class="nav-main" id="content-toggle">
         <ul class="nav-menu">
-          <li><a href="#" onclick="showEntries()" class="active">Entries</a></li>
-          <li><a href="#" onclick="showUsers()">Users</a></li>
-          <li><a href="#" onclick="showComments()">Comments</a></li>
+          <li><a href="#" onclick="showEntries()" class="active" id="entries-link">Entries</a></li>
+          <li><a href="#" onclick="showUsers()" id="users-link">Users</a></li>
+          <li><a href="#" onclick="showComments()" id="comments-link">Comments</a></li>
         </ul>
         <div class="nav-test">
           <input type="text" placeholder="Search" class="nav-search">

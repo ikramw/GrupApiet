@@ -33,15 +33,8 @@
           <input type="text" placeholder="Search" class="nav-search">
           <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
 
-          <?php if (!isset($_SESSION["loggedIn"])): ?>
-            <a href="#">Sign in</a>
-            <a href="#">Register</a>
-          <?php endif; ?>
-
-          <?php if (isset($_SESSION["loggedIn"])): ?>
             <a href="#">Your Profile</a>
             <a href="#">Sign out</a>
-          <?php endif; ?>
 
         </div>
       </nav>
@@ -52,6 +45,12 @@
       </div>
     </div>
   </header>
+
+  <footer class="footer">
+      <?php
+        echo "<p>Copyright &copy; 2016-" . date("Y") . " company-name.com</p>";
+      ?>
+  </footer>
 
   <script src="scripts/main.js"></script>
 </body>
