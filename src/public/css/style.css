@@ -49,11 +49,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   float: left;
 }
-.nav-menu {
+.nav-menu-left {
   padding: 0.1em 0;
   margin: 0;
 }
-.nav-menu li {
+.nav-menu-left li {
   display: inline-block;
 }
 .nav-main.responsive li {
@@ -115,13 +115,55 @@ h1, h2, h3, h4, h5, h6 {
 .fa-search {
   color: #cecece;
 }
-.nav-test a {
+.nav-menu-right a {
   display: inline-block;
 }
-.nav-main.responsive .nav-test a {
+.nav-main.responsive .nav-menu-right a {
   display: block;
   padding: 1em 0 1em 0.8em;
   border-top: 1px solid #616161;
+}
+.login-form {
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  top: 58px;
+  padding: 1em;
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #616161;
+}
+.login-form.visible {
+  display: block;
+}
+.login-form p {
+  margin-top: 0;
+}
+.login-form label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #616161;
+}
+.login-form input[type="text"], .login-form input[type="password"] {
+  width: 100%;
+  height: 30px;
+  padding: 0 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid #616161;
+  border-radius: 3px;
+}
+.login-form input[type="submit"] {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 1em;
+  background-color: #616161;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+.login-form input[type="submit"]:hover {
+  background-color: #262626;
 }
 #mobile-menu {
   display: block;
@@ -140,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
 .header-info {
   width: 100%;
   padding: 2em;
-  margin: 56.4px auto 0 auto;
+  margin: 57px auto 0 auto;
   text-align: center;
   background-color: #4d8594;
   color: #fff;
@@ -160,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: 960px;
   padding: 0;
-  margin: 56.4px auto 0 auto;
+  margin: 57px auto 0 auto;
 }
 .content-wrapper h1 {
 
@@ -298,11 +340,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     border: none;
   }
-  .nav-test a {
+  .nav-menu-right a {
     display: inline-block;
     border: none;
   }
-  .nav-main.responsive .nav-test a {
+  .nav-main.responsive .nav-menu-right a {
     display: inline-block;
     padding: 0 0.8em;
     border: none;

@@ -18,18 +18,28 @@
           <a href="index.html"><img src="images/logo.png" class="logo" alt="Logo"></a>
       </div>
       <nav class="nav-main" id="content-toggle">
-        <ul class="nav-menu">
+        <ul class="nav-menu-left">
           <li><a href="#" onclick="showEntries()" class="active" id="entries-link">Entries</a></li>
           <li><a href="#" onclick="showUsers()" id="users-link">Users</a></li>
           <li><a href="#" onclick="showComments()" id="comments-link">Comments</a></li>
         </ul>
-        <div class="nav-test">
+        <div class="nav-menu-right">
           <input type="text" placeholder="Search" class="nav-search">
           <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
 
           <!-- Om användaren är utloggad visas: -->
           <?php if (!isset($_SESSION["loggedIn"])): ?>
-            <a href="#">Sign in</a>
+            <a href="javascript:void(0)" onclick="showSignin()">Sign in</a>
+            <div class="login-form" id="login-form">
+              <p>Sign in</p>
+              <form action="" method="post">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" />
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" />
+                <input type="submit" id="submit" value="Submit" />
+              </form>
+            </div>
             <a href="#">Register</a>
           <?php endif; ?>
 
