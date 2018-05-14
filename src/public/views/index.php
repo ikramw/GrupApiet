@@ -31,16 +31,26 @@
           <?php if (!isset($_SESSION["loggedIn"])): ?>
             <a href="javascript:void(0)" onclick="showSignin()">Sign in</a>
             <div class="login-form" id="login-form">
-              <p>Sign in</p>
+              <h3>Sign in</h3>
               <form action="" method="post">
                 <label for="username">Username:</label>
-                <input type="text" name="username" id="username" />
+                <input type="text" name="username" class="form-input" id="username" />
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" />
+                <input type="password" name="password" class="form-input" id="password" />
                 <input type="submit" id="submit" value="Submit" />
               </form>
             </div>
-            <a href="#">Register</a>
+            <a href="javascript:void(0)" onclick="showRegister()">Register</a>
+            <div class="register-form" id="register-form">
+              <h3>Register</h3>
+              <form action="" method="post">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-input" id="username" />
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-input" id="password" />
+                <input type="submit" id="submit" value="Submit" />
+              </form>
+            </div>
           <?php endif; ?>
 
           <!-- Annars visas: -->
