@@ -241,6 +241,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   border: 1px solid #eeeeee;
   margin-bottom: 2em;
+  background-color: #fff;
 }
 .new-entry a {
   text-decoration: none;
@@ -275,12 +276,11 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 .users-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  overflow: hidden;
 }
 .user {
-  width: 22%;
+  width: 50%;
+  float: left;
   background-color: #fff;
   padding: 1em;
   border: 1px solid #eeeeee;
@@ -288,13 +288,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .user img {
   width: 50%;
-
 }
 .user h2 {
   font-size: 18px;
 }
+.user a {
+  color: #4d8594;
+  text-decoration: none;
+  display: block;
+}
+.user a:hover {
+  text-decoration: underline;
+}
 .user p {
-  font-size: 14px;
+  font-size: 13px;
+  color: #616161;
 }
 .user button {
   padding: 1em;
@@ -328,6 +336,11 @@ h1, h2, h3, h4, h5, h6 {
   }
   .content-wrapper {
     padding: 0 2em 2em;
+  }
+}
+@media (min-width: 600px) {
+  .user {
+    width: 33.3%;
   }
 }
 
@@ -388,9 +401,18 @@ h1, h2, h3, h4, h5, h6 {
   .new-entry {
     width: 48%;
   }
+  .user {
+    width: 25%;
+  }
 }
 @media (min-width: 960px) {
   .nav-search {
     width: 200px;
+  }
+  .user {
+    width: 20%;
+  }
+  .user img {
+    width: 60%;
   }
 }

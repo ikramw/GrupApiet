@@ -200,33 +200,28 @@
       <div class="users-content">
         <div class="user">
           <img src="images/profile-picture.png" />
-          <h2><a href="#">johannas</a></h2>
+          <a href="#">username</a>
           <p>Joined April 15, 2017</p>
-          <button>Visit user</button>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <h2><a href="#">johannas</a></h2>
+          <a href="#">username</a>
           <p>Joined April 15, 2017</p>
-          <button>Visit user</button>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <h2><a href="#">johannas</a></h2>
+          <a href="#">username</a>
           <p>Joined April 15, 2017</p>
-          <button>Visit user</button>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <h2><a href="#">johannas</a></h2>
+          <a href="#">username</a>
           <p>Joined April 15, 2017</p>
-          <button>Visit user</button>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <h2><a href="#">johannas</a></h2>
+          <a href="#">username</a>
           <p>Joined April 15, 2017</p>
-          <button>Visit user</button>
         </div>
       </div>
     </section>
