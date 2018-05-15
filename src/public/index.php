@@ -169,6 +169,13 @@ $app->group('/api', function () use ($app) {
         $newEntry = $this->entries->update($body);
         return $response->withJson(['data' => $newEntry]);
     });
+     // GET http://localhost:XXXX/api/entries/user/5
+    $app->get('/entries/user/{userId}', function ($request, $response, $args) {
+       
+        $id = $args['userId'];
+        $EntryByUser = $this->entries->getByUser($id);
+        return $response->withJson(['data' => $EntryByUser]);
+    });
       // GET http://localhost:XXXX/api/comments
     $app->get('/comments', function ($request, $response, $args) {
         /**

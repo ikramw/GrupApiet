@@ -29,6 +29,14 @@ class EntryController
         // Fetch -> single resource
         return $getOneEntry->fetch();
     }
+    public function getByUser($userId)
+    {
+        $getEntryByUser = $this->db->prepare("SELECT * FROM entries WHERE createdBy = :id");
+        $getEntryByUser->execute([
+          ":id" => $userId
+        ]);
+        return $getEntryByUser->fetchAll();
+    }
     public function add($entry)
     {
             $addOne = $this->db->prepare(
