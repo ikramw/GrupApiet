@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Roboto+Slab:300,400|Open+Sans:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,700|Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Frontend</title>
 </head>
@@ -55,7 +55,7 @@
 
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
-            <a href="home.php">Your Profile</a>
+            <a href="#">Your Profile</a>
             <a href="logout.php">Sign out</a>
           <?php endif; ?>
 
@@ -78,7 +78,6 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
           elit. Sed eu nunc id enim sodales cursus elementum
           quis turpis. Ut ac elit id ante egestas lacinia.</p>
-        <button>Get started</button>
       </div>
     </section>
   <?php endif; ?>
@@ -88,8 +87,8 @@
         Har skapat några entries direkt i html bara för att se hur det
         kommer att se ut. Valde att lägga till bilder i en ny mapp uploads,
         ifall det går att fixa så att man kan ladda upp bilder till inläggen -->
-    <section class="entries-wrapper" id="entries-wrapper">
-      <div class="display-number">
+    <section class="entries-wrapper" id="entries">
+      <div class="elements-displayed-wrapper">
         <h1>Explore entries</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
@@ -112,7 +111,7 @@
           </div>
           <div class="entry-info">
             <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
+            <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
@@ -125,7 +124,7 @@
           </div>
           <div class="entry-info">
             <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
+            <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
@@ -138,7 +137,7 @@
           </div>
           <div class="entry-info">
             <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
+            <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
@@ -151,33 +150,7 @@
           </div>
           <div class="entry-info">
             <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
-          </div>
-        </article>
-        <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
-            <img src="uploads/railway.jpg" alt="Bild" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
-          </div>
-        </article>
-        <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
-            <img src="uploads/photographer.jpg" alt="Bild" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
-            <p>2018-03-24 17:45</p>
+            <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
       </div>
@@ -185,7 +158,7 @@
 
     <!-- Section som visar users -->
     <section class="users-wrapper" id="users">
-      <div class="display-number">
+      <div class="elements-displayed-wrapper">
         <h1>Explore users</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
@@ -228,7 +201,7 @@
 
     <!-- Section som visar comments -->
     <section class="comments-wrapper" id="comments">
-      <div class="display-number">
+      <div class="elements-displayed-wrapper">
         <h1>Explore comments</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
@@ -238,6 +211,24 @@
             <option value="60">60</option>
             <option value="all">All</option>
           </select>
+        </div>
+      </div>
+      <div class="comments-content">
+        <div class="comment">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia...</p>
+            <p>Written by</p><a href="#">username</a>
+        </div>
+        <div class="comment">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia...</p>
+        </div>
+        <div class="comment">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia...</p>
         </div>
       </div>
     </section>

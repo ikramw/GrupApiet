@@ -9,7 +9,7 @@ function navToggle() {
 }
 
 //Visar och gömmer element
-let entries = document.getElementById("entries-wrapper");
+let entries = document.getElementById("entries");
 let users = document.getElementById("users");
 let comments = document.getElementById("comments");
 
@@ -38,7 +38,7 @@ function showUsers() {
 function showComments() {
   users.style.display = "none";
   entries.style.display = "none";
-  comments.style.display = "flex";
+  comments.style.display = "block";
 
   commentsLink.classList.add("active");
   usersLink.classList.remove("active");
