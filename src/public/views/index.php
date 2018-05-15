@@ -15,7 +15,7 @@
   <header class="header-navbar">
     <div class="nav-content">
       <div class="logo-wrapper">
-          <a href="index.html"><img src="images/logo.png" class="logo" alt="Logo"></a>
+          <a href="#"><img src="images/logo.png" class="logo" alt="Logo"></a>
       </div>
       <nav class="nav-main" id="content-toggle">
         <ul class="nav-menu-left">
@@ -72,7 +72,7 @@
   <!-- Info om sidan för användare som inte har en blogg
   Visas bara om användaren inte är inloggad -->
   <?php if (!isset($_SESSION["loggedIn"])): ?>
-    <section class="header-info">
+    <section class="header-info" id="frontpage-header">
       <div class="info-content">
         <h1>Create your own free blog</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -81,6 +81,13 @@
       </div>
     </section>
   <?php endif; ?>
+
+  <!-- Namnet på användaren vars sida man är inne på -->
+  <section class="header-info display-username" id="display-username">
+    <div class="info-content">
+      <h1>username's blog</h1>
+    </div>
+  </section>
 
   <div class="content-wrapper">
     <!-- Section som visar entries.
@@ -103,53 +110,53 @@
       <div class="entries-content">
         <article class="new-entry">
           <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
+            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
             <img src="uploads/pencils.jpg" alt="Bild" />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Sed eu nunc id enim sodales cursus elementum quis turpis.
               Ut ac elit id ante egestas lacinia...</p>
           </div>
           <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
+            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
             <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
           <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
+            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
             <img src="uploads/bicycle.jpg" alt="Bild" />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Sed eu nunc id enim sodales cursus elementum quis turpis.
               Ut ac elit id ante egestas lacinia...</p>
           </div>
           <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
+            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
             <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
           <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
+            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
             <img src="uploads/flower.jpg" alt="Bild" />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Sed eu nunc id enim sodales cursus elementum quis turpis.
               Ut ac elit id ante egestas lacinia...</p>
           </div>
           <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
+            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
             <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
         <article class="new-entry">
           <div class="entry-content">
-            <h1><a href="#">Lorem Ipsum</a></h1>
+            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Sed eu nunc id enim sodales cursus elementum quis turpis.
               Ut ac elit id ante egestas lacinia. Sed eu nunc id enim sodales cursus elementum quis turpis.
               Ut ac elit id ante egestas lacinia...</p>
           </div>
           <div class="entry-info">
-            <a href="#"><i class="fa fa-user"></i> username</a>
+            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
             <p class="display-time">2018-03-24 17:45</p>
           </div>
         </article>
@@ -173,27 +180,27 @@
       <div class="users-content">
         <div class="user">
           <img src="images/profile-picture.png" />
-          <a href="#">username</a>
+          <a href="#" onclick="showSingleUser()">username</a>
           <p>Joined April 15, 2017</p>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <a href="#">username</a>
+          <a href="#" onclick="showSingleUser()">username</a>
           <p>Joined April 15, 2017</p>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <a href="#">username</a>
+          <a href="#" onclick="showSingleUser()">username</a>
           <p>Joined April 15, 2017</p>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <a href="#">username</a>
+          <a href="#" onclick="showSingleUser()">username</a>
           <p>Joined April 15, 2017</p>
         </div>
         <div class="user">
           <img src="images/profile-picture.png" />
-          <a href="#">username</a>
+          <a href="#" onclick="showSingleUser()">username</a>
           <p>Joined April 15, 2017</p>
         </div>
       </div>
@@ -231,6 +238,132 @@
             Ut ac elit id ante egestas lacinia...</p>
         </div>
       </div>
+    </section>
+
+    <!-- Section som visar en användare och dennes inlägg -->
+    <section class="single-user-wrapper" id="single-user">
+      <article class="single-entry">
+        <div class="single-entry-content">
+          <div class="single-entry-info">
+            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
+            <p>15 MAY 2018 - 17:45</p>
+          </div>
+          <img src="uploads/flower.jpg" alt="Bild" />
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+            dictum augue, ut tincidunt nibh enim in turpis.</p>
+            <p>3 comments</p>
+        </div>
+      </article>
+      <article class="single-entry">
+        <div class="single-entry-content">
+          <div class="single-entry-info">
+            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
+            <p>15 MAY 2018 - 17:45</p>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+            dictum augue, ut tincidunt nibh enim in turpis.</p>
+            <p>3 comments</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Visar ett inlägg och kommentarer till inlägget -->
+    <section class="single-entry-wrapper" id="single-entry">
+      <article class="single-entry">
+        <div class="single-entry-content">
+          <div class="single-entry-info">
+            <h1>This is the title of the entry</h1>
+            <span>Written by </span><a href="#" onclick="showSingleUser()">username</a>
+            <p>15 MAY 2018 - 17:45</p>
+          </div>
+          <img src="uploads/flower.jpg" alt="Bild" />
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed eu nunc id enim sodales cursus elementum quis turpis.
+            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+            dictum augue, ut tincidunt nibh enim in turpis.</p>
+        </div>
+      </article>
+      <section class="entry-comments">
+        <h2 class="heading-responses"><span id="comments-amount">2</span> responses to <span id="entry-title">"Titel av inlägget"</span></h2>
+        <div class="comments-displayed">
+          <span>VIEW</span>
+          <select>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div class="entry-comment">
+          <div class="comment-profile-picture">
+            <img src="images/profile-picture.png"/>
+          </div>
+          <div class="comment-text">
+            <a href="#" onclick="showSingleUser()">username</a>
+            <p class="display-time">2018-03-24 17:45</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed eu nunc id enim sodales cursus elementum quis turpis.
+              Ut ac elit id ante egestas lacinia.</p>
+          </div>
+        </div>
+        <div class="entry-comment">
+          <div class="comment-profile-picture">
+            <img src="images/profile-picture.png"/>
+          </div>
+          <div class="comment-text">
+            <a href="#" onclick="showSingleUser()">username</a>
+            <p class="display-time">2018-03-24 17:45</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed eu nunc id enim sodales cursus elementum quis turpis.
+              Ut ac elit id ante egestas lacinia.</p>
+          </div>
+        </div>
+
+        <div class="leave-comment-wrapper">
+          <?php if (!isset($_SESSION["loggedIn"])): ?>
+            <h2 class="comment-message">Sign in to leave a comment</h2>
+          <?php endif; ?>
+
+          <?php if (isset($_SESSION["loggedIn"])): ?>
+            <h2>Leave a comment</h2>
+            <form action="" method="post">
+              <textarea name="comment">Write your comment here...</textarea>
+              <input type="submit" id="submit" value="Post comment" />
+            </form>
+          <?php endif; ?>
+        </div>
+      </section>
     </section>
 
   </div>
