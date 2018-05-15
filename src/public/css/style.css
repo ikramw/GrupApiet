@@ -205,6 +205,9 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 500px;
   margin: 0 auto;
 }
+.display-username {
+  display: none;
+}
 .content-wrapper {
   width: 100%;
   max-width: 960px;
@@ -218,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2em;
 }
 
-/* Entries */
+/* All entries */
 .entries-content {
   display: flex;
   justify-content: space-between;
@@ -259,7 +262,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
-/* Users */
+/* All users */
 .users-wrapper {
   display: none;
 }
@@ -300,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 3px;
 }
 
-/* Comments */
+/* All comments */
 .comments-wrapper {
   display: none;
   overflow: hidden;
@@ -313,8 +316,12 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #eeeeee;
 }
 
-/* Single entry */
+/* Single user and single entry */
+.single-user-wrapper{
+  display: none;
+}
 .single-entry-wrapper{
+  display: none;
   padding-top: 2em;
 }
 .single-entry {
@@ -323,6 +330,7 @@ h1, h2, h3, h4, h5, h6 {
 .single-entry-content {
   background-color: #fff;
   padding: 2em;
+  border: 1px solid #eeeeee;
 }
 .single-entry-info {
   text-align: center;
@@ -344,8 +352,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   margin-top: 0.5em;
 }
-.heading-response {
+.heading-responses {
   margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+.comments-displayed {
+  margin-left: 1.4em;
+  margin-bottom: 1em;
 }
 .entry-comment {
   display: flex;
@@ -390,7 +403,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 30px;
   float: right;
 }
-
 
 /* Footer */
 .footer {
