@@ -13,9 +13,12 @@ class CommentController
 
     public function getAll()
     {
-        $getAllComments = $this->db->prepare("SELECT * FROM comments");
+        $limit=3;
+        $getAllComments = $this->db->prepare("SELECT * FROM comments ORDER BY createdAt DESC LIMIT :limit");
+        $getAllComments->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $getAllComments->execute();
-        return $getAllUsers->fetchAll();         
+        return $getAllComments->fetchAll();  
+               
     }
 
     public function getOne($id)
@@ -29,9 +32,7 @@ class CommentController
     }
     public function add($comment)
     {
-        /**
-         * Default 'completed' is false so we only need to insert the 'content'
-         */
+        
         $addOne = $this->db->prepare(
             'INSERT INTO comments (entryID, content, createdBy, createdAt) 
             VALUES (:entryID, :content, :createdBy, :createdAt)'
@@ -44,13 +45,9 @@ class CommentController
        [':entryID'  => $comment['entryID'],
         ':content'  => $comment['content'],
         ':createdBy'  => $comment['createdBy'],
-        ':createdAt'  => $comment['createdAt']]);
-
-        /**
-         * A INSERT INTO does not return the created object. If we want to return it to the user
-         * that has posted the todo we must build it ourself or fetch it after we have inserted it
-         * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
-         */
+        ':createdAt'  => $comment['createdAt']]
+    );
+        
         return [
         'commentID'      => (int)$this->db->lastInsertId(),
         'entryID'  => $comment['entryID'],
@@ -59,6 +56,11 @@ class CommentController
         'createdAt'  => $comment['createdAt']
         ];
     }
-    
+    public function delete($id){
+        $deleteOneComment = $this->db->prepare("DELETE FROM comments WHERE commentID = :id");
+        $deleteOneComment->execute([
+          ":id" => $id
+        ]);
+    }
     
 }

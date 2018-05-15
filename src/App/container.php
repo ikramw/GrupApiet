@@ -3,6 +3,7 @@
 require_once 'ConfigHandler.php';
 use \App\Controllers\UserController as UserController;
 use \App\Controllers\EntryController as EntryController;
+use \App\Controllers\CommentController as CommentController;
 
 /**
  * Return a new config with all the database credentials. If you need to change
@@ -65,6 +66,10 @@ $container['users'] = function ($c) {
 $container['entries'] = function ($c) {
     $EntryControllers = new \App\Controllers\EntryController($c->get('db'));
     return $EntryControllers;
+};
+$container['comments'] = function ($c) {
+    $CommentControllers = new \App\Controllers\CommentController($c->get('db'));
+    return $CommentControllers;
 };
 
 return $container;

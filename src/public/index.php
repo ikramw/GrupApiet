@@ -164,6 +164,11 @@ $app->group('/api', function () use ($app) {
         $id = $args['id'];
          $this->entries->delete($id);
         });
+    $app->patch('/entries/{id}', function ($request, $response, $args) {
+        $body = $request->getParsedBody();
+        $newEntry = $this->entries->update($body);
+        return $response->withJson(['data' => $newEntry]);
+    });
       // GET http://localhost:XXXX/api/comments
     $app->get('/comments', function ($request, $response, $args) {
         /**
@@ -194,15 +199,14 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $singleComment]);
     });
     $app->post('/comments', function ($request, $response, $args) {
-        /**
-         * Everything sent in 'body' when doing a POST-request can be
-         * extracted with 'getParsedBody()' from the request-object
-         * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
-         */
         $body = $request->getParsedBody();
         $newComment = $this->comments->add($body);
         return $response->withJson(['data' => $newComment]);
     });
+    $app->delete('/comments/{id}', function ($request, $response, $args) {
+        $id = $args['id'];
+        $this->comments->delete($id);
+        });
 });
 
 $app->run();
