@@ -30,9 +30,16 @@ class CommentController
         // Fetch -> single resource
         return $getOneComment->fetch();
     }
-    public function add($comment)
+    public function getByEntry($entryId)
     {
-        
+        $getCommentByEntry = $this->db->prepare("SELECT * FROM comments WHERE entryID = :id");
+        $getCommentByEntry->execute([
+          ":id" => $entryId
+        ]);
+        return $getCommentByEntry->fetchAll();
+    }
+    public function add($comment)
+    {        
         $addOne = $this->db->prepare(
             'INSERT INTO comments (entryID, content, createdBy, createdAt) 
             VALUES (:entryID, :content, :createdBy, :createdAt)'

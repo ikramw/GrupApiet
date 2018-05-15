@@ -214,6 +214,12 @@ $app->group('/api', function () use ($app) {
         $id = $args['id'];
         $this->comments->delete($id);
         });
+    $app->get('/comments/entry/{entryId}', function ($request, $response, $args) {
+    
+        $id = $args['entryId'];
+        $commentsByEntry = $this->comments->getByEntry($id);
+        return $response->withJson(['data' => $commentsByEntry]);
+    });
 });
 
 $app->run();
