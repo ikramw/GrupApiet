@@ -11,7 +11,7 @@ class EntryController
         $this->db = $pdo;
     }
 
-    public function getAll(){
+    public function getAll($params){
         $limit=3;
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $limit, \PDO::PARAM_INT);
@@ -37,27 +37,27 @@ class EntryController
         ]);
         return $getEntryByUser->fetchAll();
     }
+    public function getByTitle($title)
+    {
+        $getEntryByTitle = $this->db->prepare("SELECT * FROM entries WHERE title = :title");
+        $getEntryByTitle->execute([
+          ":title" => $title
+        ]);
+        return $getEntryByTitle->fetch();
+    }
     public function add($entry)
     {
             $addOne = $this->db->prepare(
             'INSERT INTO entries (title, content, createdBy, createdAt) 
             VALUES (:title, :content, :createdBy, :createdAt)'
         );
-
-        /**
-         * Insert the value from the parameter into the database
-         */
+       
         $addOne->execute(
        [':title'  => $entry['title'],
         ':content'  => $entry['content'],
         ':createdBy'  => $entry['createdBy'],
         ':createdAt'  => $entry['createdAt']]);
 
-        /**
-         * A INSERT INTO does not return the created object. If we want to return it to the user
-         * that has posted the todo we must build it ourself or fetch it after we have inserted it
-         * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
-         */
         return [
         'entryID'      => (int)$this->db->lastInsertId(),
         'title'  => $entry['title'],
@@ -72,7 +72,7 @@ class EntryController
           ":id" => $id
         ]);
     }
-    public function update($id)
+    public function update($entry,$id)
     {
         $updateOne = $this->db->prepare(
         'UPDATE entries 
@@ -83,19 +83,16 @@ class EntryController
         );
         $updateOne->execute(
        [":id" => $id,
-        ':title'  => $_POST['title'],
-        ':content'  => $_POST['content'],
-        ':createdBy'  => $_POST['createdBy'],
-        ':createdAt'  => $_POST['createdAt']]);
+        ':title'  => $entry['title'],
+        ':content'  => $entry['content'],
+        ':createdBy'  => $entry['createdBy'],
+        ':createdAt'  => $entry['createdAt']]);
 
-        /**
-         * A INSERT INTO does not return the created object. If we want to return it to the user
-         * that has posted the todo we must build it ourself or fetch it after we have inserted it
-         * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
-         */
         return [
-        'createdBy'  => $_POST['createdBy'],
-        'createdAt'  => $_POST['createdAt']
+        ':title'  => $entry['title'],
+        ':content'  => $entry['content'],
+        'createdBy'  => $entry['createdBy'],
+        'createdAt'  => $entry['createdAt']
         ];
     }
 }

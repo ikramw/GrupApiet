@@ -107,11 +107,7 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $singleUser]);
     });
     $app->post('/users', function ($request, $response, $args) {
-        /**
-         * Everything sent in 'body' when doing a POST-request can be
-         * extracted with 'getParsedBody()' from the request-object
-         * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
-         */
+       
         $body = $request->getParsedBody();
         $newUser = $this->users->add($body);
         return $response->withJson(['data' => $newUser]);
@@ -124,7 +120,10 @@ $app->group('/api', function () use ($app) {
          * inside our routes.
          */
         // $this === $app
-        $allEntries = $this->entries->getAll();
+        $params = $request->getQueryParams();
+        $params['limit'];
+        $params['title'];
+        $allEntries = $this->entries->getAll($params);
         /**
          * Wrapping the data when returning as a safety thing
          * https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet#Server_Side
@@ -166,7 +165,8 @@ $app->group('/api', function () use ($app) {
         });
     $app->patch('/entries/{id}', function ($request, $response, $args) {
         $body = $request->getParsedBody();
-        $newEntry = $this->entries->update($body);
+        $id = $args['id'];
+        $newEntry = $this->entries->update($body,$id);
         return $response->withJson(['data' => $newEntry]);
     });
      // GET http://localhost:XXXX/api/entries/user/5
@@ -175,6 +175,13 @@ $app->group('/api', function () use ($app) {
         $id = $args['userId'];
         $EntryByUser = $this->entries->getByUser($id);
         return $response->withJson(['data' => $EntryByUser]);
+    });
+     // GET http://localhost:XXXX/api/entries/user/5
+    $app->get('/entries/', function ($request, $response, $args) {
+       
+        $title = $args['title'];
+        $EntryByTitle = $this->entries->getByTitle($title);
+        return $response->withJson(['data' => $EntryByTitle]);
     });
       // GET http://localhost:XXXX/api/comments
     $app->get('/comments', function ($request, $response, $args) {
