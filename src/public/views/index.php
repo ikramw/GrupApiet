@@ -21,7 +21,7 @@
         <ul class="nav-menu-left">
           <li><a href="#" onclick="getAllEntries()" class="active" id="entries-link">Entries</a></li>
           <li><a href="#" onclick="getAllUsers()" id="users-link">Users</a></li>
-          <li><a href="#" onclick="showComments()" id="comments-link">Comments</a></li>
+          <li><a href="#" onclick="getAllComments()" id="comments-link">Comments</a></li>
         </ul>
         <div class="nav-menu-right">
           <input type="text" placeholder="Search" class="nav-search">
@@ -134,7 +134,7 @@
         <h1>Explore comments</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
-          <select>
+          <select id="selectCommentsAmount" onchange="getAllComments()">
             <option value="20">20</option>
             <option value="40">40</option>
             <option value="60">60</option>
@@ -143,12 +143,7 @@
         </div>
       </div>
       <div class="comments-content" id="comments-content">
-        <div class="comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia...</p>
-            <p>Written by</p><a href="#">username</a>
-        </div>
+        <!-- Fylls på med comments -->
       </div>
     </section>
 
