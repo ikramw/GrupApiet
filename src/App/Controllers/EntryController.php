@@ -11,10 +11,10 @@ class EntryController
         $this->db = $pdo;
     }
 
-    public function getAll($params){
-        $limit=3;
+    public function getAll(){
+        
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
-        $getAllEntries->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $getAllEntries->bindParam(':limit', $_GET['limit'] , \PDO::PARAM_INT);
         $getAllEntries->execute();
         $allEntries = $getAllEntries->fetchAll();
         return $allEntries;
