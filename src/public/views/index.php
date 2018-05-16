@@ -19,8 +19,8 @@
       </div>
       <nav class="nav-main" id="content-toggle">
         <ul class="nav-menu-left">
-          <li><a href="#" onclick="showEntries()" class="active" id="entries-link">Entries</a></li>
-          <li><a href="#" onclick="showUsers()" id="users-link">Users</a></li>
+          <li><a href="#" onclick="getAllEntries()" class="active" id="entries-link">Entries</a></li>
+          <li><a href="#" onclick="getAllUsers()" id="users-link">Users</a></li>
           <li><a href="#" onclick="showComments()" id="comments-link">Comments</a></li>
         </ul>
         <div class="nav-menu-right">
@@ -33,11 +33,11 @@
             <div class="login-form" id="login-form">
               <h3>Sign in</h3>
               <form action="" method="post">
-                <label for="username">Username:</label>
-                <input type="text" name="username" class="form-input" id="username" />
-                <label for="password">Password:</label>
-                <input type="password" name="password" class="form-input" id="password" />
-                <input type="submit" id="submit" value="Submit" />
+                <label for="login-username">Username:</label>
+                <input type="text" name="username" class="form-input" id="login-username" />
+                <label for="login-password">Password:</label>
+                <input type="password" name="password" class="form-input" id="login-password" />
+                <input type="submit" id="login-submit" value="Submit" />
               </form>
             </div>
             <a href="javascript:void(0)" onclick="showRegister()">Register</a>
@@ -89,7 +89,7 @@
     </div>
   </section>
 
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="content-wrapper">
     <!-- Section som visar entries.
         Har skapat några entries direkt i html bara för att se hur det
         kommer att se ut. Valde att lägga till bilder i en ny mapp uploads,
@@ -107,8 +107,8 @@
           </select>
         </div>
       </div>
-      <div class="entries-content">
-        <article class="new-entry">
+      <div class="entries-content" id="entries-content">
+        <!-- <article class="new-entry">
           <div class="entry-content">
             <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
             <img src="uploads/pencils.jpg" alt="Bild" />
@@ -120,46 +120,8 @@
             <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
             <p class="display-time">2018-03-24 17:45</p>
           </div>
-        </article>
-        <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
-            <img src="uploads/bicycle.jpg" alt="Bild" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-          </div>
-        </article>
-        <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
-            <img src="uploads/flower.jpg" alt="Bild" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-          </div>
-        </article>
-        <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia. Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-          </div>
-        </article>
+        </article> -->
+
       </div>
     </section>
 
@@ -177,27 +139,7 @@
           </select>
         </div>
       </div>
-      <div class="users-content">
-        <div class="user">
-          <img src="images/profile-picture.png" />
-          <a href="#" onclick="showSingleUser()">username</a>
-          <p>Joined April 15, 2017</p>
-        </div>
-        <div class="user">
-          <img src="images/profile-picture.png" />
-          <a href="#" onclick="showSingleUser()">username</a>
-          <p>Joined April 15, 2017</p>
-        </div>
-        <div class="user">
-          <img src="images/profile-picture.png" />
-          <a href="#" onclick="showSingleUser()">username</a>
-          <p>Joined April 15, 2017</p>
-        </div>
-        <div class="user">
-          <img src="images/profile-picture.png" />
-          <a href="#" onclick="showSingleUser()">username</a>
-          <p>Joined April 15, 2017</p>
-        </div>
+      <div class="users-content" id="users-content">
         <div class="user">
           <img src="images/profile-picture.png" />
           <a href="#" onclick="showSingleUser()">username</a>
