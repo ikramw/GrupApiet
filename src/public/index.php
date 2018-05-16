@@ -97,11 +97,17 @@ $app->group('/api', function () use ($app) {
     // GET http://localhost:XXXX/api/entries
     $app->get('/entries', function ($request, $response, $args) {
         
-       /* $params = $request->getQueryParams();
-        $params['limit'];
-        $params['title'];*/
+       $params = $request->getQueryParams();
+       if($params == null) {       
+        $allEntries = $this->entries->getDefault();
+    }
+        elseif($params['title']!=null){
+        $allEntries = $this->entries->getByTitle();
+    }
+        elseif($params['limit']!=null){
         $allEntries = $this->entries->getAll();
-        
+    }
+    
         return $response->withJson(['data' => $allEntries]);
     });
 

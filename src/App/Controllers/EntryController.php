@@ -10,7 +10,14 @@ class EntryController
     {
         $this->db = $pdo;
     }
-
+    public function getDefault(){
+        $limit=3;
+        $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
+        $getAllEntries->bindParam(':limit', $limit , \PDO::PARAM_INT);
+        $getAllEntries->execute();
+        $allEntries = $getAllEntries->fetchAll();
+        return $allEntries;
+    }
     public function getAll(){
         
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
@@ -37,12 +44,11 @@ class EntryController
         ]);
         return $getEntryByUser->fetchAll();
     }
-    public function getByTitle($title)
+    public function getByTitle()
     {
         $getEntryByTitle = $this->db->prepare("SELECT * FROM entries WHERE title = :title");
-        $getEntryByTitle->execute([
-          ":title" => $title
-        ]);
+        $getEntryByTitle->bindParam(':title', $_GET['title'] , \PDO::PARAM_STR, 12);
+        $getEntryByTitle->execute();
         return $getEntryByTitle->fetch();
     }
     public function add($entry)
