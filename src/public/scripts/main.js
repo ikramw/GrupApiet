@@ -1,6 +1,7 @@
 //Sections som ska gömmas eller visas
 let entries = document.getElementById("entries");
 let users = document.getElementById("users");
+let comments = document.getElementById("comments");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
@@ -25,6 +26,7 @@ async function getAllEntries() {
 
   entries.style.display = "block";
   users.style.display = "none";
+  comments.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -99,10 +101,9 @@ function getSingleEntry() {
 
 //Sparar värdet på vald option i select för users
 function changeUsersDisplayed() {
-  let selectValue = document.getElementById("selectEntryAmount").value;
+  let selectValue = document.getElementById("selectUserAmount").value;
   return selectValue;
 }
-
 
 async function getAllUsers() {
   const response = await fetch('/api/users');
@@ -110,6 +111,7 @@ async function getAllUsers() {
 
   entries.style.display = "none";
   users.style.display = "block";
+  comments.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -152,6 +154,68 @@ function getSingleUser() {
 
 }
 
+function changeCommentsDisplayed() {
+  let selectValue = document.getElementById("selectCommentsAmount").value;
+  return selectValue;
+}
+
+async function getAllComments() {
+  const response = await fetch('/api/comments');
+  const { data } = await response.json();
+
+  entries.style.display = "none";
+  users.style.display = "none";
+  comments.style.display = "block";
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  commentsContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.remove("active");
+  usersLink.classList.remove("active");
+  commentsLink.classList.add("active");
+
+  function createCommentDiv(userData) {
+
+    let commentDiv = document.createElement("div");
+    commentDiv.setAttribute("class", "comment");
+
+    let commentText = document.createElement("p");
+    var commentTextNode = document.createTextNode(userData.content);
+    commentText.appendChild(commentTextNode);
+
+    let writtenBy = document.createElement("p");
+    var writtenByText = document.createTextNode("Written by ");
+    writtenBy.appendChild(writtenByText);
+
+    let commentUsername = document.createElement("a");
+    commentUsername.href = "#";
+    var commentUsernameText = document.createTextNode(userData.createdBy);
+    commentUsername.appendChild(commentUsernameText);
+
+    writtenBy.appendChild(commentUsername);
+
+    let commentCreated = document.createElement("p");
+    var commentCreatedText = document.createTextNode(userData.createdAt);
+    commentCreated.appendChild(commentCreatedText);
+
+    commentDiv.appendChild(commentText);
+    commentDiv.appendChild(writtenBy);
+    commentDiv.appendChild(commentCreated);
+
+    commentsContent.appendChild(commentDiv);
+  }
+
+  let selectValue = document.getElementById("selectCommentsAmount").value;
+
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  for (let i = 0; i < selectValue && i < data.length; i++) {
+
+    createCommentDiv(data[i]);
+  }
+}
+
 //Navigation Toggle
 function navToggle() {
   var menu = document.getElementById("content-toggle");
@@ -161,85 +225,6 @@ function navToggle() {
     menu.className = "nav-main";
   }
 }
-
-//Visar och gömmer element
-/*let entries = document.getElementById("entries");
-let users = document.getElementById("users");
-let comments = document.getElementById("comments");
-let singleUser = document.getElementById("single-user");
-let singleEntry = document.getElementById("single-entry");
-let frontpageHeader = document.getElementById("frontpage-header");
-let singleUsername = document.getElementById("display-username");
-
-let entriesLink = document.getElementById("entries-link");
-let usersLink = document.getElementById("users-link");
-let commentsLink = document.getElementById("comments-link");
-
-function showEntries() {
-  entries.style.display = "block";
-  users.style.display = "none";
-  comments.style.display = "none";
-  frontpageHeader.style.display = "block";
-  singleUser.style.display = "none";
-  singleUsername.style.display = "none";
-  singleEntry.style.display = "none";
-
-  entriesLink.classList.add("active");
-  usersLink.classList.remove("active");
-  commentsLink.classList.remove("active");
-}
-function showUsers() {
-  users.style.display = "block";
-  entries.style.display = "none";
-  comments.style.display = "none";
-  frontpageHeader.style.display = "block";
-  singleUser.style.display = "none";
-  singleUsername.style.display = "none";
-  singleEntry.style.display = "none";
-
-  usersLink.classList.add("active");
-  entriesLink.classList.remove("active");
-  commentsLink.classList.remove("active");
-}
-function showComments() {
-  users.style.display = "none";
-  entries.style.display = "none";
-  comments.style.display = "block";
-  frontpageHeader.style.display = "block";
-  singleUser.style.display = "none";
-  singleUsername.style.display = "none";
-  singleEntry.style.display = "none";
-
-  commentsLink.classList.add("active");
-  usersLink.classList.remove("active");
-  entriesLink.classList.remove("active");
-}
-function showSingleUser() {
-  singleUser.style.display = "block";
-  singleUsername.style.display = "block";
-  users.style.display = "none";
-  entries.style.display = "none";
-  comments.style.display = "none";
-  frontpageHeader.style.display = "none";
-  singleEntry.style.display = "none";
-
-  commentsLink.classList.remove("active");
-  usersLink.classList.add("active");
-  entriesLink.classList.remove("active");
-}
-function showSingleEntry() {
-  singleEntry.style.display = "block";
-  singleUser.style.display = "none";
-  singleUsername.style.display = "none";
-  users.style.display = "none";
-  entries.style.display = "none";
-  comments.style.display = "none";
-  frontpageHeader.style.display = "none";
-
-  commentsLink.classList.remove("active");
-  usersLink.classList.add("active");
-  entriesLink.classList.remove("active");
-}*/
 
 //Visar login och register form
 let loginForm = document.getElementById("login-form");
