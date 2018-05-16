@@ -144,13 +144,6 @@
       </div>
       <div class="comments-content" id="comments-content">
         <!-- Fylls på med comments -->
-        <div class="comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia...</p>
-            <p>Written by</p><a href="#">username</a>
-            <p>15 MAY 2018 - 17:45</p>
-        </div>
       </div>
     </section>
 
