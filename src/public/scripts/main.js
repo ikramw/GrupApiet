@@ -128,6 +128,8 @@ async function getAllUsers() {
     userDiv.setAttribute("class", "user");
 
     let userUsername = document.createElement("a");
+    userUsername.href = "#";
+    userUsername.addEventListener("click", getSingleUser);
     var usernameText = document.createTextNode(userData.username);
     userUsername.appendChild(usernameText);
 
@@ -216,7 +218,7 @@ async function getAllComments() {
   }
 }
 
-//Navigation Toggle
+//Öppnar och stänger navigationen på mobiler 
 function navToggle() {
   var menu = document.getElementById("content-toggle");
   if (menu.className === "nav-main") {
