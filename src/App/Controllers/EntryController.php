@@ -5,19 +5,19 @@ namespace App\Controllers;
 class EntryController
 {
     private $db;
-    
+
     public function __construct($pdo)
     {
         $this->db = $pdo;
     }
 
     public function getAll(){
-        $limit=3;
+        $limit=100;
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $getAllEntries->execute();
-        $allEntries = $getAllEntries->fetchAll();  
-        return $allEntries;      
+        $allEntries = $getAllEntries->fetchAll();
+        return $allEntries;
     }
 
     public function getOne($id)
@@ -40,7 +40,7 @@ class EntryController
     public function add($entry)
     {
             $addOne = $this->db->prepare(
-            'INSERT INTO entries (title, content, createdBy, createdAt) 
+            'INSERT INTO entries (title, content, createdBy, createdAt)
             VALUES (:title, :content, :createdBy, :createdAt)'
         );
 
@@ -75,11 +75,11 @@ class EntryController
     public function update($id)
     {
         $updateOne = $this->db->prepare(
-        'UPDATE entries 
+        'UPDATE entries
         SET title = :title, content = :content,
         createdBy = :createdBy, createdAt = :createdAt
         WHERE entryID = :id'
-    
+
         );
         $updateOne->execute(
        [":id" => $id,

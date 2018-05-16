@@ -1,20 +1,43 @@
-//Navigation Toggle
-function navToggle() {
-  var menu = document.getElementById("content-toggle");
-  if (menu.className === "nav-main") {
-    menu.className += " responsive";
-  } else {
-    menu.className = "nav-main";
-  }
+//Sections som ska gömmas eller visas
+let entries = document.getElementById("entries");
+let users = document.getElementById("users");
+
+//Elementen som ska fyllas på med information
+let entriesContent = document.getElementById("entries-content");
+let usersContent = document.getElementById("users-content");
+let commentsContent = document.getElementById("comments-content");
+
+//Länkarna i navigationen
+let entriesLink = document.getElementById("entries-link");
+let usersLink = document.getElementById("users-link");
+let commentsLink = document.getElementById("comments-link");
+
+//Sparar värdet på vald option i select för entries
+function changeEntriesDisplayed() {
+  let selectValue = document.getElementById("selectEntryAmount").value;
+  return selectValue;
 }
 
+//Hämtar alla entries
 async function getAllEntries() {
   const response = await fetch('/api/entries');
   const { data } = await response.json();
 
+  entries.style.display = "block";
+  users.style.display = "none";
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  commentsContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.add("active");
+  usersLink.classList.remove("active");
+  commentsLink.classList.remove("active");
+
+  //Skapar element för att visa upp entries från databasen
   function createEntryArticle(entryData) {
 
-    let entriesContent = document.getElementById("entries-content");
     let entryArticle = document.createElement("article");
     entryArticle.setAttribute("class", "new-entry");
 
@@ -22,8 +45,12 @@ async function getAllEntries() {
     entryContent.setAttribute("class", "entry-content");
 
     let entryTitle = document.createElement("h1");
+    let titleLink = document.createElement("a");
+    titleLink.href = "#";
+    titleLink.addEventListener("click", getSingleEntry);
     var titleText = document.createTextNode(entryData.title);
-    entryTitle.appendChild(titleText);
+    titleLink.appendChild(titleText);
+    entryTitle.appendChild(titleLink);
 
     let entryContentText = document.createElement("p");
     var entryContentTextNode = document.createTextNode(entryData.content);
@@ -37,6 +64,8 @@ async function getAllEntries() {
     entryInfo.setAttribute("class", "entry-info");
 
     let entryUsername = document.createElement("a");
+    entryUsername.href = "#";
+    entryUsername.addEventListener("click", getSingleUser);
     var entryUsernameText = document.createTextNode(entryData.createdBy);
     entryUsername.appendChild(entryUsernameText);
 
@@ -52,20 +81,47 @@ async function getAllEntries() {
     entriesContent.appendChild(entryArticle);
   }
 
-  for (let i = 0; i < data.length; i++) {
+  let selectValue = document.getElementById("selectEntryAmount").value;
 
-        createEntryArticle(data[i]);
-    }
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  for (let i = 0; i < selectValue && i < data.length; i++) {
+
+    createEntryArticle(data[i]);
+  }
 }
+
+//Kallar på funtionen för att hämta alla entries då de visas på startsidan
 getAllEntries();
+
+function getSingleEntry() {
+  console.log("test");
+}
+
+//Sparar värdet på vald option i select för users
+function changeUsersDisplayed() {
+  let selectValue = document.getElementById("selectEntryAmount").value;
+  return selectValue;
+}
+
 
 async function getAllUsers() {
   const response = await fetch('/api/users');
   const { data } = await response.json();
 
+  entries.style.display = "none";
+  users.style.display = "block";
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  commentsContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.remove("active");
+  usersLink.classList.add("active");
+  commentsLink.classList.remove("active");
+
   function createUserDiv(userData) {
 
-    let usersContent = document.getElementById("users-content");
     let userDiv = document.createElement("div");
     userDiv.setAttribute("class", "user");
 
@@ -74,7 +130,7 @@ async function getAllUsers() {
     userUsername.appendChild(usernameText);
 
     let userCreated = document.createElement("p");
-    var userCreatedText = document.createTextNode(userData.createdAt);
+    var userCreatedText = document.createTextNode("Joined " + userData.createdAt);
     userCreated.appendChild(userCreatedText);
 
     userDiv.appendChild(userUsername);
@@ -83,14 +139,31 @@ async function getAllUsers() {
     usersContent.appendChild(userDiv);
   }
 
-  for (let i = 0; i < data.length; i++) {
+  let selectValue = document.getElementById("selectUserAmount").value;
 
-        createUserDiv(data[i]);
-    }
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  for (let i = 0; i < selectValue && i < data.length; i++) {
+
+    createUserDiv(data[i]);
+  }
+}
+
+function getSingleUser() {
+
+}
+
+//Navigation Toggle
+function navToggle() {
+  var menu = document.getElementById("content-toggle");
+  if (menu.className === "nav-main") {
+    menu.className += " responsive";
+  } else {
+    menu.className = "nav-main";
+  }
 }
 
 //Visar och gömmer element
-let entries = document.getElementById("entries");
+/*let entries = document.getElementById("entries");
 let users = document.getElementById("users");
 let comments = document.getElementById("comments");
 let singleUser = document.getElementById("single-user");
@@ -166,7 +239,7 @@ function showSingleEntry() {
   commentsLink.classList.remove("active");
   usersLink.classList.add("active");
   entriesLink.classList.remove("active");
-}
+}*/
 
 //Visar login och register form
 let loginForm = document.getElementById("login-form");
