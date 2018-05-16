@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700|Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Frontend</title>
+  <title>Gruppuppgift - API</title>
 </head>
 
 <body>
@@ -90,38 +90,22 @@
   </section>
 
   <div class="content-wrapper" id="content-wrapper">
-    <!-- Section som visar entries.
-        Har skapat några entries direkt i html bara för att se hur det
-        kommer att se ut. Valde att lägga till bilder i en ny mapp uploads,
-        ifall det går att fixa så att man kan ladda upp bilder till inläggen -->
+    <!-- Section som visar entries -->
     <section class="entries-wrapper" id="entries">
       <div class="elements-displayed-wrapper">
         <h1>Explore entries</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
-          <select>
+          <select id="selectEntryAmount" onchange="getAllEntries()">
             <option value="20">20</option>
             <option value="40">40</option>
             <option value="60">60</option>
-            <option value="all">All</option>
+            <option value="100">100</option>
           </select>
         </div>
       </div>
       <div class="entries-content" id="entries-content">
-        <!-- <article class="new-entry">
-          <div class="entry-content">
-            <h1><a href="#" onclick="showSingleEntry()">Lorem Ipsum</a></h1>
-            <img src="uploads/pencils.jpg" alt="Bild" />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia...</p>
-          </div>
-          <div class="entry-info">
-            <a href="#" onclick="showSingleUser()"><i class="fa fa-user"></i> username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-          </div>
-        </article> -->
-
+        <!-- Fylls på med entries -->
       </div>
     </section>
 
@@ -131,20 +115,16 @@
         <h1>Explore users</h1>
         <div class="elements-displayed">
           <span>VIEW</span>
-          <select>
+          <select id="selectUserAmount" onchange="getAllUsers()">
             <option value="20">20</option>
             <option value="40">40</option>
             <option value="60">60</option>
-            <option value="all">All</option>
+            <option value="100">100</option>
           </select>
         </div>
       </div>
       <div class="users-content" id="users-content">
-        <div class="user">
-          <img src="images/profile-picture.png" />
-          <a href="#" onclick="showSingleUser()">username</a>
-          <p>Joined April 15, 2017</p>
-        </div>
+        <!-- Fylls på med users -->
       </div>
     </section>
 
@@ -162,22 +142,12 @@
           </select>
         </div>
       </div>
-      <div class="comments-content">
+      <div class="comments-content" id="comments-content">
         <div class="comment">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Sed eu nunc id enim sodales cursus elementum quis turpis.
             Ut ac elit id ante egestas lacinia...</p>
             <p>Written by</p><a href="#">username</a>
-        </div>
-        <div class="comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia...</p>
-        </div>
-        <div class="comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia...</p>
         </div>
       </div>
     </section>
