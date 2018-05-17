@@ -338,6 +338,7 @@ async function getSingleUser(id) {
   users.style.display = "none";
   comments.style.display = "none";
   singleUser.style.display = "block";
+  singleEntry.style.display = "none";
   usernameHeader.style.display = "block"
   frontpageHeader.style.display = "none";
 
