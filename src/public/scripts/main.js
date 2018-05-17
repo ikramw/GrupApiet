@@ -20,22 +20,6 @@ let entriesLink = document.getElementById("entries-link");
 let usersLink = document.getElementById("users-link");
 let commentsLink = document.getElementById("comments-link");
 
-//Sparar värdet på vald option i select för entries
-function changeEntriesDisplayed() {
-  let selectValue = document.getElementById("selectEntryAmount").value;
-  return selectValue;
-}
-//Sparar värdet på vald option i select för users
-function changeUsersDisplayed() {
-  let selectValue = document.getElementById("selectUserAmount").value;
-  return selectValue;
-}
-//Sparar värdet på vald option i select för comments
-function changeCommentsDisplayed() {
-  let selectValue = document.getElementById("selectCommentsAmount").value;
-  return selectValue;
-}
-
 //Skapar element för att visa upp inlägg från databasen
 function createEntryArticle(entryData) {
 
@@ -72,8 +56,8 @@ function createEntryArticle(entryData) {
   entryUsername.addEventListener("click", function(){
     getSingleUser(entryData.createdBy)
   });
-  let entryUsernameText = document.createTextNode(entryData.createdBy);
-  entryUsername.appendChild(entryUsernameText);
+  //Hämtar användarnamnet
+  getUsername(entryData.createdBy, entryUsername);
 
   let entryDisplayTime = document.createElement("p");
   entryDisplayTime.setAttribute("class", "display-time");
@@ -107,8 +91,8 @@ function createSingleEntryArticle(entryData) {
   entryUsername.addEventListener("click", function(){
     getSingleUser(entryData.createdBy)
   });
-  let entryUsernameText = document.createTextNode(entryData.createdBy);
-  entryUsername.appendChild(entryUsernameText);
+  //Hämtar användarnamnet
+  getUsername(entryData.createdBy, entryUsername);
 
   let entryDisplayTime = document.createElement("p");
   let entryDisplayTimeText = document.createTextNode(entryData.createdAt);
@@ -152,13 +136,13 @@ function createUserDiv(userData) {
   usersContent.appendChild(userDiv);
 }
 //Skapar element för att visa upp kommentarer från databasen
-function createCommentDiv(userData) {
+function createCommentDiv(commentData) {
 
   let commentDiv = document.createElement("div");
   commentDiv.setAttribute("class", "comment");
 
   let commentText = document.createElement("p");
-  var commentTextNode = document.createTextNode(userData.content);
+  var commentTextNode = document.createTextNode(commentData.content);
   commentText.appendChild(commentTextNode);
 
   let writtenBy = document.createElement("p");
@@ -167,13 +151,16 @@ function createCommentDiv(userData) {
 
   let commentUsername = document.createElement("a");
   commentUsername.href = "#";
-  var commentUsernameText = document.createTextNode(userData.createdBy);
-  commentUsername.appendChild(commentUsernameText);
+  commentUsername.addEventListener("click", function(){
+    getSingleUser(commentData.createdBy)
+  });
+  //Hämtar användarnamnet
+  getUsername(commentData.createdBy, commentUsername);
 
   writtenBy.appendChild(commentUsername);
 
   let commentCreated = document.createElement("p");
-  var commentCreatedText = document.createTextNode(userData.createdAt);
+  var commentCreatedText = document.createTextNode(commentData.createdAt);
   commentCreated.appendChild(commentCreatedText);
 
   commentDiv.appendChild(commentText);
@@ -182,7 +169,58 @@ function createCommentDiv(userData) {
 
   commentsContent.appendChild(commentDiv);
 }
+//Skapar element för att visa kommentarer kopplat till inlägg
+function createEntryComments(commentData) {
+  let entryComment = document.createElement("div");
+  entryComment.setAttribute("class", "entry-comment");
 
+  let commentProfilePicture = document.createElement("div");
+  commentProfilePicture.setAttribute("class", "comment-profile-picture");
+
+  var profilePicture = document.createElement("img");
+  profilePicture.src = "images/profile-picture.png";
+
+  commentProfilePicture.appendChild(profilePicture);
+
+  let commentText = document.createElement("div");
+  commentText.setAttribute("class", "comment-text");
+
+  let commentUsername = document.createElement("a");
+  commentUsername.href = "#";
+  commentUsername.addEventListener("click", function(){
+    getSingleUser(commentData.createdBy)
+  });
+  //Hämtar användarnamnet
+  getUsername(commentData.createdBy, commentUsername);
+
+  let commentDisplayTime = document.createElement("p");
+  commentDisplayTime.setAttribute("class", "display-time");
+  let commentDisplayTimeText = document.createTextNode(commentData.createdAt);
+  commentDisplayTime.appendChild(commentDisplayTimeText);
+
+  let commentContentText = document.createElement("p");
+  let commentContentTextNode = document.createTextNode(commentData.content);
+  commentContentText.appendChild(commentContentTextNode);
+
+  commentText.appendChild(commentUsername);
+  commentText.appendChild(commentDisplayTime);
+  commentText.appendChild(commentContentText);
+
+  entryComment.appendChild(commentProfilePicture);
+  entryComment.appendChild(commentText);
+  entryCommentsContent.appendChild(entryComment);
+}
+
+/*Funktion som hämtar användarnamnet och appendar det till ett element, t.ex. så
+att det går att visa användarnamnet för ett inlägg */
+async function getUsername(id, userLink) {
+  const response = await fetch('/api/users/' + id);
+  const { data } = await response.json();
+
+  let username = data.username;
+  let usernameTextNode = document.createTextNode(username);
+  userLink.appendChild(usernameTextNode);
+}
 //Hämtar alla entries
 async function getAllEntries() {
   const response = await fetch('/api/entries');
@@ -229,47 +267,6 @@ async function getEntryComments(id) {
   //Skriver ut antalet svar till inlägget
   document.getElementById("comments-amount").innerHTML = data.length;
 
-  function createEntryComments(commentData) {
-    let entryComment = document.createElement("div");
-    entryComment.setAttribute("class", "entry-comment");
-
-    let commentProfilePicture = document.createElement("div");
-    commentProfilePicture.setAttribute("class", "comment-profile-picture");
-
-    var profilePicture = document.createElement("img");
-    profilePicture.src = "images/profile-picture.png";
-
-    commentProfilePicture.appendChild(profilePicture);
-
-    let commentText = document.createElement("div");
-    commentText.setAttribute("class", "comment-text");
-
-    let commentUsername = document.createElement("a");
-    commentUsername.href = "#";
-    commentUsername.addEventListener("click", function(){
-      getSingleUser(commentData.createdBy)
-    });
-    let commentUsernameText = document.createTextNode(commentData.createdBy);
-    commentUsername.appendChild(commentUsernameText);
-
-    let commentDisplayTime = document.createElement("p");
-    commentDisplayTime.setAttribute("class", "display-time");
-    let commentDisplayTimeText = document.createTextNode(commentData.createdAt);
-    commentDisplayTime.appendChild(commentDisplayTimeText);
-
-    let commentContentText = document.createElement("p");
-    let commentContentTextNode = document.createTextNode(commentData.content);
-    commentContentText.appendChild(commentContentTextNode);
-
-    commentText.appendChild(commentUsername);
-    commentText.appendChild(commentDisplayTime);
-    commentText.appendChild(commentContentText);
-
-    entryComment.appendChild(commentProfilePicture);
-    entryComment.appendChild(commentText);
-    entryCommentsContent.appendChild(entryComment);
-  }
-
   let selectValue = document.getElementById("selectCommentAmount").value;
 
   //Skapar artikel element för antalet entries som är valt i select elementet
@@ -278,6 +275,8 @@ async function getEntryComments(id) {
     createEntryComments(data[i]);
   }
 }
+/*Funktion som kallar på single entry och entry kommentarer så att de visas
+på samma sida med samma id */
 function getSingleEntryAndComments(id) {
   entries.style.display = "none";
   users.style.display = "none";

@@ -210,12 +210,6 @@
 
   </div>
 
-  <footer class="footer">
-      <?php
-        echo "<p>Copyright &copy; 2016-" . date("Y") . " company-name.com</p>";
-      ?>
-  </footer>
-
   <script src="scripts/main.js"></script>
 </body>
 
