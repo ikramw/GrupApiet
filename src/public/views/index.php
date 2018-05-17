@@ -85,7 +85,7 @@
   <!-- Namnet på användaren vars sida man är inne på -->
   <section class="header-info display-username" id="display-username">
     <div class="info-content">
-      <h1>username's blog</h1>
+      <h1 id="usernames-blog"></h1>
     </div>
   </section>
 
@@ -174,41 +174,22 @@
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
     <section class="single-entry-wrapper" id="single-entry">
-      <!-- Fylls på med ett entry -->
+      <div id="single-entry-content">
+        <!-- Fylls på med ett entry -->
+      </div>
       <section class="entry-comments">
-        <h2 class="heading-responses"><span id="comments-amount">2</span> responses to <span id="entry-title">"Titel av inlägget"</span></h2>
+        <h2 class="heading-responses"><span id="comments-amount"></span> responses</h2>
         <div class="comments-displayed">
           <span>VIEW</span>
-          <select>
+          <select id="selectCommentAmount">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="all">All</option>
           </select>
         </div>
-        <div class="entry-comment">
-          <div class="comment-profile-picture">
-            <img src="images/profile-picture.png"/>
-          </div>
-          <div class="comment-text">
-            <a href="#" onclick="showSingleUser()">username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia.</p>
-          </div>
-        </div>
-        <div class="entry-comment">
-          <div class="comment-profile-picture">
-            <img src="images/profile-picture.png"/>
-          </div>
-          <div class="comment-text">
-            <a href="#" onclick="showSingleUser()">username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia.</p>
-          </div>
+        <div id="entry-comments-content">
+          <!-- Fylls på med kommentarer -->
         </div>
 
         <div class="leave-comment-wrapper">

@@ -4,13 +4,16 @@ let entries = document.getElementById("entries");
 let singleEntry = document.getElementById("single-entry");
 let users = document.getElementById("users");
 let singleUser = document.getElementById("single-user");
+let usernameHeader = document.getElementById("display-username");
 let comments = document.getElementById("comments");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
+let singleEntryContent = document.getElementById("single-entry-content");
 let usersContent = document.getElementById("users-content");
 let singleUserContent = document.getElementById("single-user");
 let commentsContent = document.getElementById("comments-content");
+let entryCommentsContent = document.getElementById("entry-comments-content");
 
 //Länkarna i navigationen
 let entriesLink = document.getElementById("entries-link");
@@ -46,14 +49,15 @@ function createEntryArticle(entryData) {
   let titleLink = document.createElement("a");
   titleLink.href = "#";
   titleLink.addEventListener("click", function(){
-    getSingleEntry(entryData.entryID)
+    getSingleEntryAndComments(entryData.entryID)
   });
   let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
   entryTitle.appendChild(titleLink);
 
   let entryContentText = document.createElement("p");
-  let entryContentTextNode = document.createTextNode(entryData.content);
+  //Skriver ut de första 300 teckena av content
+  let entryContentTextNode = document.createTextNode(entryData.content.substring(0,300) + "...");
   entryContentText.appendChild(entryContentTextNode);
 
   entryContent.appendChild(entryTitle);
@@ -120,7 +124,7 @@ function createSingleEntryArticle(entryData) {
   singleEntryInfo.appendChild(entryDisplayTime);
   singleEntryArticle.appendChild(singleEntryInfo);
   singleEntryArticle.appendChild(entryContentText);
-  singleEntry.appendChild(singleEntryArticle);
+  singleEntryContent.appendChild(singleEntryArticle);
 }
 //Skapar element för att visa upp användare från databasen
 function createUserDiv(userData) {
@@ -189,6 +193,7 @@ async function getAllEntries() {
   comments.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
+  usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -215,24 +220,86 @@ async function getSingleEntry(id) {
   const response = await fetch('/api/entries/' + id);
   const { data } = await response.json();
 
+  createSingleEntryArticle(data);
+}
+async function getEntryComments(id) {
+  const response = await fetch('/api/comments/entry/' + id);
+  const { data } = await response.json();
+
+  //Skriver ut antalet svar till inlägget
+  document.getElementById("comments-amount").innerHTML = data.length;
+
+  function createEntryComments(commentData) {
+    let entryComment = document.createElement("div");
+    entryComment.setAttribute("class", "entry-comment");
+
+    let commentProfilePicture = document.createElement("div");
+    commentProfilePicture.setAttribute("class", "comment-profile-picture");
+
+    var profilePicture = document.createElement("img");
+    profilePicture.src = "images/profile-picture.png";
+
+    commentProfilePicture.appendChild(profilePicture);
+
+    let commentText = document.createElement("div");
+    commentText.setAttribute("class", "comment-text");
+
+    let commentUsername = document.createElement("a");
+    commentUsername.href = "#";
+    commentUsername.addEventListener("click", function(){
+      getSingleUser(commentData.createdBy)
+    });
+    let commentUsernameText = document.createTextNode(commentData.createdBy);
+    commentUsername.appendChild(commentUsernameText);
+
+    let commentDisplayTime = document.createElement("p");
+    commentDisplayTime.setAttribute("class", "display-time");
+    let commentDisplayTimeText = document.createTextNode(commentData.createdAt);
+    commentDisplayTime.appendChild(commentDisplayTimeText);
+
+    let commentContentText = document.createElement("p");
+    let commentContentTextNode = document.createTextNode(commentData.content);
+    commentContentText.appendChild(commentContentTextNode);
+
+    commentText.appendChild(commentUsername);
+    commentText.appendChild(commentDisplayTime);
+    commentText.appendChild(commentContentText);
+
+    entryComment.appendChild(commentProfilePicture);
+    entryComment.appendChild(commentText);
+    entryCommentsContent.appendChild(entryComment);
+  }
+
+  let selectValue = document.getElementById("selectCommentAmount").value;
+
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  for (let i = 0; i < selectValue && i < data.length; i++) {
+
+    createEntryComments(data[i]);
+  }
+}
+function getSingleEntryAndComments(id) {
   entries.style.display = "none";
   users.style.display = "none";
   comments.style.display = "none";
   singleUser.style.display = "none";
   singleEntry.style.display = "block";
   frontpageHeader.style.display = "none";
+  usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
   commentsContent.innerHTML = "";
-  singleEntry.innerHTML = "";
+  singleEntryContent.innerHTML = "";
+  entryCommentsContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
   commentsLink.classList.remove("active");
 
-  createSingleEntryArticle(data);
+  getSingleEntry(id);
+  getEntryComments(id);
 }
 //Hämtar alla användare
 async function getAllUsers() {
@@ -244,6 +311,7 @@ async function getAllUsers() {
   comments.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
+  usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -271,7 +339,10 @@ async function getSingleUser(id) {
   users.style.display = "none";
   comments.style.display = "none";
   singleUser.style.display = "block";
-  frontpageHeader.style.display = "block";
+  usernameHeader.style.display = "block"
+  frontpageHeader.style.display = "none";
+
+  document.getElementById("usernames-blog").innerHTML = data.username + "'s blog";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -283,7 +354,7 @@ async function getSingleUser(id) {
   commentsLink.classList.remove("active");
 
   //Skapar element för att visa upp entries från databasen
-  function createSingleUserArticle(entryData) {
+  /*function createSingleUserArticle(entryData) {
 
     let singleUserArticle = document.createElement("article");
     singleUserArticle.setAttribute("class", "single-entry");
@@ -326,9 +397,7 @@ async function getSingleUser(id) {
   for (let i = 0; i < 20; i++) {
 
     createSingleUserArticle(data[i]);
-  }
-
-  console.log(data.username);
+  }*/
 }
 //Hämtar alla kommentarer
 async function getAllComments() {
@@ -339,6 +408,8 @@ async function getAllComments() {
   users.style.display = "none";
   comments.style.display = "block";
   singleEntry.style.display = "none";
+  frontpageHeader.style.display = "block";
+  usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";

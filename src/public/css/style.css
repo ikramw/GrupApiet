@@ -235,11 +235,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .new-entry a {
   text-decoration: none;
-  color: #000;
+  color: #4d8594;
 }
 .new-entry a:hover {
   text-decoration: underline;
-  color: #4d8594;
 }
 .entry-content {
   background-color: #fff;
@@ -265,6 +264,7 @@ h1, h2, h3, h4, h5, h6 {
 /* All users */
 .users-wrapper {
   display: none;
+  margin-bottom: 2em;
 }
 .users-content {
   overflow: hidden;
@@ -307,9 +307,10 @@ h1, h2, h3, h4, h5, h6 {
 .comments-wrapper {
   display: none;
   overflow: hidden;
+  margin-bottom: 2em;
 }
 .comment {
-  width: 33.3%;
+  width: 100%;
   float: left;
   background-color: #fff;
   padding: 1em;
@@ -430,6 +431,9 @@ h1, h2, h3, h4, h5, h6 {
   .user {
     width: 33.3%;
   }
+  .comment {
+    width: 50%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -491,6 +495,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .user {
     width: 25%;
+  }
+  .comment {
+    width: 50%;
   }
 }
 @media (min-width: 960px) {
