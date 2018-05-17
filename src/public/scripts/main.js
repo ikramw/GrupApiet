@@ -67,7 +67,9 @@ async function getAllEntries() {
 
     let entryUsername = document.createElement("a");
     entryUsername.href = "#";
-    entryUsername.addEventListener("click", getSingleUser);
+    entryUsername.addEventListener("click", function(){
+      getSingleUser(entryData.createdBy)
+    });
     var entryUsernameText = document.createTextNode(entryData.createdBy);
     entryUsername.appendChild(entryUsernameText);
 
@@ -95,7 +97,7 @@ async function getAllEntries() {
 //Kallar på funtionen för att hämta alla entries då de visas på startsidan
 getAllEntries();
 
-function getSingleEntry() {
+async function getSingleEntry() {
   console.log("test");
 }
 
@@ -129,7 +131,11 @@ async function getAllUsers() {
 
     let userUsername = document.createElement("a");
     userUsername.href = "#";
-    userUsername.addEventListener("click", getSingleUser);
+    /* Lägger till ett event som kallar på funktionen getSingleUser och skickar
+       med id för användaren */
+    userUsername.addEventListener("click", function(){
+      getSingleUser(userData.userID)
+    });
     var usernameText = document.createTextNode(userData.username);
     userUsername.appendChild(usernameText);
 
@@ -152,8 +158,19 @@ async function getAllUsers() {
   }
 }
 
-function getSingleUser() {
+async function getSingleUser(id) {
+  const response = await fetch('/api/users/' + id);
+  const { data } = await response.json();
 
+  entries.style.display = "none";
+  users.style.display = "block";
+  comments.style.display = "none";
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  commentsContent.innerHTML = "";
+
+  console.log(data.username);
 }
 
 function changeCommentsDisplayed() {
@@ -218,7 +235,7 @@ async function getAllComments() {
   }
 }
 
-//Öppnar och stänger navigationen på mobiler 
+//Öppnar och stänger navigationen på mobiler
 function navToggle() {
   var menu = document.getElementById("content-toggle");
   if (menu.className === "nav-main") {
