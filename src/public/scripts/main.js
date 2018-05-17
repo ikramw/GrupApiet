@@ -1,11 +1,14 @@
 //Sections som ska gömmas eller visas
 let entries = document.getElementById("entries");
+let singleEntry = document.getElementById("single-entry");
 let users = document.getElementById("users");
+let singleUser = document.getElementById("single-user");
 let comments = document.getElementById("comments");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
 let usersContent = document.getElementById("users-content");
+let singleUserContent = document.getElementById("single-user");
 let commentsContent = document.getElementById("comments-content");
 
 //Länkarna i navigationen
@@ -18,6 +21,125 @@ function changeEntriesDisplayed() {
   let selectValue = document.getElementById("selectEntryAmount").value;
   return selectValue;
 }
+//Sparar värdet på vald option i select för users
+function changeUsersDisplayed() {
+  let selectValue = document.getElementById("selectUserAmount").value;
+  return selectValue;
+}
+
+//Skapar element för att visa upp entries från databasen
+function createEntryArticle(entryData) {
+
+  let entryArticle = document.createElement("article");
+  entryArticle.setAttribute("class", "new-entry");
+
+  let entryContent = document.createElement("div");
+  entryContent.setAttribute("class", "entry-content");
+
+  let entryTitle = document.createElement("h1");
+  let titleLink = document.createElement("a");
+  titleLink.href = "#";
+  titleLink.addEventListener("click", function(){
+    getSingleEntry(entryData.entryID)
+  });
+  var titleText = document.createTextNode(entryData.title);
+  titleLink.appendChild(titleText);
+  entryTitle.appendChild(titleLink);
+
+  let entryContentText = document.createElement("p");
+  var entryContentTextNode = document.createTextNode(entryData.content);
+  entryContentText.appendChild(entryContentTextNode);
+
+  entryContent.appendChild(entryTitle);
+  entryContent.appendChild(entryContentText);
+  entryArticle.appendChild(entryContent);
+
+  let entryInfo = document.createElement("div");
+  entryInfo.setAttribute("class", "entry-info");
+
+  let entryUsername = document.createElement("a");
+  entryUsername.href = "#";
+  entryUsername.addEventListener("click", function(){
+    getSingleUser(entryData.createdBy)
+  });
+  var entryUsernameText = document.createTextNode(entryData.createdBy);
+  entryUsername.appendChild(entryUsernameText);
+
+  let entryDisplayTime = document.createElement("p");
+  entryDisplayTime.setAttribute("class", "display-time");
+  var entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  entryDisplayTime.appendChild(entryDisplayTimeText);
+
+  entryInfo.appendChild(entryUsername);
+  entryInfo.appendChild(entryDisplayTime);
+  entryArticle.appendChild(entryInfo);
+
+  entriesContent.appendChild(entryArticle);
+}
+function createUserDiv(userData) {
+
+  let userDiv = document.createElement("div");
+  userDiv.setAttribute("class", "user");
+
+  let userUsername = document.createElement("a");
+  userUsername.href = "#";
+  /* Lägger till ett event som kallar på funktionen getSingleUser och skickar
+     med id för användaren */
+  userUsername.addEventListener("click", function(){
+    getSingleUser(userData.userID)
+  });
+  var usernameText = document.createTextNode(userData.username);
+  userUsername.appendChild(usernameText);
+
+  let userCreated = document.createElement("p");
+  var userCreatedText = document.createTextNode("Joined " + userData.createdAt);
+  userCreated.appendChild(userCreatedText);
+
+  userDiv.appendChild(userUsername);
+  userDiv.appendChild(userCreated);
+
+  usersContent.appendChild(userDiv);
+}
+
+function createSingleEntryArticle(entryData) {
+  let singleEntryArticle = document.createElement("article");
+  singleEntryArticle.setAttribute("class", "single-entry");
+
+  let singleEntryInfo = document.createElement("div");
+  singleEntryInfo.setAttribute("class", "single-entry-info");
+
+  let entryTitle = document.createElement("h1");
+  let titleText = document.createTextNode(entryData.title);
+  entryTitle.appendChild(titleText);
+
+  let writtenBy = document.createElement("span");
+  var writtenByText = document.createTextNode("Written by ");
+  writtenBy.appendChild(writtenByText);
+
+  let entryUsername = document.createElement("a");
+  entryUsername.href = "#";
+  entryUsername.addEventListener("click", function(){
+    getSingleUser(entryData.createdBy)
+  });
+  var entryUsernameText = document.createTextNode(entryData.createdBy);
+  entryUsername.appendChild(entryUsernameText);
+
+  let entryDisplayTime = document.createElement("p");
+  var entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  entryDisplayTime.appendChild(entryDisplayTimeText);
+
+  let entryContentText = document.createElement("p");
+  var entryContentTextNode = document.createTextNode(entryData.content);
+  entryContentText.appendChild(entryContentTextNode);
+
+  singleEntryInfo.appendChild(entryTitle);
+  singleEntryInfo.appendChild(writtenBy);
+  singleEntryInfo.appendChild(entryUsername);
+  singleEntryInfo.appendChild(entryDisplayTime);
+  singleEntryArticle.appendChild(singleEntryInfo);
+  singleEntryArticle.appendChild(entryContentText);
+  singleEntry.appendChild(singleEntryArticle);
+}
 
 //Hämtar alla entries
 async function getAllEntries() {
@@ -27,6 +149,7 @@ async function getAllEntries() {
   entries.style.display = "block";
   users.style.display = "none";
   comments.style.display = "none";
+  singleEntry.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -36,54 +159,6 @@ async function getAllEntries() {
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
   commentsLink.classList.remove("active");
-
-  //Skapar element för att visa upp entries från databasen
-  function createEntryArticle(entryData) {
-
-    let entryArticle = document.createElement("article");
-    entryArticle.setAttribute("class", "new-entry");
-
-    let entryContent = document.createElement("div");
-    entryContent.setAttribute("class", "entry-content");
-
-    let entryTitle = document.createElement("h1");
-    let titleLink = document.createElement("a");
-    titleLink.href = "#";
-    titleLink.addEventListener("click", getSingleEntry);
-    var titleText = document.createTextNode(entryData.title);
-    titleLink.appendChild(titleText);
-    entryTitle.appendChild(titleLink);
-
-    let entryContentText = document.createElement("p");
-    var entryContentTextNode = document.createTextNode(entryData.content);
-    entryContentText.appendChild(entryContentTextNode);
-
-    entryContent.appendChild(entryTitle);
-    entryContent.appendChild(entryContentText);
-    entryArticle.appendChild(entryContent);
-
-    let entryInfo = document.createElement("div");
-    entryInfo.setAttribute("class", "entry-info");
-
-    let entryUsername = document.createElement("a");
-    entryUsername.href = "#";
-    entryUsername.addEventListener("click", function(){
-      getSingleUser(entryData.createdBy)
-    });
-    var entryUsernameText = document.createTextNode(entryData.createdBy);
-    entryUsername.appendChild(entryUsernameText);
-
-    let entryDisplayTime = document.createElement("p");
-    entryDisplayTime.setAttribute("class", "display-time");
-    var entryDisplayTimeText = document.createTextNode(entryData.createdAt);
-    entryDisplayTime.appendChild(entryDisplayTimeText);
-
-    entryInfo.appendChild(entryUsername);
-    entryInfo.appendChild(entryDisplayTime);
-    entryArticle.appendChild(entryInfo);
-
-    entriesContent.appendChild(entryArticle);
-  }
 
   let selectValue = document.getElementById("selectEntryAmount").value;
 
@@ -97,14 +172,27 @@ async function getAllEntries() {
 //Kallar på funtionen för att hämta alla entries då de visas på startsidan
 getAllEntries();
 
-async function getSingleEntry() {
-  console.log("test");
-}
+//Hämtar ett inlägg samt visar kommentarer till inlägget
+async function getSingleEntry(id) {
+  const response = await fetch('/api/entries/' + id);
+  const { data } = await response.json();
 
-//Sparar värdet på vald option i select för users
-function changeUsersDisplayed() {
-  let selectValue = document.getElementById("selectUserAmount").value;
-  return selectValue;
+  entries.style.display = "none";
+  users.style.display = "none";
+  comments.style.display = "none";
+  singleUser.style.display = "none";
+  singleEntry.style.display = "block";
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  commentsContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.add("active");
+  usersLink.classList.remove("active");
+  commentsLink.classList.remove("active");
+
+  createSingleEntryArticle(data);
 }
 
 async function getAllUsers() {
@@ -114,6 +202,7 @@ async function getAllUsers() {
   entries.style.display = "none";
   users.style.display = "block";
   comments.style.display = "none";
+  singleEntry.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -123,31 +212,6 @@ async function getAllUsers() {
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
   commentsLink.classList.remove("active");
-
-  function createUserDiv(userData) {
-
-    let userDiv = document.createElement("div");
-    userDiv.setAttribute("class", "user");
-
-    let userUsername = document.createElement("a");
-    userUsername.href = "#";
-    /* Lägger till ett event som kallar på funktionen getSingleUser och skickar
-       med id för användaren */
-    userUsername.addEventListener("click", function(){
-      getSingleUser(userData.userID)
-    });
-    var usernameText = document.createTextNode(userData.username);
-    userUsername.appendChild(usernameText);
-
-    let userCreated = document.createElement("p");
-    var userCreatedText = document.createTextNode("Joined " + userData.createdAt);
-    userCreated.appendChild(userCreatedText);
-
-    userDiv.appendChild(userUsername);
-    userDiv.appendChild(userCreated);
-
-    usersContent.appendChild(userDiv);
-  }
 
   let selectValue = document.getElementById("selectUserAmount").value;
 
@@ -163,12 +227,64 @@ async function getSingleUser(id) {
   const { data } = await response.json();
 
   entries.style.display = "none";
-  users.style.display = "block";
+  users.style.display = "none";
   comments.style.display = "none";
+  singleUser.style.display = "block";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
   commentsContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.remove("active");
+  usersLink.classList.add("active");
+  commentsLink.classList.remove("active");
+
+  //Skapar element för att visa upp entries från databasen
+  function createSingleUserArticle(entryData) {
+
+    let singleUserArticle = document.createElement("article");
+    singleUserArticle.setAttribute("class", "single-entry");
+
+    let entryInfo = document.createElement("div");
+    entryInfo.setAttribute("class", "single-entry-info");
+
+    let entryTitle = document.createElement("h1");
+    let titleLink = document.createElement("a");
+    titleLink.href = "#";
+    titleLink.addEventListener("click", getSingleEntry);
+    var titleText = document.createTextNode(entryData.title);
+    titleLink.appendChild(titleText);
+    entryTitle.appendChild(titleLink);
+
+    let entryCreated = document.createElement("p");
+    var entryCreatedText = document.createTextNode(entryData.createdAt);
+    entryCreated.appendChild(entryCreatedText);
+
+    let entryContentText = document.createElement("p");
+    var entryContentTextNode = document.createTextNode(entryData.content);
+    entryContentText.appendChild(entryContentTextNode);
+
+    let commentsAmount = document.createElement("p");
+    var commentsAmountText = document.createTextNode("3" + "amount of comments");
+    commentsAmount.appendChild(commentsAmountText);
+
+    entryInfo.appendChild(entryTitle);
+    entryInfo.appendChild(entryCreated);
+    singleUserArticle.appendChild(entryInfo);
+    singleUserArticle.appendChild(entryContentText);
+    singleUserArticle.appendChild(commentsAmount);
+
+    singleUser.appendChild(singleUserArticle);
+  }
+
+  //let selectValue = document.getElementById("selectEntryAmount").value;
+
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  for (let i = 0; i < 20; i++) {
+
+    createSingleUserArticle(data[i]);
+  }
 
   console.log(data.username);
 }
@@ -185,6 +301,7 @@ async function getAllComments() {
   entries.style.display = "none";
   users.style.display = "none";
   comments.style.display = "block";
+  singleEntry.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";

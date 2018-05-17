@@ -326,11 +326,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .single-entry {
   margin-bottom: 3em;
-}
-.single-entry-content {
   background-color: #fff;
   padding: 2em;
   border: 1px solid #eeeeee;
+}
+.single-entry-content {
+
 }
 .single-entry-info {
   text-align: center;

@@ -149,77 +149,51 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <img src="uploads/flower.jpg" alt="Bild" />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
-            <p>3 comments</p>
+      <!--<article class="single-entry">
+        <div class="single-entry-info">
+          <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
+          <p>15 MAY 2018 - 17:45</p>
         </div>
-      </article>
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
-            <p>3 comments</p>
-        </div>
-      </article>
+        <img src="uploads/flower.jpg" alt="Bild" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sed eu nunc id enim sodales cursus elementum quis turpis.
+          Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+          quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+          faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+          massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+          sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+          nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+          leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+          hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+          neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+          dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+          dictum augue, ut tincidunt nibh enim in turpis.</p>
+          <p>3 comments</p>
+      </article>-->
     </section>
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
     <section class="single-entry-wrapper" id="single-entry">
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1>This is the title of the entry</h1>
-            <span>Written by </span><a href="#" onclick="showSingleUser()">username</a>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <img src="uploads/flower.jpg" alt="Bild" />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
+      <!--<article class="single-entry">
+        <div class="single-entry-info">
+          <h1>This is the title of the entry</h1>
+          <span>Written by </span><a href="#" onclick="showSingleUser()">username</a>
+          <p>15 MAY 2018 - 17:45</p>
         </div>
+        <img src="uploads/flower.jpg" alt="Bild" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sed eu nunc id enim sodales cursus elementum quis turpis.
+          Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+          quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+          faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+          massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+          sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+          nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+          leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+          hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+          neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+          dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+          dictum augue, ut tincidunt nibh enim in turpis.</p>
       </article>
       <section class="entry-comments">
         <h2 class="heading-responses"><span id="comments-amount">2</span> responses to <span id="entry-title">"Titel av inlägget"</span></h2>
@@ -270,7 +244,7 @@
             </form>
           <?php endif; ?>
         </div>
-      </section>
+      </section>-->
     </section>
 
   </div>
