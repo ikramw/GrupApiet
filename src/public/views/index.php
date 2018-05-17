@@ -174,27 +174,7 @@
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
     <section class="single-entry-wrapper" id="single-entry">
-      <!--<article class="single-entry">
-        <div class="single-entry-info">
-          <h1>This is the title of the entry</h1>
-          <span>Written by </span><a href="#" onclick="showSingleUser()">username</a>
-          <p>15 MAY 2018 - 17:45</p>
-        </div>
-        <img src="uploads/flower.jpg" alt="Bild" />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Sed eu nunc id enim sodales cursus elementum quis turpis.
-          Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-          quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-          faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-          massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-          sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-          nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-          leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-          hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-          neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-          dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-          dictum augue, ut tincidunt nibh enim in turpis.</p>
-      </article>
+      <!-- Fylls på med ett entry -->
       <section class="entry-comments">
         <h2 class="heading-responses"><span id="comments-amount">2</span> responses to <span id="entry-title">"Titel av inlägget"</span></h2>
         <div class="comments-displayed">
@@ -244,7 +224,7 @@
             </form>
           <?php endif; ?>
         </div>
-      </section>-->
+      </section>
     </section>
 
   </div>

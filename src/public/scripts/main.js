@@ -1,4 +1,5 @@
 //Sections som ska gömmas eller visas
+let frontpageHeader = document.getElementById("frontpage-header");
 let entries = document.getElementById("entries");
 let singleEntry = document.getElementById("single-entry");
 let users = document.getElementById("users");
@@ -26,8 +27,13 @@ function changeUsersDisplayed() {
   let selectValue = document.getElementById("selectUserAmount").value;
   return selectValue;
 }
+//Sparar värdet på vald option i select för comments
+function changeCommentsDisplayed() {
+  let selectValue = document.getElementById("selectCommentsAmount").value;
+  return selectValue;
+}
 
-//Skapar element för att visa upp entries från databasen
+//Skapar element för att visa upp inlägg från databasen
 function createEntryArticle(entryData) {
 
   let entryArticle = document.createElement("article");
@@ -42,12 +48,12 @@ function createEntryArticle(entryData) {
   titleLink.addEventListener("click", function(){
     getSingleEntry(entryData.entryID)
   });
-  var titleText = document.createTextNode(entryData.title);
+  let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
   entryTitle.appendChild(titleLink);
 
   let entryContentText = document.createElement("p");
-  var entryContentTextNode = document.createTextNode(entryData.content);
+  let entryContentTextNode = document.createTextNode(entryData.content);
   entryContentText.appendChild(entryContentTextNode);
 
   entryContent.appendChild(entryTitle);
@@ -62,12 +68,12 @@ function createEntryArticle(entryData) {
   entryUsername.addEventListener("click", function(){
     getSingleUser(entryData.createdBy)
   });
-  var entryUsernameText = document.createTextNode(entryData.createdBy);
+  let entryUsernameText = document.createTextNode(entryData.createdBy);
   entryUsername.appendChild(entryUsernameText);
 
   let entryDisplayTime = document.createElement("p");
   entryDisplayTime.setAttribute("class", "display-time");
-  var entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  let entryDisplayTimeText = document.createTextNode(entryData.createdAt);
   entryDisplayTime.appendChild(entryDisplayTimeText);
 
   entryInfo.appendChild(entryUsername);
@@ -76,6 +82,47 @@ function createEntryArticle(entryData) {
 
   entriesContent.appendChild(entryArticle);
 }
+//Skapar element för att visa upp ett inlägg från databasen
+function createSingleEntryArticle(entryData) {
+  let singleEntryArticle = document.createElement("article");
+  singleEntryArticle.setAttribute("class", "single-entry");
+
+  let singleEntryInfo = document.createElement("div");
+  singleEntryInfo.setAttribute("class", "single-entry-info");
+
+  let entryTitle = document.createElement("h1");
+  let titleText = document.createTextNode(entryData.title);
+  entryTitle.appendChild(titleText);
+
+  let writtenBy = document.createElement("span");
+  let writtenByText = document.createTextNode("Written by ");
+  writtenBy.appendChild(writtenByText);
+
+  let entryUsername = document.createElement("a");
+  entryUsername.href = "#";
+  entryUsername.addEventListener("click", function(){
+    getSingleUser(entryData.createdBy)
+  });
+  let entryUsernameText = document.createTextNode(entryData.createdBy);
+  entryUsername.appendChild(entryUsernameText);
+
+  let entryDisplayTime = document.createElement("p");
+  let entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  entryDisplayTime.appendChild(entryDisplayTimeText);
+
+  let entryContentText = document.createElement("p");
+  let entryContentTextNode = document.createTextNode(entryData.content);
+  entryContentText.appendChild(entryContentTextNode);
+
+  singleEntryInfo.appendChild(entryTitle);
+  singleEntryInfo.appendChild(writtenBy);
+  singleEntryInfo.appendChild(entryUsername);
+  singleEntryInfo.appendChild(entryDisplayTime);
+  singleEntryArticle.appendChild(singleEntryInfo);
+  singleEntryArticle.appendChild(entryContentText);
+  singleEntry.appendChild(singleEntryArticle);
+}
+//Skapar element för att visa upp användare från databasen
 function createUserDiv(userData) {
 
   let userDiv = document.createElement("div");
@@ -92,7 +139,7 @@ function createUserDiv(userData) {
   userUsername.appendChild(usernameText);
 
   let userCreated = document.createElement("p");
-  var userCreatedText = document.createTextNode("Joined " + userData.createdAt);
+  let userCreatedText = document.createTextNode("Joined " + userData.createdAt);
   userCreated.appendChild(userCreatedText);
 
   userDiv.appendChild(userUsername);
@@ -100,45 +147,36 @@ function createUserDiv(userData) {
 
   usersContent.appendChild(userDiv);
 }
+//Skapar element för att visa upp kommentarer från databasen
+function createCommentDiv(userData) {
 
-function createSingleEntryArticle(entryData) {
-  let singleEntryArticle = document.createElement("article");
-  singleEntryArticle.setAttribute("class", "single-entry");
+  let commentDiv = document.createElement("div");
+  commentDiv.setAttribute("class", "comment");
 
-  let singleEntryInfo = document.createElement("div");
-  singleEntryInfo.setAttribute("class", "single-entry-info");
+  let commentText = document.createElement("p");
+  var commentTextNode = document.createTextNode(userData.content);
+  commentText.appendChild(commentTextNode);
 
-  let entryTitle = document.createElement("h1");
-  let titleText = document.createTextNode(entryData.title);
-  entryTitle.appendChild(titleText);
-
-  let writtenBy = document.createElement("span");
+  let writtenBy = document.createElement("p");
   var writtenByText = document.createTextNode("Written by ");
   writtenBy.appendChild(writtenByText);
 
-  let entryUsername = document.createElement("a");
-  entryUsername.href = "#";
-  entryUsername.addEventListener("click", function(){
-    getSingleUser(entryData.createdBy)
-  });
-  var entryUsernameText = document.createTextNode(entryData.createdBy);
-  entryUsername.appendChild(entryUsernameText);
+  let commentUsername = document.createElement("a");
+  commentUsername.href = "#";
+  var commentUsernameText = document.createTextNode(userData.createdBy);
+  commentUsername.appendChild(commentUsernameText);
 
-  let entryDisplayTime = document.createElement("p");
-  var entryDisplayTimeText = document.createTextNode(entryData.createdAt);
-  entryDisplayTime.appendChild(entryDisplayTimeText);
+  writtenBy.appendChild(commentUsername);
 
-  let entryContentText = document.createElement("p");
-  var entryContentTextNode = document.createTextNode(entryData.content);
-  entryContentText.appendChild(entryContentTextNode);
+  let commentCreated = document.createElement("p");
+  var commentCreatedText = document.createTextNode(userData.createdAt);
+  commentCreated.appendChild(commentCreatedText);
 
-  singleEntryInfo.appendChild(entryTitle);
-  singleEntryInfo.appendChild(writtenBy);
-  singleEntryInfo.appendChild(entryUsername);
-  singleEntryInfo.appendChild(entryDisplayTime);
-  singleEntryArticle.appendChild(singleEntryInfo);
-  singleEntryArticle.appendChild(entryContentText);
-  singleEntry.appendChild(singleEntryArticle);
+  commentDiv.appendChild(commentText);
+  commentDiv.appendChild(writtenBy);
+  commentDiv.appendChild(commentCreated);
+
+  commentsContent.appendChild(commentDiv);
 }
 
 //Hämtar alla entries
@@ -150,6 +188,7 @@ async function getAllEntries() {
   users.style.display = "none";
   comments.style.display = "none";
   singleEntry.style.display = "none";
+  frontpageHeader.style.display = "block";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -168,7 +207,6 @@ async function getAllEntries() {
     createEntryArticle(data[i]);
   }
 }
-
 //Kallar på funtionen för att hämta alla entries då de visas på startsidan
 getAllEntries();
 
@@ -182,10 +220,12 @@ async function getSingleEntry(id) {
   comments.style.display = "none";
   singleUser.style.display = "none";
   singleEntry.style.display = "block";
+  frontpageHeader.style.display = "none";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
   commentsContent.innerHTML = "";
+  singleEntry.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
@@ -194,7 +234,7 @@ async function getSingleEntry(id) {
 
   createSingleEntryArticle(data);
 }
-
+//Hämtar alla användare
 async function getAllUsers() {
   const response = await fetch('/api/users');
   const { data } = await response.json();
@@ -203,6 +243,7 @@ async function getAllUsers() {
   users.style.display = "block";
   comments.style.display = "none";
   singleEntry.style.display = "none";
+  frontpageHeader.style.display = "block";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -221,7 +262,7 @@ async function getAllUsers() {
     createUserDiv(data[i]);
   }
 }
-
+//Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/users/' + id);
   const { data } = await response.json();
@@ -230,6 +271,7 @@ async function getSingleUser(id) {
   users.style.display = "none";
   comments.style.display = "none";
   singleUser.style.display = "block";
+  frontpageHeader.style.display = "block";
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -288,12 +330,7 @@ async function getSingleUser(id) {
 
   console.log(data.username);
 }
-
-function changeCommentsDisplayed() {
-  let selectValue = document.getElementById("selectCommentsAmount").value;
-  return selectValue;
-}
-
+//Hämtar alla kommentarer
 async function getAllComments() {
   const response = await fetch('/api/comments');
   const { data } = await response.json();
@@ -311,37 +348,6 @@ async function getAllComments() {
   entriesLink.classList.remove("active");
   usersLink.classList.remove("active");
   commentsLink.classList.add("active");
-
-  function createCommentDiv(userData) {
-
-    let commentDiv = document.createElement("div");
-    commentDiv.setAttribute("class", "comment");
-
-    let commentText = document.createElement("p");
-    var commentTextNode = document.createTextNode(userData.content);
-    commentText.appendChild(commentTextNode);
-
-    let writtenBy = document.createElement("p");
-    var writtenByText = document.createTextNode("Written by ");
-    writtenBy.appendChild(writtenByText);
-
-    let commentUsername = document.createElement("a");
-    commentUsername.href = "#";
-    var commentUsernameText = document.createTextNode(userData.createdBy);
-    commentUsername.appendChild(commentUsernameText);
-
-    writtenBy.appendChild(commentUsername);
-
-    let commentCreated = document.createElement("p");
-    var commentCreatedText = document.createTextNode(userData.createdAt);
-    commentCreated.appendChild(commentCreatedText);
-
-    commentDiv.appendChild(commentText);
-    commentDiv.appendChild(writtenBy);
-    commentDiv.appendChild(commentCreated);
-
-    commentsContent.appendChild(commentDiv);
-  }
 
   let selectValue = document.getElementById("selectCommentsAmount").value;
 
