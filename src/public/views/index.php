@@ -15,7 +15,7 @@
   <header class="header-navbar">
     <div class="nav-content">
       <div class="logo-wrapper">
-          <a href="#"><img src="images/logo.png" class="logo" alt="Logo"></a>
+          <img src="images/logo.png" class="logo" alt="Logo">
       </div>
       <nav class="nav-main" id="content-toggle">
         <ul class="nav-menu-left">
