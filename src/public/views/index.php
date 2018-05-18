@@ -32,23 +32,23 @@
             <a href="javascript:void(0)" onclick="showSignin()">Sign in</a>
             <div class="login-form" id="login-form">
               <h3>Sign in</h3>
-              <form action="" method="post">
+              <form>
                 <label for="login-username">Username:</label>
                 <input type="text" name="username" class="form-input" id="login-username" />
                 <label for="login-password">Password:</label>
                 <input type="password" name="password" class="form-input" id="login-password" />
-                <input type="submit" id="login-submit" value="Submit" />
+                <input type="button" id="login-submit" value="Submit" />
               </form>
             </div>
             <a href="javascript:void(0)" onclick="showRegister()">Register</a>
             <div class="register-form" id="register-form">
               <h3>Register</h3>
-              <form action="" method="post">
+              <form>
                 <label for="username">Username:</label>
                 <input type="text" name="username" class="form-input" id="username" />
                 <label for="password">Password:</label>
                 <input type="password" name="password" class="form-input" id="password" />
-                <input type="submit" id="submit" value="Submit" />
+                <input type="button" id="submit" value="Submit" />
               </form>
             </div>
           <?php endif; ?>

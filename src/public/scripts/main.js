@@ -162,7 +162,7 @@ function changeCommentsDisplayed() {
 }
 
 async function getAllComments() {
-  const response = await fetch('/api/comments');
+  const response = await fetch('/api/comments?limit=' + selectValue);
   const { data } = await response.json();
 
   entries.style.display = "none";
@@ -247,4 +247,63 @@ function showRegister() {
   } else {
     registerForm.className = "register-form";
   }
+}
+let btnRegister=document.getElementById('submit');
+btnRegister.addEventListener('click', registerUser);
+
+function registerUser(){
+    // x-www-form-urlencoded
+  
+    const formData = new FormData();
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+
+    today = yyyy + '-' + mm + '-' + dd;
+    
+    formData.append('username', username.value);
+    formData.append('password', password.value);
+    formData.append('createdAt', today);
+  
+    const postOptions = {
+      method: 'POST',
+      body: formData
+    }
+    
+  fetch('register', postOptions)
+  .then(res => res.json())
+  
+}
+let btnLogin=document.getElementById('login-submit');
+btnLogin.addEventListener('click', login);
+function login(){
+  
+  const formData = new FormData();
+  const username = document.getElementById('login-username');
+  const password = document.getElementById('login-password');
+  
+  
+  formData.append('username', username.value);
+  formData.append('password', password.value);
+  
+  const postOptions = {
+    method: 'POST',
+    body: formData,
+    credentials: 'include'
+  }
+  
+fetch('login', postOptions)
+.then(res => res.json())
+.then(console.log);
 }

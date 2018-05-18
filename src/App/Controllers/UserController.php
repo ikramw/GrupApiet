@@ -44,7 +44,8 @@ class UserController
          */
         $addOne->execute([':username'  => $user['username'],
         ':password'  => $user['password'],
-        ':createdAt'  => $user['createdAt']]);
+        ':createdAt'  => date("Y-m-d H:i:s")
+        ]);
 
         /**
          * A INSERT INTO does not return the created object. If we want to return it to the user
