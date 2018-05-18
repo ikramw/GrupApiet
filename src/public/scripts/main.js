@@ -51,17 +51,21 @@ function createEntryArticle(entryData) {
   let entryInfo = document.createElement("div");
   entryInfo.setAttribute("class", "entry-info");
 
+  let userIcon = document.createElement("i");
+  userIcon.setAttribute("class", "fa fa-user");
+
   let entryUsername = document.createElement("a");
   entryUsername.href = "#";
   entryUsername.addEventListener("click", function(){
     getSingleUser(entryData.createdBy)
   });
+  entryUsername.appendChild(userIcon);
   //Hämtar användarnamnet
   getUsername(entryData.createdBy, entryUsername);
 
   let entryDisplayTime = document.createElement("p");
   entryDisplayTime.setAttribute("class", "display-time");
-  let entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  let entryDisplayTimeText = document.createTextNode(entryData.createdAt.slice(0, 16));
   entryDisplayTime.appendChild(entryDisplayTimeText);
 
   entryInfo.appendChild(entryUsername);
@@ -95,7 +99,7 @@ function createSingleEntryArticle(entryData) {
   getUsername(entryData.createdBy, entryUsername);
 
   let entryDisplayTime = document.createElement("p");
-  let entryDisplayTimeText = document.createTextNode(entryData.createdAt);
+  let entryDisplayTimeText = document.createTextNode(entryData.createdAt.slice(0, 16));
   entryDisplayTime.appendChild(entryDisplayTimeText);
 
   let entryContentText = document.createElement("p");
@@ -127,7 +131,7 @@ function createUserDiv(userData) {
   userUsername.appendChild(usernameText);
 
   let userCreated = document.createElement("p");
-  let userCreatedText = document.createTextNode("Joined " + userData.createdAt);
+  let userCreatedText = document.createTextNode("Joined " + userData.createdAt.slice(0, 10));
   userCreated.appendChild(userCreatedText);
 
   userDiv.appendChild(userUsername);
@@ -217,7 +221,7 @@ async function getUsername(id, userLink) {
   const response = await fetch('/api/users/' + id);
   const { data } = await response.json();
 
-  let username = data.username;
+  let username = " " + data.username;
   let usernameTextNode = document.createTextNode(username);
   userLink.appendChild(usernameTextNode);
 }
