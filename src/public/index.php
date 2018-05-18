@@ -56,7 +56,6 @@ $app->post('/login', function ($request, $response, $args) {
     if (password_verify($body['password'], $user['password'])) {
         $_SESSION['loggedIn'] = true;
         $_SESSION['userID'] = $user['id'];
-        header('Location: ../localhost:3000');
         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
     }
     return $response->withJson(['error' => 'wrong password']);
@@ -74,7 +73,6 @@ $app->post('/register', function ($request, $response, $args) {
 
     $body = $request->getParsedBody();
     $newUser = $this->users->add($body);
-    header('Location: ../localhost:3000');
     return $response->withJson(['data' => $newUser]);
 });
 

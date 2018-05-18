@@ -504,6 +504,8 @@ function registerUser(){
       body: formData
     }
 
+    location.reload();
+
   fetch('register', postOptions)
   .then(res => res.json())
 
@@ -524,6 +526,8 @@ function login(){
     body: formData,
     credentials: 'include'
   }
+
+  location.reload();
 
 fetch('login', postOptions)
 .then(res => res.json())
