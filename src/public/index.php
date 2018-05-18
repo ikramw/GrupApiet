@@ -74,6 +74,7 @@ $app->post('/register', function ($request, $response, $args) {
 
     $body = $request->getParsedBody();
     $newUser = $this->users->add($body);
+    header('Location: ../localhost:3000');
     return $response->withJson(['data' => $newUser]);
 });
 
