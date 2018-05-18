@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_set_cookie_params(3600);
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +21,7 @@
   <header class="header-navbar">
     <div class="nav-content">
       <div class="logo-wrapper">
-          <a href="#"><img src="images/logo.png" class="logo" alt="Logo"></a>
+          <img src="images/logo.png" class="logo" alt="Logo">
       </div>
       <nav class="nav-main" id="content-toggle">
         <ul class="nav-menu-left">
@@ -85,7 +91,7 @@
   <!-- Namnet på användaren vars sida man är inne på -->
   <section class="header-info display-username" id="display-username">
     <div class="info-content">
-      <h1>username's blog</h1>
+      <h1 id="usernames-blog"></h1>
     </div>
   </section>
 
@@ -149,112 +155,47 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <img src="uploads/flower.jpg" alt="Bild" />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
-            <p>3 comments</p>
+      <!--<article class="single-entry">
+        <div class="single-entry-info">
+          <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
+          <p>15 MAY 2018 - 17:45</p>
         </div>
-      </article>
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
-            <p>3 comments</p>
-        </div>
-      </article>
+        <img src="uploads/flower.jpg" alt="Bild" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sed eu nunc id enim sodales cursus elementum quis turpis.
+          Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
+          quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
+          faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
+          massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
+          sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
+          nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
+          leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
+          hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
+          neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
+          dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
+          dictum augue, ut tincidunt nibh enim in turpis.</p>
+          <p>3 comments</p>
+      </article>-->
     </section>
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
     <section class="single-entry-wrapper" id="single-entry">
-      <article class="single-entry">
-        <div class="single-entry-content">
-          <div class="single-entry-info">
-            <h1>This is the title of the entry</h1>
-            <span>Written by </span><a href="#" onclick="showSingleUser()">username</a>
-            <p>15 MAY 2018 - 17:45</p>
-          </div>
-          <img src="uploads/flower.jpg" alt="Bild" />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed eu nunc id enim sodales cursus elementum quis turpis.
-            Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-            quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-            faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-            massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-            sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-            nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-            leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-            hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-            neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-            dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-            dictum augue, ut tincidunt nibh enim in turpis.</p>
-        </div>
-      </article>
+      <div id="single-entry-content">
+        <!-- Fylls på med ett entry -->
+      </div>
       <section class="entry-comments">
-        <h2 class="heading-responses"><span id="comments-amount">2</span> responses to <span id="entry-title">"Titel av inlägget"</span></h2>
+        <h2 class="heading-responses"><span id="comments-amount"></span> responses</h2>
         <div class="comments-displayed">
           <span>VIEW</span>
-          <select>
+          <select id="selectCommentAmount">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="all">All</option>
           </select>
         </div>
-        <div class="entry-comment">
-          <div class="comment-profile-picture">
-            <img src="images/profile-picture.png"/>
-          </div>
-          <div class="comment-text">
-            <a href="#" onclick="showSingleUser()">username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia.</p>
-          </div>
-        </div>
-        <div class="entry-comment">
-          <div class="comment-profile-picture">
-            <img src="images/profile-picture.png"/>
-          </div>
-          <div class="comment-text">
-            <a href="#" onclick="showSingleUser()">username</a>
-            <p class="display-time">2018-03-24 17:45</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed eu nunc id enim sodales cursus elementum quis turpis.
-              Ut ac elit id ante egestas lacinia.</p>
-          </div>
+        <div id="entry-comments-content">
+          <!-- Fylls på med kommentarer -->
         </div>
 
         <div class="leave-comment-wrapper">
@@ -274,12 +215,6 @@
     </section>
 
   </div>
-
-  <footer class="footer">
-      <?php
-        echo "<p>Copyright &copy; 2016-" . date("Y") . " company-name.com</p>";
-      ?>
-  </footer>
 
   <script src="scripts/main.js"></script>
 </body>

@@ -11,7 +11,7 @@ class EntryController
         $this->db = $pdo;
     }
     public function getDefault(){
-        $limit=3;
+        $limit=20;
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $limit , \PDO::PARAM_INT);
         $getAllEntries->execute();
@@ -19,7 +19,7 @@ class EntryController
         return $allEntries;
     }
     public function getAll(){
-        
+
         $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $_GET['limit'] , \PDO::PARAM_INT);
         $getAllEntries->execute();

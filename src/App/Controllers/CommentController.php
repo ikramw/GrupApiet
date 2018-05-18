@@ -5,7 +5,7 @@ namespace App\Controllers;
 class CommentController
 {
     private $db;
-    
+
     public function __construct($pdo)
     {
         $this->db = $pdo;
@@ -13,12 +13,12 @@ class CommentController
 
     public function getAll()
     {
-        $limit=3;
+        $limit=20;
         $getAllComments = $this->db->prepare("SELECT * FROM comments ORDER BY createdAt DESC LIMIT :limit");
         $getAllComments->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $getAllComments->execute();
-        return $getAllComments->fetchAll();  
-               
+        return $getAllComments->fetchAll();
+
     }
 
     public function getOne($id)
@@ -39,9 +39,9 @@ class CommentController
         return $getCommentByEntry->fetchAll();
     }
     public function add($comment)
-    {        
+    {
         $addOne = $this->db->prepare(
-            'INSERT INTO comments (entryID, content, createdBy, createdAt) 
+            'INSERT INTO comments (entryID, content, createdBy, createdAt)
             VALUES (:entryID, :content, :createdBy, :createdAt)'
         );
 
@@ -54,7 +54,7 @@ class CommentController
         ':createdBy'  => $comment['createdBy'],
         ':createdAt'  => $comment['createdAt']]
     );
-        
+
         return [
         'commentID'      => (int)$this->db->lastInsertId(),
         'entryID'  => $comment['entryID'],
@@ -69,5 +69,5 @@ class CommentController
           ":id" => $id
         ]);
     }
-    
+
 }
