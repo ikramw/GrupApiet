@@ -495,6 +495,7 @@ function registerUser(){
     const formData = new FormData();
     const username = document.getElementById('username');
     const password = document.getElementById('password');
+<<<<<<< HEAD
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth()+1; //January is 0!
@@ -514,6 +515,12 @@ function registerUser(){
     formData.append('password', password.value);
     formData.append('createdAt', today);
 
+=======
+     
+    formData.append('username', username.value);
+    formData.append('password', password.value);
+    
+>>>>>>> c011890363b53b3b23d1006f6352d5fed621d815
     const postOptions = {
       method: 'POST',
       body: formData
