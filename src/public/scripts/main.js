@@ -354,8 +354,8 @@ function changeCommentsDisplayed() {
   return selectValue;
 }
 
-async function getAllComments() {
-  const response = await fetch('/api/comments?limit=' + selectValue);
+
+  
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/users/' + id);
@@ -428,7 +428,7 @@ async function getSingleUser(id) {
 }
 //Hämtar alla kommentarer
 async function getAllComments() {
-  const response = await fetch('/api/comments');
+  const response = await fetch('/api/comments?limit=' + selectValue);
   const { data } = await response.json();
 
   entries.style.display = "none";
@@ -527,4 +527,5 @@ function login(){
   
 fetch('login', postOptions)
 .then(res => res.json())
-}
+  }
+
