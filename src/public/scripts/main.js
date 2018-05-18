@@ -149,6 +149,20 @@ function createCommentDiv(commentData) {
   var commentTextNode = document.createTextNode(commentData.content);
   commentText.appendChild(commentTextNode);
 
+  let postedIn = document.createElement("p");
+  var postedInText = document.createTextNode("Posted in entry ");
+  postedIn.appendChild(postedInText);
+
+  let commentEntry = document.createElement("a");
+  commentEntry.href = "#";
+  commentEntry.addEventListener("click", function(){
+    getSingleEntry(commentData.entryID)
+  });
+  let commentEntryText = document.createTextNode(commentData.entryID);
+  commentEntry.appendChild(commentEntryText);
+
+  postedIn.appendChild(commentEntry);
+
   let writtenBy = document.createElement("p");
   var writtenByText = document.createTextNode("Written by ");
   writtenBy.appendChild(writtenByText);
@@ -168,6 +182,7 @@ function createCommentDiv(commentData) {
   commentCreated.appendChild(commentCreatedText);
 
   commentDiv.appendChild(commentText);
+  commentDiv.appendChild(postedIn);
   commentDiv.appendChild(writtenBy);
   commentDiv.appendChild(commentCreated);
 
