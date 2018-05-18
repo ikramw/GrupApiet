@@ -62,7 +62,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <a href="#">Your Profile</a>
-            <a href="logout.php">Sign out</a>
+            <a href="#" id="logout">Sign out</a>
           <?php endif; ?>
 
         </div>

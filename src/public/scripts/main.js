@@ -355,7 +355,7 @@ function changeCommentsDisplayed() {
 }
 
 
-  
+
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/users/' + id);
@@ -495,24 +495,9 @@ function registerUser(){
     const formData = new FormData();
     const username = document.getElementById('username');
     const password = document.getElementById('password');
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0!
-    let yyyy = today.getFullYear();
-
-    if(dd<10) {
-        dd = '0'+dd
-    }
-
-    if(mm<10) {
-        mm = '0'+mm
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
 
     formData.append('username', username.value);
     formData.append('password', password.value);
-    formData.append('createdAt', today);
 
     const postOptions = {
       method: 'POST',
@@ -543,4 +528,3 @@ function login(){
 fetch('login', postOptions)
 .then(res => res.json())
   }
-
