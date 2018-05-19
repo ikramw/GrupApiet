@@ -433,3 +433,11 @@ function login(){
 fetch('login', postOptions)
 .then(res => res.json())
   }
+  function Signgout(){
+    const postOptions = {
+      method: 'GET',
+      credentials: 'include'
+    }  
+  fetch('logout',postOptions)
+  .then(res.redirect('/'))  
+}
