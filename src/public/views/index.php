@@ -55,7 +55,7 @@
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <a href="#">Your Profile</a>
-            <a href="#" id="logout">Sign out</a>
+            <a href="#" id="logout" onclick="logOut()">Sign out</a>
           <?php endif; ?>
 
         </div>
