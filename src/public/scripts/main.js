@@ -438,6 +438,8 @@ function logOut(){
     method: 'GET',
     credentials: 'include'
   }
+  location.reload();
+  
   fetch('logout',postOptions)
-  .then(res.redirect('/'))
+  .then(res.json())
 }
