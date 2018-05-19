@@ -430,16 +430,16 @@ function login(){
 
   location.reload();
 
-  fetch('login', postOptions)
-  .then(res => res.json())
-}
-function logOut(){
-  const postOptions = {
-    method: 'GET',
-    credentials: 'include'
+fetch('login', postOptions)
+.then(res => res.json())
   }
-  location.reload();
-  
-  fetch('logout',postOptions)
-  .then(res.json())
-}
+  function logOut(){
+    const postOptions = {
+      method: 'GET',
+      credentials: 'include'
+    }
+    location.reload();
+    
+    fetch('logout',postOptions)
+    .then(res.json())
+  }
