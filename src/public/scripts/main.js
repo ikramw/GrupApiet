@@ -5,20 +5,17 @@ let singleEntry = document.getElementById("single-entry");
 let users = document.getElementById("users");
 let singleUser = document.getElementById("single-user");
 let usernameHeader = document.getElementById("display-username");
-let comments = document.getElementById("comments");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
 let singleEntryContent = document.getElementById("single-entry-content");
 let usersContent = document.getElementById("users-content");
 let singleUserContent = document.getElementById("single-user");
-let commentsContent = document.getElementById("comments-content");
 let entryCommentsContent = document.getElementById("entry-comments-content");
 
 //Länkarna i navigationen
 let entriesLink = document.getElementById("entries-link");
 let usersLink = document.getElementById("users-link");
-let commentsLink = document.getElementById("comments-link");
 
 //Skapar element för att visa upp inlägg från databasen
 function createEntryArticle(entryData) {
@@ -139,55 +136,6 @@ function createUserDiv(userData) {
 
   usersContent.appendChild(userDiv);
 }
-//Skapar element för att visa upp kommentarer från databasen
-function createCommentDiv(commentData) {
-
-  let commentDiv = document.createElement("div");
-  commentDiv.setAttribute("class", "comment");
-
-  let commentText = document.createElement("p");
-  var commentTextNode = document.createTextNode(commentData.content);
-  commentText.appendChild(commentTextNode);
-
-  let postedIn = document.createElement("p");
-  var postedInText = document.createTextNode("Posted in entry ");
-  postedIn.appendChild(postedInText);
-
-  let commentEntry = document.createElement("a");
-  commentEntry.href = "#";
-  commentEntry.addEventListener("click", function(){
-    getSingleEntry(commentData.entryID)
-  });
-  let commentEntryText = document.createTextNode(commentData.entryID);
-  commentEntry.appendChild(commentEntryText);
-
-  postedIn.appendChild(commentEntry);
-
-  let writtenBy = document.createElement("p");
-  var writtenByText = document.createTextNode("Written by ");
-  writtenBy.appendChild(writtenByText);
-
-  let commentUsername = document.createElement("a");
-  commentUsername.href = "#";
-  commentUsername.addEventListener("click", function(){
-    getSingleUser(commentData.createdBy)
-  });
-  //Hämtar användarnamnet
-  getUsername(commentData.createdBy, commentUsername);
-
-  writtenBy.appendChild(commentUsername);
-
-  let commentCreated = document.createElement("p");
-  var commentCreatedText = document.createTextNode(commentData.createdAt);
-  commentCreated.appendChild(commentCreatedText);
-
-  commentDiv.appendChild(commentText);
-  commentDiv.appendChild(postedIn);
-  commentDiv.appendChild(writtenBy);
-  commentDiv.appendChild(commentCreated);
-
-  commentsContent.appendChild(commentDiv);
-}
 //Skapar element för att visa kommentarer kopplat till inlägg
 function createEntryComments(commentData) {
   let entryComment = document.createElement("div");
@@ -247,19 +195,16 @@ async function getAllEntries() {
 
   entries.style.display = "block";
   users.style.display = "none";
-  comments.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
-  commentsContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
-  commentsLink.classList.remove("active");
 
   let selectValue = document.getElementById("selectEntryAmount").value;
 
@@ -299,7 +244,6 @@ på samma sida med samma id */
 function getSingleEntryAndComments(id) {
   entries.style.display = "none";
   users.style.display = "none";
-  comments.style.display = "none";
   singleUser.style.display = "none";
   singleEntry.style.display = "block";
   frontpageHeader.style.display = "none";
@@ -307,14 +251,12 @@ function getSingleEntryAndComments(id) {
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
-  commentsContent.innerHTML = "";
   singleEntryContent.innerHTML = "";
   entryCommentsContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
-  commentsLink.classList.remove("active");
 
   getSingleEntry(id);
   getEntryComments(id);
@@ -326,19 +268,16 @@ async function getAllUsers() {
 
   entries.style.display = "none";
   users.style.display = "block";
-  comments.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
-  commentsContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
-  commentsLink.classList.remove("active");
 
   let selectValue = document.getElementById("selectUserAmount").value;
 
@@ -354,8 +293,6 @@ function changeCommentsDisplayed() {
   return selectValue;
 }
 
-
-
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/users/' + id);
@@ -363,7 +300,6 @@ async function getSingleUser(id) {
 
   entries.style.display = "none";
   users.style.display = "none";
-  comments.style.display = "none";
   singleUser.style.display = "block";
   singleEntry.style.display = "none";
   usernameHeader.style.display = "block"
@@ -373,12 +309,10 @@ async function getSingleUser(id) {
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
-  commentsContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
-  commentsLink.classList.remove("active");
 
   //Skapar element för att visa upp entries från databasen
   /*function createSingleUserArticle(entryData) {
@@ -426,35 +360,6 @@ async function getSingleUser(id) {
     createSingleUserArticle(data[i]);
   }*/
 }
-//Hämtar alla kommentarer
-async function getAllComments() {
-  const response = await fetch('/api/comments?limit=' + selectValue);
-  const { data } = await response.json();
-
-  entries.style.display = "none";
-  users.style.display = "none";
-  comments.style.display = "block";
-  singleEntry.style.display = "none";
-  frontpageHeader.style.display = "block";
-  usernameHeader.style.display = "none"
-
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-  commentsContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.remove("active");
-  usersLink.classList.remove("active");
-  commentsLink.classList.add("active");
-
-  let selectValue = document.getElementById("selectCommentsAmount").value;
-
-  //Skapar artikel element för antalet entries som är valt i select elementet
-  for (let i = 0; i < selectValue && i < data.length; i++) {
-
-    createCommentDiv(data[i]);
-  }
-}
 
 //Öppnar och stänger navigationen på mobiler
 function navToggle() {
@@ -486,8 +391,6 @@ function showRegister() {
     registerForm.className = "register-form";
   }
 }
-let btnRegister=document.getElementById('submit');
-btnRegister.addEventListener('click', registerUser);
 
 function registerUser(){
     // x-www-form-urlencoded
@@ -510,8 +413,6 @@ function registerUser(){
   .then(res => res.json())
 
 }
-let btnLogin=document.getElementById('login-submit');
-btnLogin.addEventListener('click', login);
 function login(){
 
   const formData = new FormData();

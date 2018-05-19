@@ -1,6 +1,3 @@
-<?php
-session_destroy();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +21,6 @@ session_destroy();
         <ul class="nav-menu-left">
           <li><a href="#" onclick="getAllEntries()" class="active" id="entries-link">Entries</a></li>
           <li><a href="#" onclick="getAllUsers()" id="users-link">Users</a></li>
-          <li><a href="#" onclick="getAllComments()" id="comments-link">Comments</a></li>
         </ul>
         <div class="nav-menu-right">
           <input type="text" placeholder="Search" class="nav-search">
@@ -40,7 +36,7 @@ session_destroy();
                 <input type="text" name="username" class="form-input" id="login-username" />
                 <label for="login-password">Password:</label>
                 <input type="password" name="password" class="form-input" id="login-password" />
-                <input type="button" id="login-submit" value="Submit" />
+                <input type="button" id="login-submit" value="Submit" onclick="login()"/>
               </form>
             </div>
             <a href="javascript:void(0)" onclick="showRegister()">Register</a>
@@ -51,7 +47,7 @@ session_destroy();
                 <input type="text" name="username" class="form-input" id="username" />
                 <label for="password">Password:</label>
                 <input type="password" name="password" class="form-input" id="password" />
-                <input type="button" id="submit" value="Submit" />
+                <input type="button" id="submit" value="Submit" onclick="registerUser()"/>
               </form>
             </div>
           <?php endif; ?>
@@ -128,25 +124,6 @@ session_destroy();
       </div>
       <div class="users-content" id="users-content">
         <!-- Fylls på med users -->
-      </div>
-    </section>
-
-    <!-- Section som visar comments -->
-    <section class="comments-wrapper" id="comments">
-      <div class="elements-displayed-wrapper">
-        <h1>Explore comments</h1>
-        <div class="elements-displayed">
-          <span>VIEW</span>
-          <select id="selectCommentsAmount" onchange="getAllComments()">
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="60">60</option>
-            <option value="all">All</option>
-          </select>
-        </div>
-      </div>
-      <div class="comments-content" id="comments-content">
-        <!-- Fylls på med comments -->
       </div>
     </section>
 
