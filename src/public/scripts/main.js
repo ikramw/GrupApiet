@@ -439,7 +439,7 @@ function logOut(){
     credentials: 'include'
   }
   location.reload();
-  
+
   fetch('logout',postOptions)
   .then(res.json())
 }
