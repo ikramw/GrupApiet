@@ -23,8 +23,8 @@
           <li><a href="#" onclick="getAllUsers()" id="users-link">Users</a></li>
         </ul>
         <div class="nav-menu-right">
-          <input type="text" placeholder="Search" class="nav-search">
-          <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          <input type="text" placeholder="Search" id="search" class="nav-search">
+          <button type="submit" class="search-submit" onclick="searchByTitle()"><i class="fa fa-search"></i></button>
 
           <!-- Om användaren är utloggad visas: -->
           <?php if (!isset($_SESSION["loggedIn"])): ?>
