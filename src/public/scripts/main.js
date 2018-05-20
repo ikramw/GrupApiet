@@ -315,50 +315,20 @@ async function getSingleUser(id) {
   usersLink.classList.add("active");
 
   //Skapar element för att visa upp entries från databasen
-  /*function createSingleUserArticle(entryData) {
-
-    let singleUserArticle = document.createElement("article");
-    singleUserArticle.setAttribute("class", "single-entry");
-
-    let entryInfo = document.createElement("div");
-    entryInfo.setAttribute("class", "single-entry-info");
-
-    let entryTitle = document.createElement("h1");
-    let titleLink = document.createElement("a");
-    titleLink.href = "#";
-    titleLink.addEventListener("click", getSingleEntry);
-    var titleText = document.createTextNode(entryData.title);
-    titleLink.appendChild(titleText);
-    entryTitle.appendChild(titleLink);
-
-    let entryCreated = document.createElement("p");
-    var entryCreatedText = document.createTextNode(entryData.createdAt);
-    entryCreated.appendChild(entryCreatedText);
-
-    let entryContentText = document.createElement("p");
-    var entryContentTextNode = document.createTextNode(entryData.content);
-    entryContentText.appendChild(entryContentTextNode);
-
-    let commentsAmount = document.createElement("p");
-    var commentsAmountText = document.createTextNode("3" + "amount of comments");
-    commentsAmount.appendChild(commentsAmountText);
-
-    entryInfo.appendChild(entryTitle);
-    entryInfo.appendChild(entryCreated);
-    singleUserArticle.appendChild(entryInfo);
-    singleUserArticle.appendChild(entryContentText);
-    singleUserArticle.appendChild(commentsAmount);
-
-    singleUser.appendChild(singleUserArticle);
-  }
 
   //let selectValue = document.getElementById("selectEntryAmount").value;
 
   //Skapar artikel element för antalet entries som är valt i select elementet
-  for (let i = 0; i < 20; i++) {
+  /*for (let i = 0; i < 20; i++) {
 
-    createSingleUserArticle(data[i]);
+    createSingleEntryArticle(data[i]);
   }*/
+}
+
+function getProfile(id) {
+
+    console.log(id);
+
 }
 
 //Öppnar och stänger navigationen på mobiler

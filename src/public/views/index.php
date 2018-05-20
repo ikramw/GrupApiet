@@ -54,7 +54,7 @@
 
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
-            <a href="#">Your Profile</a>
+            <a href="#" onclick="getProfile( <?php $_SESSION['userID'] ?> )">My Profile</a>
             <a href="#" id="logout" onclick="logOut()">Sign out</a>
           <?php endif; ?>
 
@@ -70,16 +70,16 @@
 
   <!-- Info om sidan för användare som inte har en blogg
   Visas bara om användaren inte är inloggad -->
-  <?php if (!isset($_SESSION["loggedIn"])): ?>
     <section class="header-info" id="frontpage-header">
+      <?php if (!isset($_SESSION["loggedIn"])): ?>
       <div class="info-content">
         <h1>Create your own free blog</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
           elit. Sed eu nunc id enim sodales cursus elementum
           quis turpis. Ut ac elit id ante egestas lacinia.</p>
       </div>
+      <?php endif; ?>
     </section>
-  <?php endif; ?>
 
   <!-- Namnet på användaren vars sida man är inne på -->
   <section class="header-info display-username" id="display-username">
@@ -180,7 +180,7 @@
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <h2>Leave a comment</h2>
             <form action="" method="post">
-              <textarea name="comment">Write your comment here...</textarea>
+              <textarea name="comment" placeholder="Write your comment here..."></textarea>
               <input type="submit" id="submit" value="Post comment" />
             </form>
           <?php endif; ?>
