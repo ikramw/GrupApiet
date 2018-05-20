@@ -410,7 +410,6 @@ function showRegister() {
 }
 
 function registerUser(){
-    // x-www-form-urlencoded
 
     const formData = new FormData();
     const username = document.getElementById('username');
@@ -430,7 +429,7 @@ function registerUser(){
   .then(res => res.json())
 
 }
-function login(){
+function login() {
 
   const formData = new FormData();
   const username = document.getElementById('login-username');
@@ -450,17 +449,51 @@ function login(){
   fetch('login', postOptions)
   .then(res => res.json())
 }
-function logOut(){
+
+function logOut() {
   const postOptions = {
     method: 'GET',
     credentials: 'include'
   }
+
   location.reload();
 
   fetch('logout',postOptions)
   .then(res.json())
 }
 
-function postComment() {
+function postEntry() {
+  const formData = new FormData();
+  const postTitle = document.getElementById('post-title');
+  const postContent = document.getElementById('post-content');
 
+  formData.append('postTitle', postTitle.value);
+  formData.append('postContent', postContent.value);
+
+  const postOptions = {
+    method: 'POST',
+    body: formData
+  }
+
+  location.reload();
+
+  fetch('vad ska stå här?', postOptions)
+  .then(res => res.json())
+}
+
+function postComment() {
+  const formData = new FormData();
+  const postComment = document.getElementById('post-comment');
+
+  formData.append('postComment', postComment.value);
+
+  const postOptions = {
+    method: 'POST',
+    body: formData
+  }
+
+  location.reload();
+
+  fetch('vad ska stå här?', postOptions)
+  .then(res => res.json())
 }

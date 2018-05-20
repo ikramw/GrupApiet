@@ -199,7 +199,7 @@
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <h2>Leave a comment</h2>
             <form action="" method="post">
-              <textarea name="comment" id="comment-content" placeholder="Write your comment here..."></textarea>
+              <textarea name="comment" id="post-comment" placeholder="Write your comment here..."></textarea>
               <input type="submit" id="submit" value="Post comment" onclick="postComment()"/>
             </form>
           <?php endif; ?>
@@ -213,7 +213,7 @@
       <div class="create-entry">
         <h1>Create post</h1>
         <form>
-          <input type="text" placeholder="Title" name="title" required>
+          <input type="text" placeholder="Title" name="title" id="post-title" required>
           <textarea name="content" maxlength="1000" id="post-content" required></textarea>
           <br/>
           <input type="submit" value="Save" class="button"/>
