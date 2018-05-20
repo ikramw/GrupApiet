@@ -86,19 +86,12 @@
             <div class="dashboard-list">
               <ul>
                 <li><a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a></li>
-                <li><a href="#"><i class="fa fa-desktop"></i> Visit your profile</a></li>
+                <li><a href="#" onclick="getProfile()"><i class="fa fa-desktop"></i> Visit your profile</a></li>
               </ul>
             </div>
           </div>
       <?php endif; ?>
     </section>
-
-    <!-- Inloggad användares sida -->
-    <?php if (isset($_SESSION["loggedIn"])): ?>
-      <!--<section class="my-profile">
-
-      </section>-->
-    <?php endif; ?>
 
   <!-- Namnet på användaren vars sida man är inne på -->
   <section class="header-info display-username" id="display-username">
@@ -108,6 +101,31 @@
   </section>
 
   <div class="content-wrapper" id="content-wrapper">
+    <!-- Inloggad användares sida -->
+    <?php if (isset($_SESSION["loggedIn"])): ?>
+      <section class="my-profile" id="my-profile">
+        <div class="my-entries">
+          <!--Fylls på med inloggad användares entries -->
+        </div>
+        <div class="my-sidebar">
+          <a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a>
+        </div>
+      </section>
+
+      <!-- Skriva ett inlägg -->
+      <section class="create-entry-wrapper" id="create-entry-wrapper">
+        <div class="create-entry">
+          <h1>Create post</h1>
+          <form>
+            <input type="text" placeholder="Title" name="title" id="post-title" required>
+            <textarea name="content" maxlength="1000" id="post-content" required></textarea>
+            <br/>
+            <input type="submit" value="Save" class="button"/>
+          </form>
+        </div>
+      </section>
+    <?php endif; ?>
+
     <!-- Section som visar entries -->
     <section class="entries-wrapper" id="entries">
       <div class="elements-displayed-wrapper">
@@ -148,27 +166,7 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-      <!--<article class="single-entry">
-        <div class="single-entry-info">
-          <h1><a href="#" onclick="showSingleEntry()">This is the title of the entry</a></h1>
-          <p>15 MAY 2018 - 17:45</p>
-        </div>
-        <img src="uploads/flower.jpg" alt="Bild" />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Sed eu nunc id enim sodales cursus elementum quis turpis.
-          Ut ac elit id ante egestas lacinia. Curabitur felis odio, lacinia
-          quis orci id, porttitor bibendum sapien. Morbi porta, leo et ornare
-          faucibus, tortor augue tincidunt mauris, vitae molestie mi diam vel
-          massa. Cras id condimentum sem. Phasellus orci neque, sollicitudin
-          sit amet tincidunt eget, varius eu ipsum. Vivamus accumsan, velit
-          nec vulputate accumsan, lacus eros sagittis sapien, a pharetra odio
-          leo a est. Aenean et dolor libero. Nullam egestas, augue eu mollis
-          hendrerit, est quam ullamcorper arcu, fermentum molestie sapien
-          neque quis massa. Ut rutrum diam id odio imperdiet, id dapibus nisi
-          dictum. Fusce fermentum, urna auctor rutrum mattis, quam sapien
-          dictum augue, ut tincidunt nibh enim in turpis.</p>
-          <p>3 comments</p>
-      </article>-->
+  
     </section>
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
@@ -206,21 +204,6 @@
         </div>
       </section>
     </section>
-
-    <!-- Skriva ett inlägg -->
-    <?php if (isset($_SESSION["loggedIn"])): ?>
-    <section class="create-entry-wrapper" id="create-entry-wrapper">
-      <div class="create-entry">
-        <h1>Create post</h1>
-        <form>
-          <input type="text" placeholder="Title" name="title" id="post-title" required>
-          <textarea name="content" maxlength="1000" id="post-content" required></textarea>
-          <br/>
-          <input type="submit" value="Save" class="button"/>
-        </form>
-      </div>
-    </section>
-    <?php endif; ?>
 
   </div>
 
