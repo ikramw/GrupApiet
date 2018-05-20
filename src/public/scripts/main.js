@@ -326,6 +326,41 @@ function getProfile(id) {
 
 }
 
+async function searchByTitle(){
+  let searchInput= document.getElementById('search').value;
+
+  const postOptions = {
+    method: 'GET'
+  }
+  const response = await fetch('/api/entries?title='+searchInput,postOptions)
+  const { data } = await response.json();
+
+  console.log(data);
+  entries.style.display = "block";
+  users.style.display = "none";
+  singleEntry.style.display = "none";
+  frontpageHeader.style.display = "block";
+  usernameHeader.style.display = "none"
+
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.add("active");
+  usersLink.classList.remove("active");
+
+  //Skapar artikel element för antalet entries som är valt i select elementet
+  if (data.length > 1) {
+    for (let i = 0; i < data.length; i++) {
+
+      createEntryArticle(data[i]);
+    }
+  }
+  else {
+    createEntryArticle(data);
+  }
+}
+
 //Öppnar och stänger navigationen på mobiler
 function navToggle() {
   var menu = document.getElementById("content-toggle");
@@ -407,39 +442,4 @@ function logOut(){
 
   fetch('logout',postOptions)
   .then(res.json())
-}
-let searchInput= document.getElementById('search').value;
-async function searchByTitle(){
-  let searchInput= document.getElementById('search').value;
-
-  const postOptions = {
-    method: 'GET'
-  }
-  const response = await fetch('/api/entries?title='+searchInput,postOptions)
-
-  const { data } = await response.json();
-  console.log(data);
-  entries.style.display = "block";
-  users.style.display = "none";
-  singleEntry.style.display = "none";
-  frontpageHeader.style.display = "block";
-  usernameHeader.style.display = "none"
-
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.add("active");
-  usersLink.classList.remove("active");
-
-  //Skapar artikel element för antalet entries som är valt i select elementet
-  if(data.length>1){
-  for (let i = 0; i < data.length; i++) {
-
-    createEntryArticle(data[i]);
-  }
-}
-  else{
-    createEntryArticle(data);
-  }
 }
