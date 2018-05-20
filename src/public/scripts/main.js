@@ -57,8 +57,10 @@ function createEntryArticle(entryData) {
     getSingleUser(entryData.createdBy)
   });
   entryUsername.appendChild(userIcon);
-  //Hämtar användarnamnet
-  getUsername(entryData.createdBy, entryUsername);
+  let username = " " + entryData.username;
+  let usernameTextNode = document.createTextNode(username);
+  entryUsername.appendChild(usernameTextNode);
+
 
   let entryDisplayTime = document.createElement("p");
   entryDisplayTime.setAttribute("class", "display-time");
@@ -92,8 +94,9 @@ function createSingleEntryArticle(entryData) {
   entryUsername.addEventListener("click", function(){
     getSingleUser(entryData.createdBy)
   });
-  //Hämtar användarnamnet
-  getUsername(entryData.createdBy, entryUsername);
+  let username = " " + entryData.username;
+  let usernameTextNode = document.createTextNode(username);
+  entryUsername.appendChild(usernameTextNode);
 
   let entryDisplayTime = document.createElement("p");
   let entryDisplayTimeText = document.createTextNode(entryData.createdAt.slice(0, 16));
@@ -158,7 +161,9 @@ function createEntryComments(commentData) {
     getSingleUser(commentData.createdBy)
   });
   //Hämtar användarnamnet
-  getUsername(commentData.createdBy, commentUsername);
+  let username = " " + commentData.username;
+  let usernameTextNode = document.createTextNode(username);
+  commentUsername.appendChild(usernameTextNode);
 
   let commentDisplayTime = document.createElement("p");
   commentDisplayTime.setAttribute("class", "display-time");
@@ -178,16 +183,6 @@ function createEntryComments(commentData) {
   entryCommentsContent.appendChild(entryComment);
 }
 
-/*Funktion som hämtar användarnamnet och appendar det till ett element, t.ex. så
-att det går att visa användarnamnet för ett inlägg */
-async function getUsername(id, userLink) {
-  const response = await fetch('/api/users/' + id);
-  const { data } = await response.json();
-
-  let username = " " + data.username;
-  let usernameTextNode = document.createTextNode(username);
-  userLink.appendChild(usernameTextNode);
-}
 //Hämtar alla entries
 async function getAllEntries() {
   const response = await fetch('/api/entries');
@@ -416,12 +411,12 @@ function logOut(){
 let searchInput= document.getElementById('search').value;
 async function searchByTitle(){
   let searchInput= document.getElementById('search').value;
-  
+
   const postOptions = {
     method: 'GET'
   }
   const response = await fetch('/api/entries?title='+searchInput,postOptions)
-  
+
   const { data } = await response.json();
   console.log(data);
   entries.style.display = "block";
@@ -436,11 +431,11 @@ async function searchByTitle(){
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
-  
+
   //Skapar artikel element för antalet entries som är valt i select elementet
   if(data.length>1){
   for (let i = 0; i < data.length; i++) {
-    
+
     createEntryArticle(data[i]);
   }
 }
