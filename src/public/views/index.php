@@ -79,7 +79,27 @@
           quis turpis. Ut ac elit id ante egestas lacinia.</p>
       </div>
       <?php endif; ?>
+      <?php if (isset($_SESSION["loggedIn"])): ?>
+          <h1 class="welcome-text">Welcome,  <?php echo $_SESSION["username"] ?>!</h1>
+          <hr />
+          <div class="dashboard">
+            <div class="dashboard-list">
+              <h2>Get Started</h2>
+              <ul>
+                <li><a href="#"><i class="fa fa-edit"></i> Write a blog post</a></li>
+                <li><a href="#"><i class="fa fa-desktop"></i> Visit your profile</a></li>
+              </ul>
+            </div>
+          </div>
+      <?php endif; ?>
     </section>
+
+    <!-- Inloggad användares sida -->
+    <?php if (isset($_SESSION["loggedIn"])): ?>
+      <!--<section class="my-profile">
+
+      </section>-->
+    <?php endif; ?>
 
   <!-- Namnet på användaren vars sida man är inne på -->
   <section class="header-info display-username" id="display-username">
@@ -180,8 +200,8 @@
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <h2>Leave a comment</h2>
             <form action="" method="post">
-              <textarea name="comment" placeholder="Write your comment here..."></textarea>
-              <input type="submit" id="submit" value="Post comment" />
+              <textarea name="comment" id="comment-content" placeholder="Write your comment here..."></textarea>
+              <input type="submit" id="submit" value="Post comment" onclick="postComment()"/>
             </form>
           <?php endif; ?>
         </div>

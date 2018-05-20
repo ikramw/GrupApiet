@@ -22,7 +22,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Muli', sans-serif;
   margin-top: 0;
 }
-
 /* Navigation */
 .header-navbar {
   background-color: #262626;
@@ -199,6 +198,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   background-color: #4d8594;
   color: #fff;
+  overflow: hidden;
 }
 .info-content {
   width: 100%;
@@ -219,6 +219,57 @@ h1, h2, h3, h4, h5, h6 {
 }
 .elements-displayed {
   margin-bottom: 2em;
+}
+
+/* Dashboard */
+.welcome-text {
+  text-align: left;
+  margin: 0;
+}
+.header-info hr {
+  background-color: #fff;
+  height: 1px;
+  margin-bottom: 1.5em;
+  border: none;
+}
+.dashboard {
+  text-align: left;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.dashboard-list {
+  float: left;
+  width: 50%;
+}
+.dashboard h2 {
+  font-size: 1.2em;
+  color: #000;
+}
+.dashboard-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+.dashboard-list li {
+  padding-top: 1em;
+}
+.dashboard-list a {
+  color: #fff;
+  text-decoration: none;
+}
+.dashboard-list a:hover {
+  text-decoration: underline;
+}
+.latest-post {
+  padding-top: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+.latest-post p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  display: inline;
+  margin: 0
 }
 
 /* All entries */
@@ -301,20 +352,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   border: none;
   border-radius: 3px;
-}
-
-/* All comments */
-.comments-wrapper {
-  display: none;
-  overflow: hidden;
-  margin-bottom: 2em;
-}
-.comment {
-  width: 100%;
-  float: left;
-  background-color: #fff;
-  padding: 1em;
-  border: 1px solid #eeeeee;
 }
 
 /* Single user and single entry */
@@ -404,6 +441,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 0.8em;
   height: 30px;
   float: right;
+}
+
+/* My profile */
+.my-profile {
+  width: 100%;
+  max-width: 960px;
+  margin: 57px auto 0 auto;
+  padding: 0 2em 2em;
 }
 
 /* Footer */

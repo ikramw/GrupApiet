@@ -38,7 +38,13 @@ function createEntryArticle(entryData) {
 
   let entryContentText = document.createElement("p");
   //Skriver ut de första 300 teckena av content
-  let entryContentTextNode = document.createTextNode(entryData.content.substring(0,300) + "...");
+  let entryContentTextNode;
+  if (entryData.content.length < 300) {
+    entryContentTextNode = document.createTextNode(entryData.content);
+  }
+  else {
+    entryContentTextNode = document.createTextNode(entryData.content.substring(0,300) + "...");
+  }
   entryContentText.appendChild(entryContentTextNode);
 
   entryContent.appendChild(entryTitle);
@@ -282,12 +288,6 @@ async function getAllUsers() {
     createUserDiv(data[i]);
   }
 }
-
-function changeCommentsDisplayed() {
-  let selectValue = document.getElementById("selectCommentsAmount").value;
-  return selectValue;
-}
-
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/users/' + id);
@@ -442,4 +442,8 @@ function logOut(){
 
   fetch('logout',postOptions)
   .then(res.json())
+}
+
+function postComment() {
+
 }

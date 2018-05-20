@@ -55,6 +55,7 @@ $app->post('/login', function ($request, $response, $args) {
     $user = $fetchUserStatement->fetch();
     if (password_verify($body['password'], $user['password'])) {
         $_SESSION['loggedIn'] = true;
+        $_SESSION['username'] = $user['username'];
         $_SESSION['userID'] = $user['id'];
         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
     }
