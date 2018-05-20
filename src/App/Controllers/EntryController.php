@@ -12,7 +12,10 @@ class EntryController
     }
     public function getDefault(){
         $limit=20;
-        $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
+        $getAllEntries = $this->db->prepare("SELECT entries.entryID, entries.title,
+        entries.content,entries.createdBy,entries.createdAt , users.username 
+        FROM entries INNER JOIN users ON userID=createdBy 
+        ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $limit , \PDO::PARAM_INT);
         $getAllEntries->execute();
         $allEntries = $getAllEntries->fetchAll();
@@ -20,7 +23,10 @@ class EntryController
     }
     public function getAll(){
 
-        $getAllEntries = $this->db->prepare("SELECT * FROM entries ORDER BY createdAt DESC LIMIT :limit");
+        $getAllEntries = $this->db->prepare("SELECT entries.entryID, entries.title,
+        entries.content,entries.createdBy,entries.createdAt , users.username 
+        FROM entries INNER JOIN users ON userID=createdBy
+        ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $_GET['limit'] , \PDO::PARAM_INT);
         $getAllEntries->execute();
         $allEntries = $getAllEntries->fetchAll();
@@ -29,7 +35,11 @@ class EntryController
 
     public function getOne($id)
     {
-        $getOneEntry = $this->db->prepare("SELECT * FROM entries WHERE entryID = :id");
+        $getOneEntry = $this->db->prepare("SELECT entries.entryID, entries.title,
+        entries.content,entries.createdBy,entries.createdAt , users.username 
+        FROM entries 
+        INNER JOIN users ON userID=createdBy
+        WHERE entryID = :id");
         $getOneEntry->execute([
           ":id" => $id
         ]);
@@ -46,7 +56,9 @@ class EntryController
     }
     public function getByTitle()
     {
-        $getEntryByTitle = $this->db->prepare("SELECT * FROM entries WHERE title = :title");
+        $getEntryByTitle = $this->db->prepare("SELECT entries.entryID, entries.title,
+        entries.content,entries.createdBy,entries.createdAt , users.username 
+        FROM entries INNER JOIN users ON userID=createdBy WHERE title = :title");
         $getEntryByTitle->bindParam(':title', $_GET['title'] , \PDO::PARAM_STR, 12);
         $getEntryByTitle->execute();
         return $getEntryByTitle->fetch();
