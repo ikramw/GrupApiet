@@ -238,14 +238,6 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 960px;
   margin: 0 auto;
 }
-.dashboard-list {
-  float: left;
-  width: 50%;
-}
-.dashboard h2 {
-  font-size: 1.2em;
-  color: #000;
-}
 .dashboard-list ul {
   list-style-type: none;
   padding: 0;
@@ -259,17 +251,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dashboard-list a:hover {
   text-decoration: underline;
-}
-.latest-post {
-  padding-top: 1em;
-  display: flex;
-  justify-content: space-between;
-}
-.latest-post p {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  display: inline;
-  margin: 0
 }
 
 /* All entries */
@@ -408,12 +389,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #eeeeee;
   margin-bottom: 1em;
 }
-.comment-profile-picture {
-  width: 5%;
-}
 .comment-text {
-  width: 95%;
-  padding-left: 2em;
+  width: 100%;
 }
 .comment-message {
   margin: 0;
@@ -427,6 +404,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .leave-comment-wrapper {
   background-color: #fff;
+  border: 1px solid #eeeeee;
   padding: 2em;
   overflow: hidden;
 }
@@ -441,6 +419,30 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 0.8em;
   height: 30px;
   float: right;
+}
+
+/* Create post */
+.create-entry-wrapper {
+  padding-top: 2em;
+}
+.create-entry {
+  background-color: #fff;
+  border: 1px solid #eeeeee;
+  padding: 1em;
+}
+.create-entry input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0 15px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.create-entry textarea {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  resize: vertical;
 }
 
 /* My profile */
@@ -532,17 +534,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* Content */
-  .header-info {
-    padding: 4em;
-  }
   .new-entry {
     width: 48%;
   }
   .user {
     width: 25%;
-  }
-  .comment {
-    width: 50%;
   }
 }
 @media (min-width: 960px) {

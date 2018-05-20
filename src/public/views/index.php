@@ -54,7 +54,7 @@
 
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
-            <a href="#" onclick="getProfile( <?php $_SESSION['userID'] ?> )">My Profile</a>
+            <a href="#" onclick="getProfile( <?php $_SESSION['userID'] ?> )" id="profile-link">My Profile</a>
             <a href="#" id="logout" onclick="logOut()">Sign out</a>
           <?php endif; ?>
 
@@ -80,13 +80,12 @@
       </div>
       <?php endif; ?>
       <?php if (isset($_SESSION["loggedIn"])): ?>
-          <h1 class="welcome-text">Welcome,  <?php echo $_SESSION["username"] ?>!</h1>
-          <hr />
           <div class="dashboard">
+            <h1 class="welcome-text">Welcome, <?php echo $_SESSION["username"] ?>!</h1>
+            <hr />
             <div class="dashboard-list">
-              <h2>Get Started</h2>
               <ul>
-                <li><a href="#"><i class="fa fa-edit"></i> Write a blog post</a></li>
+                <li><a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a></li>
                 <li><a href="#"><i class="fa fa-desktop"></i> Visit your profile</a></li>
               </ul>
             </div>
@@ -207,6 +206,21 @@
         </div>
       </section>
     </section>
+
+    <!-- Skriva ett inlägg -->
+    <?php if (isset($_SESSION["loggedIn"])): ?>
+    <section class="create-entry-wrapper" id="create-entry-wrapper">
+      <div class="create-entry">
+        <h1>Create post</h1>
+        <form>
+          <input type="text" placeholder="Title" name="title" required>
+          <textarea name="content" maxlength="1000" id="post-content" required></textarea>
+          <br/>
+          <input type="submit" value="Save" class="button"/>
+        </form>
+      </div>
+    </section>
+    <?php endif; ?>
 
   </div>
 

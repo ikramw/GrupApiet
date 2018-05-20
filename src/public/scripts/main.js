@@ -5,6 +5,7 @@ let singleEntry = document.getElementById("single-entry");
 let users = document.getElementById("users");
 let singleUser = document.getElementById("single-user");
 let usernameHeader = document.getElementById("display-username");
+let createPost = document.getElementById("create-entry-wrapper");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
@@ -16,6 +17,7 @@ let entryCommentsContent = document.getElementById("entry-comments-content");
 //Länkarna i navigationen
 let entriesLink = document.getElementById("entries-link");
 let usersLink = document.getElementById("users-link");
+let profileLink = document.getElementById("profile-link");
 
 //Skapar element för att visa upp inlägg från databasen
 function createEntryArticle(entryData) {
@@ -150,14 +152,6 @@ function createEntryComments(commentData) {
   let entryComment = document.createElement("div");
   entryComment.setAttribute("class", "entry-comment");
 
-  let commentProfilePicture = document.createElement("div");
-  commentProfilePicture.setAttribute("class", "comment-profile-picture");
-
-  var profilePicture = document.createElement("img");
-  profilePicture.src = "images/profile-picture.png";
-
-  commentProfilePicture.appendChild(profilePicture);
-
   let commentText = document.createElement("div");
   commentText.setAttribute("class", "comment-text");
 
@@ -184,7 +178,6 @@ function createEntryComments(commentData) {
   commentText.appendChild(commentDisplayTime);
   commentText.appendChild(commentContentText);
 
-  entryComment.appendChild(commentProfilePicture);
   entryComment.appendChild(commentText);
   entryCommentsContent.appendChild(entryComment);
 }
@@ -198,7 +191,13 @@ async function getAllEntries() {
   users.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
-  usernameHeader.style.display = "none"
+  usernameHeader.style.display = "none";
+  if(createPost != undefined) {
+    createPost.style.display = "none";
+  }
+  if(profileLink != undefined) {
+    profileLink.classList.remove("active");
+  }
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -272,6 +271,9 @@ async function getAllUsers() {
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
+  if(createPost != undefined) {
+    createPost.style.display = "none";
+  }
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
@@ -279,6 +281,9 @@ async function getAllUsers() {
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
+  if(profileLink != undefined) {
+    profileLink.classList.remove("active");
+  }
 
   let selectValue = document.getElementById("selectUserAmount").value;
 
@@ -359,6 +364,18 @@ async function searchByTitle(){
   else {
     createEntryArticle(data);
   }
+}
+
+function showCreatePost() {
+  createPost.style.display = "block";
+  entries.style.display = "none";
+  users.style.display = "none";
+  frontpageHeader.style.display = "none";
+
+  //Ändrar länk som är aktiv i nav
+  entriesLink.classList.remove("active");
+  usersLink.classList.remove("active");
+  profileLink.classList.add("active");
 }
 
 //Öppnar och stänger navigationen på mobiler
