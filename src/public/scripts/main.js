@@ -105,6 +105,8 @@ function createSingleEntryArticle(entryData, displayWrapper) {
   titleLink.href = "#";
   titleLink.addEventListener("click", function(){
     getSingleEntryAndComments(entryData.entryID);
+    selectedEntryId=entryData.entryID;
+    selectedEntryUserId=entryData.createdBy;
   });
   let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
