@@ -41,7 +41,7 @@ function createEntryArticle(entryData) {
     getSingleEntryAndComments(entryData.entryID);
     selectedEntryId=entryData.entryID;
     selectedEntryUserId=entryData.createdBy;
-    
+
   });
   let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
@@ -287,10 +287,10 @@ async function getAllUsers() {
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
-  if(createPost != undefined) {
+  if(createPost) {
     createPost.style.display = "none";
   }
-  if(userProfile != undefined) {
+  if(userProfile) {
     userProfile.style.display = "none";
   }
 
@@ -300,7 +300,7 @@ async function getAllUsers() {
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
-  if(profileLink != undefined) {
+  if(profileLink) {
     profileLink.classList.remove("active");
   }
 
@@ -358,10 +358,10 @@ async function searchByTitle(){
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
-  if(createPost != undefined) {
+  if(createPost) {
     createPost.style.display = "none";
   }
-  if(userProfile != undefined) {
+  if(userProfile) {
     userProfile.style.display = "none";
   }
 
@@ -371,7 +371,7 @@ async function searchByTitle(){
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
-  if(profileLink != undefined) {
+  if(profileLink) {
     profileLink.classList.remove("active");
   }
 
@@ -484,16 +484,16 @@ function login() {
     body: formData,
     credentials: 'include'
   }
-  
+
   location.reload();
-  
+
   fetch('login', postOptions)
   .then(res => res.json())
   .then(function(data) {
     loggedInUser = data;
     sessionStorage.setItem("loggedInUserId", loggedInUser.userID);
     })
-  
+
 }
 
 console.log(sessionStorage.getItem("loggedInUserId"));
