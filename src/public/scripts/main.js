@@ -1,8 +1,8 @@
-var selectedEntryId=0;
-var selectedEntryUserId="";
+let selectedEntryId=0;
+let selectedEntryUserId="";
 
 //var loggedInUserId=0;
-var loggedInUser =[];
+let loggedInUser =[];
 
 //Sections som ska gömmas eller visas
 let frontpageHeader = document.getElementById("frontpage-header");
@@ -31,13 +31,39 @@ let entriesLink = document.getElementById("entries-link");
 let usersLink = document.getElementById("users-link");
 let profileLink = document.getElementById("profile-link");
 
+//Funktion för att bestämma vilken länk i navigationen som är aktiv
+function activeNav(link) {
+
+  if(link == "entries") {
+    entriesLink.classList.add("active");
+    usersLink.classList.remove("active");
+    if (profileLink) {
+      profileLink.classList.remove("active");
+    }
+  }
+  else if(link == "users") {
+    entriesLink.classList.remove("active");
+    usersLink.classList.add("active");
+    if (profileLink) {
+      profileLink.classList.remove("active");
+    }
+  }
+  else if(link == "profile") {
+    entriesLink.classList.remove("active");
+    usersLink.classList.remove("active");
+    if (profileLink) {
+      profileLink.classList.add("active");
+    }
+  }
+}
+
 //Skapar element för att visa upp ett inlägg från databasen
 function createEntryArticle(entryData, displayWrapper) {
-  let singleEntryArticle = document.createElement("article");
-  singleEntryArticle.setAttribute("class", "single-entry");
+  let entryArticle = document.createElement("article");
+  entryArticle.setAttribute("class", "single-entry");
 
-  let singleEntryInfo = document.createElement("div");
-  singleEntryInfo.setAttribute("class", "single-entry-info");
+  let entryInfo = document.createElement("div");
+  entryInfo.setAttribute("class", "single-entry-info");
 
   let entryTitle = document.createElement("h1");
   let titleLink = document.createElement("a");
@@ -72,13 +98,13 @@ function createEntryArticle(entryData, displayWrapper) {
   let entryContentTextNode = document.createTextNode(entryData.content);
   entryContentText.appendChild(entryContentTextNode);
 
-  singleEntryInfo.appendChild(entryTitle);
-  singleEntryInfo.appendChild(writtenBy);
-  singleEntryInfo.appendChild(entryUsername);
-  singleEntryInfo.appendChild(entryDisplayTime);
-  singleEntryArticle.appendChild(singleEntryInfo);
-  singleEntryArticle.appendChild(entryContentText);
-  displayWrapper.appendChild(singleEntryArticle);
+  entryInfo.appendChild(entryTitle);
+  entryInfo.appendChild(writtenBy);
+  entryInfo.appendChild(entryUsername);
+  entryInfo.appendChild(entryDisplayTime);
+  entryArticle.appendChild(entryInfo);
+  entryArticle.appendChild(entryContentText);
+  displayWrapper.appendChild(entryArticle);
 
 }
 //Skapar element för att visa upp användare från databasen
@@ -140,6 +166,17 @@ function createEntryComments(commentData) {
   entryComment.appendChild(commentText);
   entryCommentsContent.appendChild(entryComment);
 }
+//Gör att allt genererat content töms så att det inte blir dubletter
+function emptyContent() {
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  singleEntryContent.innerHTML = "";
+  entryCommentsContent.innerHTML = "";
+  singleUserContent.innerHTML = "";
+  if (userProfileEntries) {
+    userProfileEntries.innerHTML = "";
+  }
+}
 
 //Hämtar alla entries
 async function getAllEntries() {
@@ -159,15 +196,8 @@ async function getAllEntries() {
     userProfile.style.display = "none";
   }
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.add("active");
-  usersLink.classList.remove("active");
-  if(profileLink) {
-    profileLink.classList.remove("active");
-  }
+  emptyContent();
+  activeNav("entries");
 
   let selectValue = document.getElementById("selectEntryAmount").value;
 
@@ -186,7 +216,6 @@ async function getSingleEntry(id) {
   const { data } = await response.json();
 
   createEntryArticle(data, singleEntryContent);
-  //return id;
 }
 async function getEntryComments(id) {
   const response = await fetch('/api/comments/entry/' + id);
@@ -216,15 +245,8 @@ function getSingleEntryAndComments(id) {
   frontpageHeader.style.display = "none";
   usernameHeader.style.display = "none"
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-  singleEntryContent.innerHTML = "";
-  entryCommentsContent.innerHTML = "";
-  singleUserContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.add("active");
-  usersLink.classList.remove("active");
+  emptyContent();
+  activeNav("entries");
 
   getSingleEntry(id);
   getEntryComments(id);
@@ -248,15 +270,8 @@ async function getAllUsers() {
     userProfile.style.display = "none";
   }
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.remove("active");
-  usersLink.classList.add("active");
-  if(profileLink) {
-    profileLink.classList.remove("active");
-  }
+  emptyContent();
+  activeNav("users");
 
   let selectValue = document.getElementById("selectUserAmount").value;
 
@@ -282,20 +297,13 @@ async function getSingleUser(id) {
   usernameHeader.style.display = "block"
   frontpageHeader.style.display = "none";
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-  singleEntryContent.innerHTML = "";
-  entryCommentsContent.innerHTML = "";
-  singleUserContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.remove("active");
-  usersLink.classList.add("active");
+  emptyContent();
+  activeNav("users");
 
   let selectValue = document.getElementById("select-user-entry-amount").value;
 
   if (data.length < 1) {
-    console.log("This user don't have any posts");
+    document.getElementById("usernames-blog").innerHTML = "This user hasn't posted anything yet";
   }
   else {
     document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
@@ -329,15 +337,8 @@ async function searchByTitle(){
     userProfile.style.display = "none";
   }
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.add("active");
-  usersLink.classList.remove("active");
-  if(profileLink) {
-    profileLink.classList.remove("active");
-  }
+  emptyContent();
+  activeNav("entries");
 
   //Skapar artikel element för antalet entries som är valt i select elementet
   if (data.length > 1) {
@@ -361,16 +362,10 @@ async function getProfile() {
   entries.style.display = "none";
   users.style.display = "none";
   frontpageHeader.style.display = "none";
+  singleUser.style.display = "none";
 
-  entriesContent.innerHTML = "";
-  usersContent.innerHTML = "";
-  singleUserContent.innerHTML = "";
-  userProfileEntries.innerHTML = "";
-
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.remove("active");
-  usersLink.classList.remove("active");
-  profileLink.classList.add("active");
+  emptyContent();
+  activeNav("profile");
 
   if (data.length < 1) {
     console.log("This user don't have any posts");
@@ -396,10 +391,7 @@ function showCreatePost() {
   frontpageHeader.style.display = "none";
   userProfile.style.display = "none";
 
-  //Ändrar länk som är aktiv i nav
-  entriesLink.classList.remove("active");
-  usersLink.classList.remove("active");
-  profileLink.classList.add("active");
+  activeNav("profile");
 }
 
 //Öppnar och stänger navigationen på mobiler

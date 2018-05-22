@@ -171,7 +171,7 @@
         <div class="elements-displayed">
           <span>VIEW</span>
           <select id="select-user-entry-amount" onchange="getAllEntries()">
-            <option value="20">20</option>
+            <option value="1">20</option>
             <option value="40">40</option>
             <option value="60">60</option>
             <option value="100">100</option>
