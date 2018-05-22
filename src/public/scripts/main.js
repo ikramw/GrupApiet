@@ -515,9 +515,9 @@ function postEntry() {
   const postTitle = document.getElementById('post-title');
   const postContent = document.getElementById('post-content');
 
-  formData.append('postTitle', postTitle.value);
-  formData.append('postContent', postContent.value);
-
+  formData.append('title', postTitle.value);
+  formData.append('content', postContent.value);
+  formData.append('createdBy',sessionStorage.getItem("loggedInUserId"));
   const postOptions = {
     method: 'POST',
     body: formData
@@ -525,7 +525,7 @@ function postEntry() {
 
   location.reload();
 
-  fetch('vad ska stå här?', postOptions)
+  fetch('/api/entries', postOptions)
   .then(res => res.json())
 }
 
