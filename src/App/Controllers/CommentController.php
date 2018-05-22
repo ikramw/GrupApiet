@@ -46,7 +46,7 @@ class CommentController
         comments.entryID, comments.content, comments.createdBy, comments.createdAt,
         users.username,entries.title        
         FROM comments INNER JOIN users ON userID=createdBy 
-        INNER JOIN entries ON comments.entryID=entries.entryID WHERE entryID = :id");
+        INNER JOIN entries ON comments.entryID=entries.entryID WHERE entries.entryID = :id");
         $getCommentByEntry->execute([
           ":id" => $entryId
         ]);
@@ -66,7 +66,7 @@ class CommentController
        [':entryID'  => $comment['entryID'],
         ':content'  => $comment['content'],
         ':createdBy'  => $comment['createdBy'],
-        ':createdAt'  => $comment['createdAt']]
+        ':createdAt'  => date("Y-m-d H:i:s")]
     );
 
         return [
