@@ -121,7 +121,7 @@
             <input type="text" placeholder="Title" name="title" id="post-title" required>
             <textarea name="content" maxlength="1000" id="post-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" class="button"/>
+            <input type="submit" value="Save" class="button" onclick="postEntry()"/>
           </form>
         </div>
       </section>
