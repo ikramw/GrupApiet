@@ -3,6 +3,7 @@ var selectedEntryUserId="";
 
 //var loggedInUserId=0;
 var loggedInUser =[];
+
 //Sections som ska gömmas eller visas
 let frontpageHeader = document.getElementById("frontpage-header");
 let entries = document.getElementById("entries");
@@ -12,6 +13,10 @@ let singleUser = document.getElementById("single-user");
 let usernameHeader = document.getElementById("display-username");
 let userProfile = document.getElementById("my-profile");
 let createPost = document.getElementById("create-entry-wrapper");
+
+//Login och register form
+let loginForm = document.getElementById("login-form");
+let registerForm = document.getElementById("register-form");
 
 //Elementen som ska fyllas på med information
 let entriesContent = document.getElementById("entries-content");
@@ -288,6 +293,7 @@ function getSingleEntryAndComments(id) {
   getSingleEntry(id);
   getEntryComments(id);
 }
+
 //Hämtar alla användare
 async function getAllUsers() {
   const response = await fetch('/api/users');
@@ -324,6 +330,7 @@ async function getAllUsers() {
     createUserDiv(data[i]);
   }
 }
+
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
   const response = await fetch('/api/entries/user/' + id);
@@ -362,6 +369,7 @@ async function getSingleUser(id) {
   }
 }
 
+//Sökfunktion för titel
 async function searchByTitle(){
   let searchInput= document.getElementById('search').value;
 
@@ -405,7 +413,7 @@ async function searchByTitle(){
   }
 }
 
-//Hämtar användarens inlägg
+//Hämtar inloggad användares inlägg
 async function getProfile() {
   const response = await fetch('/api/entries/user/' + sessionStorage.getItem("loggedInUserId"));
   const { data } = await response.json();
@@ -467,9 +475,6 @@ function navToggle() {
 }
 
 //Visar login och register form
-let loginForm = document.getElementById("login-form");
-let registerForm = document.getElementById("register-form");
-
 function showSignin() {
   if (loginForm.className === "login-form") {
     loginForm.className += " visible";
@@ -487,26 +492,27 @@ function showRegister() {
   }
 }
 
-function registerUser(){
+//Registrera användare
+function registerUser() {
 
-    const formData = new FormData();
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
+  const formData = new FormData();
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
 
-    formData.append('username', username.value);
-    formData.append('password', password.value);
+  formData.append('username', username.value);
+  formData.append('password', password.value);
 
-    const postOptions = {
-      method: 'POST',
-      body: formData
-    }
+  const postOptions = {
+    method: 'POST',
+    body: formData
+  }
 
-    location.reload();
+  location.reload();
 
   fetch('register', postOptions)
   .then(res => res.json())
-
 }
+//Logga in
 function login() {
 
   const formData = new FormData();
@@ -530,11 +536,10 @@ function login() {
     loggedInUser = data;
     sessionStorage.setItem("loggedInUserId", loggedInUser.userID);
     })
-
 }
-
-console.log(sessionStorage.getItem("loggedInUserId"));
+//Logga ut
 function logOut() {
+
   const postOptions = {
     method: 'GET',
     credentials: 'include'
@@ -545,8 +550,9 @@ function logOut() {
   fetch('logout',postOptions)
   .then(res.json())
 }
-
+//Lägga upp inlägg
 function postEntry() {
+
   const formData = new FormData();
   const postTitle = document.getElementById('post-title');
   const postContent = document.getElementById('post-content');
@@ -554,6 +560,7 @@ function postEntry() {
   formData.append('title', postTitle.value);
   formData.append('content', postContent.value);
   formData.append('createdBy',sessionStorage.getItem("loggedInUserId"));
+
   const postOptions = {
     method: 'POST',
     body: formData
@@ -564,8 +571,9 @@ function postEntry() {
   fetch('/api/entries', postOptions)
   .then(res => res.json())
 }
-
+//Lägga upp en kommentar
 function postComment() {
+
   const formData = new FormData();
   const comment = document.getElementById('post-comment');
 
@@ -583,3 +591,4 @@ function postComment() {
   fetch('/api/comments', postOptions)
   .then(res => res.json())
 }
+console.log(sessionStorage.getItem("loggedInUserId"));
