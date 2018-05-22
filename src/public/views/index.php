@@ -54,7 +54,7 @@
 
           <!-- Annars visas: -->
           <?php if (isset($_SESSION["loggedIn"])): ?>
-            <a href="#" onclick="getProfile( <?php $_SESSION['userID'] ?> )" id="profile-link">My Profile</a>
+            <a href="#" onclick="getProfile()" id="profile-link">My Profile</a>
             <a href="#" id="logout" onclick="logOut()">Sign out</a>
           <?php endif; ?>
 
@@ -166,7 +166,7 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-  
+
     </section>
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
