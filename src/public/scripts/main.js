@@ -83,9 +83,17 @@ function createEntryArticle(entryData, displayWrapper) {
 
   let entryUsername = document.createElement("a");
   entryUsername.href = "#";
-  entryUsername.addEventListener("click", function(){
-    getSingleUser(entryData.createdBy)
-  });
+  if (entryData.createdBy == sessionStorage.getItem("loggedInUserId")) {
+    entryUsername.addEventListener("click", function(){
+      getProfile();
+    });
+  }
+  else {
+    entryUsername.addEventListener("click", function(){
+      getSingleUser(entryData.createdBy)
+    });
+  }
+
   let username = " " + entryData.username;
   let usernameTextNode = document.createTextNode(username);
   entryUsername.appendChild(usernameTextNode);
@@ -162,6 +170,19 @@ function createEntryComments(commentData) {
   commentText.appendChild(commentUsername);
   commentText.appendChild(commentDisplayTime);
   commentText.appendChild(commentContentText);
+
+  if (commentData.createdBy == sessionStorage.getItem("loggedInUserId")) {
+    let deleteComment = document.createElement("a");
+    deleteComment.href = "#";
+    deleteComment.addEventListener("click", function(){
+      deleteComment()
+    });
+    //Hämtar användarnamnet
+    let deleteCommentText = document.createTextNode("Delete");
+    deleteComment.appendChild(deleteCommentText);
+
+    commentText.appendChild(deleteComment);
+  }
 
   entryComment.appendChild(commentText);
   entryCommentsContent.appendChild(entryComment);
@@ -360,6 +381,7 @@ async function getProfile() {
   userProfile.style.display = "flex";
   createPost.style.display = "none";
   entries.style.display = "none";
+  singleEntry.style.display = "none";
   users.style.display = "none";
   frontpageHeader.style.display = "none";
   singleUser.style.display = "none";
@@ -368,7 +390,11 @@ async function getProfile() {
   activeNav("profile");
 
   if (data.length < 1) {
-    console.log("This user don't have any posts");
+    let gotNoEntries = document.createElement("p");
+    let noEntriesText = document.createTextNode("You haven't posted anything yet");
+    gotNoEntries.appendChild(noEntriesText);
+
+    userProfileEntries.appendChild(gotNoEntries);
   }
   else {
     document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
@@ -378,9 +404,7 @@ async function getProfile() {
       createEntryArticle(data[i], userProfileEntries);
     }
   }
-
   console.log(sessionStorage.getItem("loggedInUserId"));
-
 }
 
 //Visar formuläret för att skapa ett inlägg
@@ -489,7 +513,7 @@ function postEntry() {
 
   formData.append('title', postTitle.value);
   formData.append('content', postContent.value);
-  formData.append('createdBy',sessionStorage.getItem("loggedInUserId"));
+  formData.append('createdBy', sessionStorage.getItem("loggedInUserId"));
 
   const postOptions = {
     method: 'POST',
@@ -500,6 +524,10 @@ function postEntry() {
 
   fetch('/api/entries', postOptions)
   .then(res => res.json())
+}
+//Ta bort ett inlägg
+function deleteEntry() {
+
 }
 //Lägga upp en kommentar
 function postComment() {
@@ -521,4 +549,10 @@ function postComment() {
   fetch('/api/comments', postOptions)
   .then(res => res.json())
 }
+//Ta bort en kommentar
+function deleteComment() {
+
+}
+
+
 console.log(sessionStorage.getItem("loggedInUserId"));

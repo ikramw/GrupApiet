@@ -104,12 +104,13 @@
     <!-- Inloggad användares sida -->
     <?php if (isset($_SESSION["loggedIn"])): ?>
       <section class="my-profile" id="my-profile">
+        <div class="my-sidebar">
+          <p>This is your profile</p>
+          <a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a>
+        </div>
         <!-- <i class="fa fa-times"></i> -->
         <div class="my-entries" id="user-profile-entries">
           <!--Fylls på med inloggad användares entries -->
-        </div>
-        <div class="my-sidebar">
-          <a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a>
         </div>
       </section>
 
@@ -121,7 +122,7 @@
             <input type="text" placeholder="Title" name="title" id="post-title" required>
             <textarea name="content" maxlength="1000" id="post-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" class="button" onclick="postEntry()"/>
+            <input type="submit" value="Save" class="button" onclick="postEntry()" class="submit-btn"/>
           </form>
         </div>
       </section>
@@ -170,8 +171,9 @@
       <div class="elements-displayed-wrapper">
         <div class="elements-displayed">
           <span>VIEW</span>
-          <select id="select-user-entry-amount" onchange="getAllEntries()">
-            <option value="1">20</option>
+          <!-- HUR SKICKAR MAN MED ID FÖR ANVÄNDAREN!??? -->
+          <select id="select-user-entry-amount" onchange="getSingleUser()">
+            <option value="20">20</option>
             <option value="40">40</option>
             <option value="60">60</option>
             <option value="100">100</option>
@@ -192,11 +194,12 @@
         <h2 class="heading-responses"><span id="comments-amount"></span> responses</h2>
         <div class="comments-displayed">
           <span>VIEW</span>
+          <!-- HUR SKICKAR MAN MED ID FÖR ENTRY!??? -->
           <select id="selectCommentAmount">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
-            <option value="all">All</option>
+            <option value="100">100</option>
           </select>
         </div>
         <div id="entry-comments-content">
@@ -212,7 +215,7 @@
             <h2>Leave a comment</h2>
             <form action="" method="post">
               <textarea name="comment" id="post-comment" placeholder="Write your comment here..."></textarea>
-              <input type="button" id="submit" value="Post comment" onclick="postComment()"/>
+              <input type="button" id="submit" value="Post comment" onclick="postComment()" class="submit-btn"/>
             </form>
           <?php endif; ?>
         </div>

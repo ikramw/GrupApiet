@@ -258,19 +258,31 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: 960px;
   margin: 57px auto 0 auto;
-  padding: 2em;
+  padding: 2em 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 .my-entries {
-  width: 80%;
+  width: 100%;
 }
 .my-sidebar {
-  width: 20%;
+  width: 100%;
   background-color: #fff;
   border: 1px solid #eeeeee;
-  padding: 1em;
+  padding: 2em 1em;
+  margin-bottom: 2em;
+}
+.my-sidebar p {
+  margin-top: 0;
+}
+.my-sidebar a {
+  color: #4d8594;
+  text-decoration: none;
+}
+.my-sidebar a:hover {
+  text-decoration: underline;
 }
 /* Create post */
 .create-entry-wrapper {
@@ -294,6 +306,16 @@ h1, h2, h3, h4, h5, h6 {
   height: 300px;
   border: 1px solid #ccc;
   resize: vertical;
+}
+.submit-btn {
+  background-color: #4d8594;
+  color: #fff;
+  border: none;
+  padding: 1em 2em;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background-color: #616161;
 }
 
 /* All entries */
@@ -485,6 +507,12 @@ h1, h2, h3, h4, h5, h6 {
   .content-wrapper {
     padding: 0 2em 2em;
   }
+  .my-sidebar p {
+    display: inline;
+  }
+  .my-sidebar a {
+    float: right;
+  }
 }
 @media (min-width: 600px) {
   .user {
@@ -546,6 +574,18 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* Content */
+  .my-entries {
+    width: 70%;
+  }
+  .my-sidebar {
+    width: 25%;
+  }
+  .my-sidebar p {
+    display: block;
+  }
+  .my-sidebar a {
+    float: left;
+  }
   .new-entry {
     width: 48%;
   }
