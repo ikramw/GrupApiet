@@ -131,8 +131,13 @@ function createSingleEntryArticle(entryData, displayWrapper) {
   singleEntryInfo.appendChild(entryDisplayTime);
   singleEntryArticle.appendChild(singleEntryInfo);
   singleEntryArticle.appendChild(entryContentText);
+<<<<<<< HEAD
   displayWrapper.appendChild(singleEntryArticle);
   return entryData.entryID;
+=======
+  singleEntryContent.appendChild(singleEntryArticle);
+  
+>>>>>>> 0538e0b4235cf40041a42e344160e9c0f9488472
 }
 //Skapar element för att visa upp användare från databasen
 function createUserDiv(userData) {
@@ -344,7 +349,11 @@ async function getSingleUser(id) {
   else {
     document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
   //Skapar artikel element för antalet entries som är valt i select elementet
+<<<<<<< HEAD
   for (let i = 0; i < selectValue && i < data.length; i++) {
+=======
+  for (let i = 0; i < data.length; i++) {
+>>>>>>> 0538e0b4235cf40041a42e344160e9c0f9488472
 
     createSingleEntryArticle(data[i], singleUserContent);
   }
