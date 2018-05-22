@@ -77,7 +77,7 @@ class EntryController
        [':title'  => $entry['title'],
         ':content'  => $entry['content'],
         ':createdBy'  => $entry['createdBy'],
-        ':createdAt'  => $entry['createdAt']]);
+        ':createdAt'  => date("Y-m-d H:i:s")]);
 
         return [
         'entryID'      => (int)$this->db->lastInsertId(),
