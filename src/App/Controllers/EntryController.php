@@ -48,7 +48,10 @@ class EntryController
     }
     public function getByUser($userId)
     {
-        $getEntryByUser = $this->db->prepare("SELECT * FROM entries WHERE createdBy = :id");
+        $getEntryByUser = $this->db->prepare("SELECT entries.entryID, entries.title,
+        entries.content, entries.createdBy, entries.createdAt, users.username 
+        FROM entries INNER JOIN users ON userID=createdBy
+        WHERE createdBy = :id");
         $getEntryByUser->execute([
           ":id" => $userId
         ]);
