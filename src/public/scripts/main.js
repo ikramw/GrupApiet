@@ -132,7 +132,7 @@ function createSingleEntryArticle(entryData) {
   singleEntryArticle.appendChild(singleEntryInfo);
   singleEntryArticle.appendChild(entryContentText);
   singleEntryContent.appendChild(singleEntryArticle);
-  return entryData.entryID;
+  
 }
 //Skapar element för att visa upp användare från databasen
 function createUserDiv(userData) {
@@ -339,7 +339,7 @@ async function getSingleUser(id) {
   //let selectValue = document.getElementById("selectEntryAmount").value;
 
   //Skapar artikel element för antalet entries som är valt i select elementet
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < data.length; i++) {
 
     createSingleEntryArticle(data[i]);
   }
