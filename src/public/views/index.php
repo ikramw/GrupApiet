@@ -105,7 +105,7 @@
     <?php if (isset($_SESSION["loggedIn"])): ?>
       <section class="my-profile" id="my-profile">
         <!-- <i class="fa fa-times"></i> -->
-        <div class="my-entries">
+        <div class="my-entries" id="user-profile-entries">
           <!--Fylls på med inloggad användares entries -->
         </div>
         <div class="my-sidebar">

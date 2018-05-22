@@ -19,6 +19,7 @@ let singleEntryContent = document.getElementById("single-entry-content");
 let usersContent = document.getElementById("users-content");
 let entryCommentsContent = document.getElementById("entry-comments-content");
 let singleUserContent = document.getElementById("single-user-content");
+let userProfileEntries = document.getElementById("user-profile-entries");
 
 //Länkarna i navigationen
 let entriesLink = document.getElementById("entries-link");
@@ -41,7 +42,6 @@ function createEntryArticle(entryData) {
     getSingleEntryAndComments(entryData.entryID);
     selectedEntryId=entryData.entryID;
     selectedEntryUserId=entryData.createdBy;
-
   });
   let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
@@ -101,8 +101,14 @@ function createSingleEntryArticle(entryData, displayWrapper) {
   singleEntryInfo.setAttribute("class", "single-entry-info");
 
   let entryTitle = document.createElement("h1");
+  let titleLink = document.createElement("a");
+  titleLink.href = "#";
+  titleLink.addEventListener("click", function(){
+    getSingleEntryAndComments(entryData.entryID);
+  });
   let titleText = document.createTextNode(entryData.title);
-  entryTitle.appendChild(titleText);
+  titleLink.appendChild(titleText);
+  entryTitle.appendChild(titleLink);
 
   let writtenBy = document.createElement("span");
   let writtenByText = document.createTextNode("Written by ");
@@ -262,6 +268,7 @@ function getSingleEntryAndComments(id) {
   entries.style.display = "none";
   users.style.display = "none";
   singleUser.style.display = "none";
+  userProfile.style.display = "none";
   singleEntry.style.display = "block";
   frontpageHeader.style.display = "none";
   usernameHeader.style.display = "none"
@@ -270,6 +277,7 @@ function getSingleEntryAndComments(id) {
   usersContent.innerHTML = "";
   singleEntryContent.innerHTML = "";
   entryCommentsContent.innerHTML = "";
+  singleUserContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
@@ -318,11 +326,10 @@ async function getAllUsers() {
 async function getSingleUser(id) {
   const response = await fetch('/api/entries/user/' + id);
   const { data } = await response.json();
-  console.log(id);
-
 
   entries.style.display = "none";
   users.style.display = "none";
+  userProfile.style.display = "none";
   singleUser.style.display = "block";
   singleEntry.style.display = "none";
   usernameHeader.style.display = "block"
@@ -330,6 +337,8 @@ async function getSingleUser(id) {
 
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
+  singleEntryContent.innerHTML = "";
+  entryCommentsContent.innerHTML = "";
   singleUserContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
@@ -395,7 +404,9 @@ async function searchByTitle(){
 }
 
 //Hämtar användarens inlägg
-function getProfile() {
+async function getProfile() {
+  const response = await fetch('/api/entries/user/' + sessionStorage.getItem("loggedInUserId"));
+  const { data } = await response.json();
 
   userProfile.style.display = "flex";
   createPost.style.display = "none";
@@ -403,10 +414,27 @@ function getProfile() {
   users.style.display = "none";
   frontpageHeader.style.display = "none";
 
+  entriesContent.innerHTML = "";
+  usersContent.innerHTML = "";
+  singleUserContent.innerHTML = "";
+  userProfileEntries.innerHTML = "";
+
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.remove("active");
   profileLink.classList.add("active");
+
+  if (data.length < 1) {
+    console.log("This user don't have any posts");
+  }
+  else {
+    document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
+  //Skapar artikel element för antalet entries som är valt i select elementet
+    for (let i = 0; i < data.length; i++) {
+
+      createSingleEntryArticle(data[i], userProfileEntries);
+    }
+  }
 
   console.log(sessionStorage.getItem("loggedInUserId"));
 
