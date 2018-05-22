@@ -338,10 +338,10 @@ async function getSingleUser(id) {
   //let selectValue = document.getElementById("selectEntryAmount").value;
 
   //Skapar artikel element för antalet entries som är valt i select elementet
-  /*for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 20; i++) {
 
     createSingleEntryArticle(data[i]);
-  }*/
+  }
 }
 
 async function searchByTitle(){
