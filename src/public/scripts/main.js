@@ -13,6 +13,7 @@ let singleUser = document.getElementById("single-user");
 let usernameHeader = document.getElementById("display-username");
 let userProfile = document.getElementById("my-profile");
 let createPost = document.getElementById("create-entry-wrapper");
+let editPost = document.getElementById("edit-entry-wrapper");
 
 //Login och register form
 let loginForm = document.getElementById("login-form");
@@ -114,8 +115,22 @@ function createEntryArticle(entryData, displayWrapper) {
   entryArticle.appendChild(entryContentText);
 
   if (entryData.createdBy == sessionStorage.getItem("loggedInUserId")) {
-    let deleteEntryDiv = document.createElement("div");
-    deleteEntryDiv.setAttribute("class", "delete-entry");
+    let changeEntryDiv = document.createElement("div");
+    changeEntryDiv.setAttribute("class", "change-entry");
+
+    let editEntry = document.createElement("a");
+    editEntry.href = "#";
+    editEntry.addEventListener("click", function(){
+      showEditPost()
+    });
+    let editEntryIcon = document.createElement("i");
+    editEntryIcon.setAttribute("class", "fa fa-edit");
+
+    let editEntryText = document.createTextNode(" Edit");
+    editEntry.appendChild(editEntryIcon);
+    editEntry.appendChild(editEntryText);
+    changeEntryDiv.appendChild(editEntry);
+
     let deleteEntry = document.createElement("a");
     deleteEntry.href = "#";
     deleteEntry.addEventListener("click", function(){
@@ -127,9 +142,9 @@ function createEntryArticle(entryData, displayWrapper) {
     let deleteEntryText = document.createTextNode(" Delete");
     deleteEntry.appendChild(deleteEntryIcon);
     deleteEntry.appendChild(deleteEntryText);
-    deleteEntryDiv.appendChild(deleteEntry);
+    changeEntryDiv.appendChild(deleteEntry);
 
-    entryArticle.appendChild(deleteEntryDiv);
+    entryArticle.appendChild(changeEntryDiv);
   }
 
   displayWrapper.appendChild(entryArticle);
@@ -232,6 +247,9 @@ async function getAllEntries() {
   if(createPost) {
     createPost.style.display = "none";
   }
+  if(editPost) {
+    editPost.style.display = "none";
+  }
   if(userProfile) {
     userProfile.style.display = "none";
   }
@@ -278,6 +296,12 @@ function getSingleEntryAndComments(id) {
   entries.style.display = "none";
   users.style.display = "none";
   singleUser.style.display = "none";
+  if(createPost) {
+    createPost.style.display = "none";
+  }
+  if(editPost) {
+    editPost.style.display = "none";
+  }
   if(userProfile) {
     userProfile.style.display = "none";
   }
@@ -306,6 +330,9 @@ async function getAllUsers() {
   if(createPost) {
     createPost.style.display = "none";
   }
+  if(editPost) {
+    editPost.style.display = "none";
+  }
   if(userProfile) {
     userProfile.style.display = "none";
   }
@@ -329,6 +356,12 @@ async function getSingleUser(id) {
 
   entries.style.display = "none";
   users.style.display = "none";
+  if(createPost) {
+    createPost.style.display = "none";
+  }
+  if(editPost) {
+    editPost.style.display = "none";
+  }
   if(userProfile) {
     userProfile.style.display = "none";
   }
@@ -373,6 +406,9 @@ async function searchByTitle(){
   if(createPost) {
     createPost.style.display = "none";
   }
+  if(editPost) {
+    editPost.style.display = "none";
+  }
   if(userProfile) {
     userProfile.style.display = "none";
   }
@@ -399,6 +435,7 @@ async function getProfile() {
 
   userProfile.style.display = "flex";
   createPost.style.display = "none";
+  editPost.style.display = "none";
   entries.style.display = "none";
   singleEntry.style.display = "none";
   users.style.display = "none";
@@ -429,6 +466,17 @@ async function getProfile() {
 //Visar formuläret för att skapa ett inlägg
 function showCreatePost() {
   createPost.style.display = "block";
+  editPost.style.display = "none";
+  entries.style.display = "none";
+  users.style.display = "none";
+  frontpageHeader.style.display = "none";
+  userProfile.style.display = "none";
+
+  activeNav("profile");
+}
+function showEditPost() {
+  createPost.style.display = "none";
+  editPost.style.display = "block";
   entries.style.display = "none";
   users.style.display = "none";
   frontpageHeader.style.display = "none";
@@ -546,6 +594,9 @@ function postEntry() {
 }
 //Ta bort ett inlägg
 function deleteEntry() {
+
+}
+function editEntry() {
 
 }
 //Lägga upp en kommentar

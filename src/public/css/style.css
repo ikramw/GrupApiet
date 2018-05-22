@@ -267,14 +267,17 @@ h1, h2, h3, h4, h5, h6 {
 .my-entries {
   width: 100%;
 }
-.delete-entry {
+.change-entry {
   float: right;
 }
-.delete-entry a {
+.change-entry a {
   color: #4d8594;
   text-decoration: none;
 }
-.delete-entry a:hover {
+.change-entry a:first-child {
+  padding-right: 1em;
+}
+.change-entry a:hover {
   text-decoration: underline;
 }
 .my-sidebar {

@@ -108,7 +108,6 @@
           <p>This is your profile</p>
           <a href="#" onclick="showCreatePost()"><i class="fa fa-edit"></i> Write a blog post</a>
         </div>
-        <!-- <i class="fa fa-times"></i> -->
         <div class="my-entries" id="user-profile-entries">
           <!--Fylls på med inloggad användares entries -->
         </div>
@@ -123,6 +122,19 @@
             <textarea name="content" maxlength="1000" id="post-content" required></textarea>
             <br/>
             <input type="submit" value="Save" class="button" onclick="postEntry()" class="submit-btn"/>
+          </form>
+        </div>
+      </section>
+
+      <!-- Redigera ett inlägg -->
+      <section class="create-entry-wrapper" id="edit-entry-wrapper">
+        <div class="create-entry">
+          <h1>Edit Post</h1>
+          <form>
+            <input type="text" placeholder="Title" name="title" id="edit-title" required>
+            <textarea name="content" maxlength="1000" id="edit-content" required></textarea>
+            <br/>
+            <input type="submit" value="Save" class="button" onclick="editEntry()" class="submit-btn"/>
           </form>
         </div>
       </section>
