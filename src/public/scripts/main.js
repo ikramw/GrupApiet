@@ -112,6 +112,26 @@ function createEntryArticle(entryData, displayWrapper) {
   entryInfo.appendChild(entryDisplayTime);
   entryArticle.appendChild(entryInfo);
   entryArticle.appendChild(entryContentText);
+
+  if (entryData.createdBy == sessionStorage.getItem("loggedInUserId")) {
+    let deleteEntryDiv = document.createElement("div");
+    deleteEntryDiv.setAttribute("class", "delete-entry");
+    let deleteEntry = document.createElement("a");
+    deleteEntry.href = "#";
+    deleteEntry.addEventListener("click", function(){
+      deleteEntry()
+    });
+    let deleteEntryIcon = document.createElement("i");
+    deleteEntryIcon.setAttribute("class", "fa fa-times");
+
+    let deleteEntryText = document.createTextNode(" Delete");
+    deleteEntry.appendChild(deleteEntryIcon);
+    deleteEntry.appendChild(deleteEntryText);
+    deleteEntryDiv.appendChild(deleteEntry);
+
+    entryArticle.appendChild(deleteEntryDiv);
+  }
+
   displayWrapper.appendChild(entryArticle);
 
 }
@@ -177,7 +197,6 @@ function createEntryComments(commentData) {
     deleteComment.addEventListener("click", function(){
       deleteComment()
     });
-    //Hämtar användarnamnet
     let deleteCommentText = document.createTextNode("Delete");
     deleteComment.appendChild(deleteCommentText);
 
