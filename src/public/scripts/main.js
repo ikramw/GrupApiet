@@ -1,9 +1,9 @@
-//Sections som ska gömmas eller visas
 var selectedEntryId=0;
 var selectedEntryUserId="";
 
 //var loggedInUserId=0;
 var loggedInUser =[];
+//Sections som ska gömmas eller visas
 let frontpageHeader = document.getElementById("frontpage-header");
 let entries = document.getElementById("entries");
 let singleEntry = document.getElementById("single-entry");
@@ -17,8 +17,8 @@ let createPost = document.getElementById("create-entry-wrapper");
 let entriesContent = document.getElementById("entries-content");
 let singleEntryContent = document.getElementById("single-entry-content");
 let usersContent = document.getElementById("users-content");
-let singleUserContent = document.getElementById("single-user");
 let entryCommentsContent = document.getElementById("entry-comments-content");
+let singleUserContent = document.getElementById("single-user-content");
 
 //Länkarna i navigationen
 let entriesLink = document.getElementById("entries-link");
@@ -93,7 +93,7 @@ function createEntryArticle(entryData) {
   return entryId;
 }
 //Skapar element för att visa upp ett inlägg från databasen
-function createSingleEntryArticle(entryData) {
+function createSingleEntryArticle(entryData, displayWrapper) {
   let singleEntryArticle = document.createElement("article");
   singleEntryArticle.setAttribute("class", "single-entry");
 
@@ -131,7 +131,7 @@ function createSingleEntryArticle(entryData) {
   singleEntryInfo.appendChild(entryDisplayTime);
   singleEntryArticle.appendChild(singleEntryInfo);
   singleEntryArticle.appendChild(entryContentText);
-  singleEntryContent.appendChild(singleEntryArticle);
+  displayWrapper.appendChild(singleEntryArticle);
   return entryData.entryID;
 }
 //Skapar element för att visa upp användare från databasen
@@ -201,13 +201,14 @@ async function getAllEntries() {
 
   entries.style.display = "block";
   users.style.display = "none";
+  singleUser.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none";
-  if(createPost != undefined) {
+  if(createPost) {
     createPost.style.display = "none";
   }
-  if(userProfile != undefined) {
+  if(userProfile) {
     userProfile.style.display = "none";
   }
 
@@ -217,7 +218,7 @@ async function getAllEntries() {
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.add("active");
   usersLink.classList.remove("active");
-  if(profileLink != undefined) {
+  if(profileLink) {
     profileLink.classList.remove("active");
   }
 
@@ -237,7 +238,7 @@ async function getSingleEntry(id) {
   const response = await fetch('/api/entries/' + id);
   const { data } = await response.json();
 
-  createSingleEntryArticle(data);
+  createSingleEntryArticle(data, singleEntryContent);
   //return id;
 }
 async function getEntryComments(id) {
@@ -284,6 +285,7 @@ async function getAllUsers() {
 
   entries.style.display = "none";
   users.style.display = "block";
+  singleUser.style.display = "none";
   singleEntry.style.display = "none";
   frontpageHeader.style.display = "block";
   usernameHeader.style.display = "none"
@@ -318,6 +320,7 @@ async function getSingleUser(id) {
   const { data } = await response.json();
   console.log(id);
 
+
   entries.style.display = "none";
   users.style.display = "none";
   singleUser.style.display = "block";
@@ -325,23 +328,26 @@ async function getSingleUser(id) {
   usernameHeader.style.display = "block"
   frontpageHeader.style.display = "none";
 
-  document.getElementById("usernames-blog").innerHTML = data.username + "'s blog";
-
   entriesContent.innerHTML = "";
   usersContent.innerHTML = "";
+  singleUserContent.innerHTML = "";
 
   //Ändrar länk som är aktiv i nav
   entriesLink.classList.remove("active");
   usersLink.classList.add("active");
 
-  //Skapar element för att visa upp entries från databasen
+  let selectValue = document.getElementById("select-user-entry-amount").value;
 
-  //let selectValue = document.getElementById("selectEntryAmount").value;
-
+  if (data.length < 1) {
+    console.log("This user don't have any posts");
+  }
+  else {
+    document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
   //Skapar artikel element för antalet entries som är valt i select elementet
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < selectValue && i < data.length; i++) {
 
-    createSingleEntryArticle(data[i]);
+    createSingleEntryArticle(data[i], singleUserContent);
+  }
   }
 }
 

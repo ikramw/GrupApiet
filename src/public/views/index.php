@@ -104,6 +104,7 @@
     <!-- Inloggad användares sida -->
     <?php if (isset($_SESSION["loggedIn"])): ?>
       <section class="my-profile" id="my-profile">
+        <!-- <i class="fa fa-times"></i> -->
         <div class="my-entries">
           <!--Fylls på med inloggad användares entries -->
         </div>
@@ -166,7 +167,20 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-
+      <div class="elements-displayed-wrapper">
+        <div class="elements-displayed">
+          <span>VIEW</span>
+          <select id="select-user-entry-amount" onchange="getAllEntries()">
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+      </div>
+      <div id="single-user-content">
+        <!-- Fylls på med users -->
+      </div>
     </section>
 
     <!-- Visar ett inlägg och kommentarer till inlägget -->
