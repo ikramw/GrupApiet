@@ -56,8 +56,8 @@ $app->post('/login', function ($request, $response, $args) {
     if (password_verify($body['password'], $user['password'])) {
         $_SESSION['loggedIn'] = true;
         $_SESSION['username'] = $user['username'];
-        $_SESSION['userID'] = $user['id'];
-        return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
+        $_SESSION['userID'] = $user['userID'];
+        return $response->withJson(['userID' =>  $user['userID'],'username' => $user['username'] ]);
     }
     return $response->withJson(['error' => 'wrong password']);
 });

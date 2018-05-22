@@ -1,4 +1,9 @@
 //Sections som ska gömmas eller visas
+var selectedEntryId=0;
+var selectedEntryUserId="";
+
+//var loggedInUserId=0;
+var loggedInUser =[];
 let frontpageHeader = document.getElementById("frontpage-header");
 let entries = document.getElementById("entries");
 let singleEntry = document.getElementById("single-entry");
@@ -33,7 +38,10 @@ function createEntryArticle(entryData) {
   let titleLink = document.createElement("a");
   titleLink.href = "#";
   titleLink.addEventListener("click", function(){
-    getSingleEntryAndComments(entryData.entryID)
+    getSingleEntryAndComments(entryData.entryID);
+    selectedEntryId=entryData.entryID;
+    selectedEntryUserId=entryData.createdBy;
+    
   });
   let titleText = document.createTextNode(entryData.title);
   titleLink.appendChild(titleText);
@@ -81,6 +89,8 @@ function createEntryArticle(entryData) {
   entryArticle.appendChild(entryInfo);
 
   entriesContent.appendChild(entryArticle);
+  let entryId=entryData.entryID;
+  return entryId;
 }
 //Skapar element för att visa upp ett inlägg från databasen
 function createSingleEntryArticle(entryData) {
@@ -122,6 +132,7 @@ function createSingleEntryArticle(entryData) {
   singleEntryArticle.appendChild(singleEntryInfo);
   singleEntryArticle.appendChild(entryContentText);
   singleEntryContent.appendChild(singleEntryArticle);
+  return entryData.entryID;
 }
 //Skapar element för att visa upp användare från databasen
 function createUserDiv(userData) {
@@ -227,6 +238,7 @@ async function getSingleEntry(id) {
   const { data } = await response.json();
 
   createSingleEntryArticle(data);
+  //return id;
 }
 async function getEntryComments(id) {
   const response = await fetch('/api/comments/entry/' + id);
@@ -472,13 +484,19 @@ function login() {
     body: formData,
     credentials: 'include'
   }
-
+  
   location.reload();
-
+  
   fetch('login', postOptions)
   .then(res => res.json())
+  .then(function(data) {
+    loggedInUser = data;
+    sessionStorage.setItem("loggedInUserId", loggedInUser.userID);
+    })
+  
 }
 
+console.log(sessionStorage.getItem("loggedInUserId"));
 function logOut() {
   const postOptions = {
     method: 'GET',
@@ -512,9 +530,11 @@ function postEntry() {
 
 function postComment() {
   const formData = new FormData();
-  const postComment = document.getElementById('post-comment');
+  const comment = document.getElementById('post-comment');
 
-  formData.append('postComment', postComment.value);
+  formData.append('content', comment.value);
+  formData.append('createdBy',sessionStorage.getItem("loggedInUserId"));
+  formData.append('entryID', selectedEntryId);
 
   const postOptions = {
     method: 'POST',
@@ -523,6 +543,6 @@ function postComment() {
 
   location.reload();
 
-  fetch('vad ska stå här?', postOptions)
+  fetch('/api/comments', postOptions)
   .then(res => res.json())
 }

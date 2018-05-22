@@ -198,7 +198,7 @@
             <h2>Leave a comment</h2>
             <form action="" method="post">
               <textarea name="comment" id="post-comment" placeholder="Write your comment here..."></textarea>
-              <input type="submit" id="submit" value="Post comment" onclick="postComment()"/>
+              <input type="button" id="submit" value="Post comment" onclick="postComment()"/>
             </form>
           <?php endif; ?>
         </div>

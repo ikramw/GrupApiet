@@ -14,7 +14,12 @@ class CommentController
     public function getAll()
     {
         $limit=20;
-        $getAllComments = $this->db->prepare("SELECT * FROM comments ORDER BY createdAt DESC LIMIT :limit");
+        $getAllComments = $this->db->prepare("SELECT comments.commentID, 
+        comments.entryID, comments.content, comments.createdBy, comments.createdAt,
+        users.username,entries.title        
+        FROM comments INNER JOIN users ON userID=createdBy 
+        INNER JOIN entries ON comments.entryID=entries.entryID
+        ORDER BY createdAt DESC LIMIT :limit");
         $getAllComments->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $getAllComments->execute();
         return $getAllComments->fetchAll();
@@ -23,7 +28,12 @@ class CommentController
 
     public function getOne($id)
     {
-        $getOneComment = $this->db->prepare("SELECT * FROM comments WHERE commentID = :id");
+        $getOneComment = $this->db->prepare("SELECT comments.commentID, 
+        comments.entryID, comments.content, comments.createdBy, comments.createdAt,
+        users.username,entries.title        
+        FROM comments INNER JOIN users ON userID=createdBy 
+        INNER JOIN entries ON comments.entryID=entries.entryID
+        WHERE commentID = :id");
         $getOneComment->execute([
           ":id" => $id
         ]);
@@ -32,7 +42,11 @@ class CommentController
     }
     public function getByEntry($entryId)
     {
-        $getCommentByEntry = $this->db->prepare("SELECT * FROM comments WHERE entryID = :id");
+        $getCommentByEntry = $this->db->prepare("SELECT comments.commentID, 
+        comments.entryID, comments.content, comments.createdBy, comments.createdAt,
+        users.username,entries.title        
+        FROM comments INNER JOIN users ON userID=createdBy 
+        INNER JOIN entries ON comments.entryID=entries.entryID WHERE entries.entryID = :id");
         $getCommentByEntry->execute([
           ":id" => $entryId
         ]);
@@ -52,7 +66,7 @@ class CommentController
        [':entryID'  => $comment['entryID'],
         ':content'  => $comment['content'],
         ':createdBy'  => $comment['createdBy'],
-        ':createdAt'  => $comment['createdAt']]
+        ':createdAt'  => date("Y-m-d H:i:s")]
     );
 
         return [
