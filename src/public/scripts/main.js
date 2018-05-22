@@ -314,8 +314,9 @@ async function getAllUsers() {
 }
 //Hämtar en användare samt visar alla användarens inlägg
 async function getSingleUser(id) {
-  const response = await fetch('/api/users/' + id);
+  const response = await fetch('/api/entries/user/' + id);
   const { data } = await response.json();
+  console.log(id);
 
   entries.style.display = "none";
   users.style.display = "none";
@@ -388,7 +389,7 @@ async function searchByTitle(){
 }
 
 //Hämtar användarens inlägg
-function getProfile(id) {
+function getProfile() {
 
   userProfile.style.display = "flex";
   createPost.style.display = "none";
@@ -401,7 +402,7 @@ function getProfile(id) {
   usersLink.classList.remove("active");
   profileLink.classList.add("active");
 
-  console.log(id);
+  console.log(sessionStorage.getItem("loggedInUserId"));
 
 }
 
