@@ -391,6 +391,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fff;
   padding: 2em;
   border: 1px solid #eeeeee;
+  width: 100%;
 }
 .single-entry-content {
 
