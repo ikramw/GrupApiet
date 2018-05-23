@@ -121,7 +121,7 @@ function createEntryArticle(entryData, displayWrapper) {
     let editEntry = document.createElement("a");
     editEntry.href = "#";
     editEntry.addEventListener("click", function(){
-      showEditPost()
+      showEditPost(entryData.title, entryData.content)
     });
     let editEntryIcon = document.createElement("i");
     editEntryIcon.setAttribute("class", "fa fa-edit");
@@ -474,7 +474,7 @@ function showCreatePost() {
 
   activeNav("profile");
 }
-function showEditPost() {
+function showEditPost(title, content) {
   createPost.style.display = "none";
   editPost.style.display = "block";
   entries.style.display = "none";
@@ -483,6 +483,9 @@ function showEditPost() {
   userProfile.style.display = "none";
 
   activeNav("profile");
+
+  document.getElementById("edit-title").value = title;
+  document.getElementById("edit-content").innerHTML = content;
 }
 
 //Öppnar och stänger navigationen på mobiler
