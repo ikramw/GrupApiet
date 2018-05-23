@@ -618,7 +618,7 @@ function editEntry(id) {
   const title = document.getElementById('edit-title').value;
   const content = document.getElementById('edit-content').value;
   //var string =  'title='+title +'&content ='+content;
-  
+
   fetch('api/entries/'+id,{
     method: 'PATCH',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
