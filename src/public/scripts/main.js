@@ -622,7 +622,7 @@ function editEntry(id) {
   fetch('api/entries/'+id,{
     method: 'PATCH',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'title='+title +'&content ='+content
+    body: 'title='+title +'&content='+content
  });
  location.reload();
 
