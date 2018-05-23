@@ -282,10 +282,8 @@ async function getEntryComments(id) {
   //Skriver ut antalet svar till inlägget
   document.getElementById("comments-amount").innerHTML = data.length;
 
-  let selectValue = document.getElementById("selectCommentAmount").value;
-
   //Skapar artikel element för antalet entries som är valt i select elementet
-  for (let i = 0; i < selectValue && i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
 
     createEntryComments(data[i]);
   }
@@ -373,15 +371,13 @@ async function getSingleUser(id) {
   emptyContent();
   activeNav("users");
 
-  let selectValue = document.getElementById("select-user-entry-amount").value;
-
   if (data.length < 1) {
     document.getElementById("usernames-blog").innerHTML = "This user hasn't posted anything yet";
   }
   else {
     document.getElementById("usernames-blog").innerHTML = data[0].username + "'s blog";
   //Skapar artikel element för antalet entries som är valt i select elementet
-    for (let i = 0; i < selectValue && i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
 
       createEntryArticle(data[i], singleUserContent);
     }
@@ -453,7 +449,7 @@ async function getProfile() {
     userProfileEntries.appendChild(gotNoEntries);
   }
   else {
-    //Skapar artikel element för antalet entries som användaren har 
+    //Skapar artikel element för antalet entries som användaren har
     for (let i = 0; i < data.length; i++) {
 
       createEntryArticle(data[i], userProfileEntries);
@@ -641,13 +637,13 @@ function postComment() {
   .then(res => res.json())
 }
 //Ta bort en kommentar
-function deleteCommentF(commentID, entryID) {
+function deleteCommentF(commentID) {
   const postOptions = {
     method: 'DELETE',
     //body: formData
   }
 
-  getSingleEntryAndComments(entryID);
+  location.reload();
 
   fetch('/api/comments/'+ commentID, postOptions)
   .then(res => res.json())
