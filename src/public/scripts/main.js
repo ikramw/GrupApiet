@@ -485,7 +485,7 @@ function showEditPost(title, content, id) {
   activeNav("profile");
 
   document.getElementById("edit-title").value = title;
-  document.getElementById("edit-content").innerHTML = content;
+  document.getElementById("edit-content").value = content;
   document.getElementById("edit-entry-btn").addEventListener("click", function(){
     editEntry(id)
   });
@@ -618,8 +618,20 @@ function deleteEntryF(id) {
   .then(res => res.json())
 }
 function editEntry(id) {
+  const formData = new FormData();
+  const title = document.getElementById('edit-title').value;
+  const content = document.getElementById('edit-content').value;
+  //var string =  'title='+title +'&content ='+content;
+  
+  fetch('api/entries/'+id,{
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'title='+title +'&content ='+content
+ });
+ location.reload();
 
 }
+
 //Lägga upp en kommentar
 function postComment() {
 

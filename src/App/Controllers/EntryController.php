@@ -97,23 +97,19 @@ class EntryController
     {
         $updateOne = $this->db->prepare(
         'UPDATE entries
-        SET title = :title, content = :content,
-        createdBy = :createdBy, createdAt = :createdAt
+        SET title = :title, content = :content        
         WHERE entryID = :id'
 
         );
         $updateOne->execute(
        [":id" => $id,
         ':title'  => $entry['title'],
-        ':content'  => $entry['content'],
-        ':createdBy'  => $entry['createdBy'],
-        ':createdAt'  => $entry['createdAt']]);
+        ':content'  => $entry['content']
+       ]);
 
         return [
         ':title'  => $entry['title'],
         ':content'  => $entry['content'],
-        'createdBy'  => $entry['createdBy'],
-        'createdAt'  => $entry['createdAt']
         ];
     }
 }
