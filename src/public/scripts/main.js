@@ -210,7 +210,7 @@ function createEntryComments(commentData) {
     let deleteComment = document.createElement("a");
     deleteComment.href = "#";
     deleteComment.addEventListener("click", function(){
-      deleteCommentF(commentData.commentID)
+      deleteCommentF(commentData.commentID, commentData.entryID)
     });
     let deleteCommentText = document.createTextNode("Delete");
     deleteComment.appendChild(deleteCommentText);
@@ -610,7 +610,7 @@ function deleteEntryF(id) {
 
   location.reload();
 
-  fetch('/api/entries/'+id, postOptions)
+  fetch('/api/entries/'+ id, postOptions)
   .then(res => res.json())
 }
 function editEntry(id) {
@@ -637,17 +637,16 @@ function postComment() {
   .then(res => res.json())
 }
 //Ta bort en kommentar
-function deleteCommentF(id) {
+function deleteCommentF(commentID, entryID) {
   const postOptions = {
     method: 'DELETE',
     //body: formData
   }
 
-  location.reload();
+  getSingleEntryAndComments(entryID);
 
-  fetch('/api/comments/'+id, postOptions)
+  fetch('/api/comments/'+ commentID, postOptions)
   .then(res => res.json())
 }
-
 
 //console.log(sessionStorage.getItem("loggedInUserId"));
