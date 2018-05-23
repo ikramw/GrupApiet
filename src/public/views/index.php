@@ -180,18 +180,6 @@
 
     <!-- Section som visar en användare och dennes inlägg -->
     <section class="single-user-wrapper" id="single-user">
-      <div class="elements-displayed-wrapper">
-        <div class="elements-displayed">
-          <span>VIEW</span>
-          <!-- HUR SKICKAR MAN MED ID FÖR ANVÄNDAREN!??? -->
-          <select id="select-user-entry-amount" onchange="getSingleUser()">
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="60">60</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-      </div>
       <div id="single-user-content">
         <!-- Fylls på med users -->
       </div>
@@ -204,16 +192,6 @@
       </div>
       <section class="entry-comments">
         <h2 class="heading-responses"><span id="comments-amount"></span> responses</h2>
-        <div class="comments-displayed">
-          <span>VIEW</span>
-          <!-- HUR SKICKAR MAN MED ID FÖR ENTRY!??? -->
-          <select id="selectCommentAmount">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="100">100</option>
-          </select>
-        </div>
         <div id="entry-comments-content">
           <!-- Fylls på med kommentarer -->
         </div>
