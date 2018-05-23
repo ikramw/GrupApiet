@@ -64,7 +64,7 @@ class EntryController
         FROM entries INNER JOIN users ON userID=createdBy WHERE title = :title");
         $getEntryByTitle->bindParam(':title', $_GET['title'] , \PDO::PARAM_STR, 12);
         $getEntryByTitle->execute();
-        return $getEntryByTitle->fetch();
+        return $getEntryByTitle->fetchAll();
     }
     public function add($entry)
     {

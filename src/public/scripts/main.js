@@ -417,7 +417,7 @@ async function searchByTitle(){
   activeNav("entries");
 
   //Skapar artikel element för antalet entries som är valt i select elementet
-  if (data.length > 1) {
+  if (data.length >= 1) {
     for (let i = 0; i < data.length; i++) {
 
       createEntryArticle(data[i], entriesContent);
