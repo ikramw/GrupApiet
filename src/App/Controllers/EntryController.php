@@ -13,8 +13,8 @@ class EntryController
     public function getDefault(){
         $limit=20;
         $getAllEntries = $this->db->prepare("SELECT entries.entryID, entries.title,
-        entries.content,entries.createdBy,entries.createdAt , users.username 
-        FROM entries INNER JOIN users ON userID=createdBy 
+        entries.content,entries.createdBy,entries.createdAt , users.username
+        FROM entries INNER JOIN users ON userID=createdBy
         ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $limit , \PDO::PARAM_INT);
         $getAllEntries->execute();
@@ -24,7 +24,7 @@ class EntryController
     public function getAll(){
 
         $getAllEntries = $this->db->prepare("SELECT entries.entryID, entries.title,
-        entries.content,entries.createdBy,entries.createdAt , users.username 
+        entries.content,entries.createdBy,entries.createdAt , users.username
         FROM entries INNER JOIN users ON userID=createdBy
         ORDER BY createdAt DESC LIMIT :limit");
         $getAllEntries->bindParam(':limit', $_GET['limit'] , \PDO::PARAM_INT);
@@ -36,8 +36,8 @@ class EntryController
     public function getOne($id)
     {
         $getOneEntry = $this->db->prepare("SELECT entries.entryID, entries.title,
-        entries.content,entries.createdBy,entries.createdAt , users.username 
-        FROM entries 
+        entries.content,entries.createdBy,entries.createdAt , users.username
+        FROM entries
         INNER JOIN users ON userID=createdBy
         WHERE entryID = :id");
         $getOneEntry->execute([
@@ -49,9 +49,9 @@ class EntryController
     public function getByUser($userId)
     {
         $getEntryByUser = $this->db->prepare("SELECT entries.entryID, entries.title,
-        entries.content, entries.createdBy, entries.createdAt, users.username 
+        entries.content, entries.createdBy, entries.createdAt, users.username
         FROM entries INNER JOIN users ON userID=createdBy
-        WHERE createdBy = :id");
+        WHERE createdBy = :id ORDER BY createdAt DESC");
         $getEntryByUser->execute([
           ":id" => $userId
         ]);
@@ -60,7 +60,7 @@ class EntryController
     public function getByTitle()
     {
         $getEntryByTitle = $this->db->prepare("SELECT entries.entryID, entries.title,
-        entries.content,entries.createdBy,entries.createdAt , users.username 
+        entries.content,entries.createdBy,entries.createdAt , users.username
         FROM entries INNER JOIN users ON userID=createdBy WHERE title = :title");
         $getEntryByTitle->bindParam(':title', $_GET['title'] , \PDO::PARAM_STR, 12);
         $getEntryByTitle->execute();
@@ -97,7 +97,7 @@ class EntryController
     {
         $updateOne = $this->db->prepare(
         'UPDATE entries
-        SET title = :title, content = :content        
+        SET title = :title, content = :content
         WHERE entryID = :id'
 
         );

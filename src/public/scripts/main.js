@@ -1,8 +1,8 @@
-let selectedEntryId=0;
-let selectedEntryUserId="";
+let selectedEntryId = 0;
+let selectedEntryUserId = "";
 
 //var loggedInUserId=0;
-let loggedInUser =[];
+let loggedInUser = [];
 
 //Sections som ska gömmas eller visas
 let frontpageHeader = document.getElementById("frontpage-header");
@@ -613,6 +613,7 @@ function deleteEntryF(id) {
   fetch('/api/entries/'+ id, postOptions)
   .then(res => res.json())
 }
+//Redigera ett inlägg
 function editEntry(id) {
   const formData = new FormData();
   const title = document.getElementById('edit-title').value;
@@ -649,16 +650,13 @@ function postComment() {
   .then(res => res.json())
 }
 //Ta bort en kommentar
-function deleteCommentF(commentID) {
+function deleteCommentF(id) {
   const postOptions = {
-    method: 'DELETE',
-    //body: formData
+    method: 'DELETE'
   }
 
   location.reload();
 
-  fetch('/api/comments/'+ commentID, postOptions)
+  fetch('/api/comments/'+ id, postOptions)
   .then(res => res.json())
 }
-
-//console.log(sessionStorage.getItem("loggedInUserId"));

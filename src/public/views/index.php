@@ -203,7 +203,7 @@
 
           <?php if (isset($_SESSION["loggedIn"])): ?>
             <h2>Leave a comment</h2>
-            <form action="" method="post">
+            <form>
               <textarea name="comment" id="post-comment" placeholder="Write your comment here..."></textarea>
               <input type="button" id="submit" value="Post comment" onclick="postComment()" class="submit-btn"/>
             </form>
