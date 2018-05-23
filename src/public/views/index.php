@@ -121,7 +121,7 @@
             <input type="text" placeholder="Title" name="title" id="post-title" required>
             <textarea name="content" maxlength="1000" id="post-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" class="button" onclick="postEntry()" class="submit-btn"/>
+            <input type="submit" value="Save" onclick="postEntry()" class="submit-btn"/>
           </form>
         </div>
       </section>
@@ -131,10 +131,10 @@
         <div class="create-entry">
           <h1>Edit Post</h1>
           <form>
-            <input type="text" placeholder="Title" name="title" id="edit-title" required>
+            <input type="text" name="title" id="edit-title" required>
             <textarea name="content" maxlength="1000" id="edit-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" class="button" onclick="editEntry()" class="submit-btn"/>
+            <input type="submit" value="Save" onclick="editEntry()" class="submit-btn"/>
           </form>
         </div>
       </section>
