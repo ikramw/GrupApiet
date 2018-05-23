@@ -134,7 +134,7 @@
             <input type="text" name="title" id="edit-title" required>
             <textarea name="content" maxlength="1000" id="edit-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" onclick="editEntry()" class="submit-btn"/>
+            <input type="submit" value="Save" class="submit-btn" id="edit-entry-btn"/>
           </form>
         </div>
       </section>
