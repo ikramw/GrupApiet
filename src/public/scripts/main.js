@@ -570,6 +570,9 @@ function logOut() {
 
   fetch('logout',postOptions)
   .then(res.json())
+  .then(function(data) {
+    sessionStorage.clear();
+  })
 }
 //Lägga upp inlägg
 function postEntry() {
@@ -625,4 +628,4 @@ function deleteComment() {
 }
 
 
-console.log(sessionStorage.getItem("loggedInUserId"));
+//console.log(sessionStorage.getItem("loggedInUserId"));
