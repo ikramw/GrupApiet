@@ -121,7 +121,7 @@ function createEntryArticle(entryData, displayWrapper) {
     let editEntry = document.createElement("a");
     editEntry.href = "#";
     editEntry.addEventListener("click", function(){
-      showEditPost(entryData.title, entryData.content)
+      showEditPost(entryData.title, entryData.content, entryData.entryID)
     });
     let editEntryIcon = document.createElement("i");
     editEntryIcon.setAttribute("class", "fa fa-edit");
@@ -474,7 +474,7 @@ function showCreatePost() {
 
   activeNav("profile");
 }
-function showEditPost(title, content) {
+function showEditPost(title, content, id) {
   createPost.style.display = "none";
   editPost.style.display = "block";
   entries.style.display = "none";
@@ -486,6 +486,9 @@ function showEditPost(title, content) {
 
   document.getElementById("edit-title").value = title;
   document.getElementById("edit-content").innerHTML = content;
+  document.getElementById("edit-entry-btn").addEventListener("click", function(){
+    editEntry(id)
+  });
 }
 
 //Öppnar och stänger navigationen på mobiler
@@ -610,7 +613,7 @@ function deleteEntryF(id) {
   fetch('/api/entries/'+id, postOptions)
   .then(res => res.json())
 }
-function editEntry() {
+function editEntry(id) {
 
 }
 //Lägga upp en kommentar
