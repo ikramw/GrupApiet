@@ -134,7 +134,7 @@ function createEntryArticle(entryData, displayWrapper) {
     let deleteEntry = document.createElement("a");
     deleteEntry.href = "#";
     deleteEntry.addEventListener("click", function(){
-      deleteEntry()
+      deleteEntry(entryData.entryID)
     });
     let deleteEntryIcon = document.createElement("i");
     deleteEntryIcon.setAttribute("class", "fa fa-times");
@@ -210,7 +210,7 @@ function createEntryComments(commentData) {
     let deleteComment = document.createElement("a");
     deleteComment.href = "#";
     deleteComment.addEventListener("click", function(){
-      deleteComment()
+      deleteComment(commentData.commentID)
     });
     let deleteCommentText = document.createTextNode("Delete");
     deleteComment.appendChild(deleteCommentText);
@@ -626,7 +626,7 @@ function postComment() {
   .then(res => res.json())
 }
 //Ta bort en kommentar
-function deleteComment() {
+function deleteComment(id) {
 
 }
 
