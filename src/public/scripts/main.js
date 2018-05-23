@@ -134,7 +134,7 @@ function createEntryArticle(entryData, displayWrapper) {
     let deleteEntry = document.createElement("a");
     deleteEntry.href = "#";
     deleteEntry.addEventListener("click", function(){
-      deleteEntry(entryData.entryID)
+      deleteEntryF(entryData.entryID)
     });
     let deleteEntryIcon = document.createElement("i");
     deleteEntryIcon.setAttribute("class", "fa fa-times");
@@ -210,7 +210,7 @@ function createEntryComments(commentData) {
     let deleteComment = document.createElement("a");
     deleteComment.href = "#";
     deleteComment.addEventListener("click", function(){
-      deleteComment(commentData.commentID)
+      deleteCommentF(commentData.commentID)
     });
     let deleteCommentText = document.createTextNode("Delete");
     deleteComment.appendChild(deleteCommentText);
@@ -599,8 +599,16 @@ function postEntry() {
   .then(res => res.json())
 }
 //Ta bort ett inlägg
-function deleteEntry() {
+function deleteEntryF(id) {
+  const postOptions = {
+    method: 'DELETE',
+    //body: formData
+  }
 
+  location.reload();
+
+  fetch('/api/entries/'+id, postOptions)
+  .then(res => res.json())
 }
 function editEntry() {
 
@@ -626,8 +634,16 @@ function postComment() {
   .then(res => res.json())
 }
 //Ta bort en kommentar
-function deleteComment(id) {
+function deleteCommentF(id) {
+  const postOptions = {
+    method: 'DELETE',
+    //body: formData
+  }
 
+  location.reload();
+
+  fetch('/api/comments/'+id, postOptions)
+  .then(res => res.json())
 }
 
 
