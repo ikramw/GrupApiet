@@ -117,11 +117,11 @@
       <section class="create-entry-wrapper" id="create-entry-wrapper">
         <div class="create-entry">
           <h1>Create post</h1>
-          <form>
+          <form id="postEntryForm">
             <input type="text" placeholder="Title" name="title" id="post-title" required>
             <textarea name="content" maxlength="1000" id="post-content" required></textarea>
             <br/>
-            <input type="submit" value="Save" onclick="postEntry()" class="submit-btn"/>
+            <input type="submit" value="Save" class="submit-btn"/>
           </form>
         </div>
       </section>

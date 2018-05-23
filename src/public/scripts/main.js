@@ -571,18 +571,22 @@ function logOut() {
     method: 'GET',
     credentials: 'include'
   }
-
-  location.reload();
-
+  
+  
   fetch('logout',postOptions)
-  .then(res.json())
-  .then(function(data) {
+  .then(() => {
     sessionStorage.clear();
+    location.reload();
   })
 }
-//Lägga upp inlägg
-function postEntry() {
 
+const postEntryForm = document.getElementById('postEntryForm');
+postEntryForm.addEventListener('submit', postEntry);
+
+//Lägga upp inlägg
+function postEntry(event) {
+  // prevents the form from submitting via html/php
+  event.preventDefault();
   const formData = new FormData();
   const postTitle = document.getElementById('post-title');
   const postContent = document.getElementById('post-content');
