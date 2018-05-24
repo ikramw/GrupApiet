@@ -1,7 +1,7 @@
 # Gruppuppgift - API
 
-## 200
+## Gruppnamn: 200
 
-### Ikram, Johanna, Rojin 
+### Medlemmar: Ikram, Johanna, Rojin 
 
 [Repository](https://github.com/ikramw/GrupApiet)
