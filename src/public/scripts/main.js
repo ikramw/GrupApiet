@@ -502,6 +502,7 @@ function showSignin() {
     registerForm.className = "register-form";
   } else {
     loginForm.className = "login-form";
+    document.getElementById("login-error").innerHTML = "";
   }
 }
 function showRegister() {
@@ -510,6 +511,7 @@ function showRegister() {
     loginForm.className = "login-form";
   } else {
     registerForm.className = "register-form";
+    document.getElementById("register-error").innerHTML = "";
   }
 }
 
@@ -528,10 +530,15 @@ function registerUser() {
     body: formData
   }
 
-  location.reload();
+  if (formData.get('username').length === 0 || formData.get('password').length === 0) {
+    document.getElementById("register-error").innerHTML = "Username or password is empty";
+  }
+  else {
+    fetch('register', postOptions)
+    .then(res => res.json())
 
-  fetch('register', postOptions)
-  .then(res => res.json())
+    location.reload();
+  }
 }
 //Logga in
 function login() {
@@ -549,14 +556,25 @@ function login() {
     credentials: 'include'
   }
 
-  location.reload();
-
-  fetch('login', postOptions)
-  .then(res => res.json())
-  .then(function(data) {
-    loggedInUser = data;
-    sessionStorage.setItem("loggedInUserId", loggedInUser.userID);
+  if (formData.get('username').length === 0 || formData.get('password').length === 0) {
+    document.getElementById("login-error").innerHTML = "Username or password is empty";
+  }
+  else {
+    fetch('login', postOptions)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return Promise.reject('something went wrong!')
+      }
     })
+    .then(function(data) {
+      loggedInUser = data;
+      sessionStorage.setItem("loggedInUserId", loggedInUser.userID);
+      location.reload();
+    })
+    .catch(error => document.getElementById("login-error").innerHTML = "Username or password is incorrect");
+  }
 }
 //Logga ut
 function logOut() {
@@ -644,10 +662,16 @@ function postComment() {
     body: formData
   }
 
-  location.reload();
+  //Kollar om kommentarsfältet är tomt
+  if(formData.get('content').length === 0) {
+    document.getElementById("comment-error").innerHTML = "You haven't written anything";
+  }
+  else {
+    fetch('/api/comments', postOptions)
+    .then(res => res.json())
 
-  fetch('/api/comments', postOptions)
-  .then(res => res.json())
+    location.reload();
+  }
 }
 //Ta bort en kommentar
 function deleteCommentF(id) {

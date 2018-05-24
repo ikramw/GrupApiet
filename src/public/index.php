@@ -59,7 +59,7 @@ $app->post('/login', function ($request, $response, $args) {
         $_SESSION['userID'] = $user['userID'];
         return $response->withJson(['userID' =>  $user['userID'],'username' => $user['username'] ]);
     }
-    return $response->withJson(['error' => 'wrong password']);
+    //return $response->withJson(['error' => 'wrong password']);
 });
 
 /**

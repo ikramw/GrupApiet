@@ -35,9 +35,10 @@
                 <label for="login-username">Username:</label>
                 <input type="text" name="username" class="form-input" id="login-username" />
                 <label for="login-password">Password:</label>
-                <input type="password" name="password" class="form-input" id="login-password" />
-                <input type="button" id="login-submit" value="Submit" onclick="login()"/>
+                <input type="password" name="password" class="form-input" id="login-password" required/>
+                <input type="button" id="login-submit" value="Submit" onclick="login()" required/>
               </form>
+              <p class="error-message" id="login-error"></p>
             </div>
             <a href="javascript:void(0)" onclick="showRegister()">Register</a>
             <div class="register-form" id="register-form">
@@ -49,6 +50,7 @@
                 <input type="password" name="password" class="form-input" id="password" />
                 <input type="button" id="submit" value="Submit" onclick="registerUser()"/>
               </form>
+              <p class="error-message" id="register-error"></p>
             </div>
           <?php endif; ?>
 
@@ -207,6 +209,7 @@
               <textarea name="comment" id="post-comment" placeholder="Write your comment here..."></textarea>
               <input type="button" id="submit" value="Post comment" onclick="postComment()" class="submit-btn"/>
             </form>
+            <p class="error-message" id="comment-error"></p>
           <?php endif; ?>
         </div>
       </section>
